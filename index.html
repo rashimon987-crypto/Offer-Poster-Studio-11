@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="jgpxeMYFC_0DGKCkhr-e1NvlBlUd6BpmvfIxEsOWmuc" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Offer Poster Studio – Create Professional Offer Posters</title>
 <meta name="description" content="Create beautiful offer posters for supermarkets, shops and businesses. Design, download and share promotional posters easily.">
-<meta name="keywords" content="poster maker, kerala poster maker, offer poster studio, supermarket price tags, business promotional posters">
-<meta property="og:title" content="Offer Poster Studio – Kerala's #1 Poster Maker">
-<meta property="og:description" content="Create professional promotional posters for your shop, supermarket or business — easily and quickly.">
+<meta name="keywords" content="offer poster maker, poster design app, supermarket poster maker, discount poster template, shop offer banner design, festival offer poster, Kerala poster maker, WhatsApp offer poster maker">
+<meta property="og:title" content="Offer Poster Studio – Create Professional Offer Posters">
+<meta property="og:description" content="Create beautiful offer posters for supermarkets, shops and businesses. Design, download and share promotional posters easily.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.offerposterstudio.in">
+<meta property="og:site_name" content="Offer Poster Studio">
+<meta name="theme-color" content="#0E6E5D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Bowlby+One+SC&family=Bungee&family=Bungee+Shade&family=Chango&family=Coiny&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Luckiest+Guy&family=Lilita+One&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700&family=Baloo+Chettan+2:wght@400;500;600;700;800&family=Manjari:wght@400;700&family=Chilanka&family=Gayathri:wght@400;700&family=Noto+Serif+Malayalam:wght@400;600;700&family=Suranna&family=Uroob&family=Paytone+One&family=Righteous&family=Russo+One&family=Titan+One&display=swap" rel="stylesheet">
 <style>
@@ -22,122 +23,58 @@
   --font-display:'Fraunces', serif; --font-body:'Manrope', sans-serif; --font-ml:'Noto Sans Malayalam','Manrope', sans-serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html,body{margin:0;padding:0;overflow-x:hidden;}
+html,body{margin:0;padding:0;}
 body{font-family:var(--font-body);background:var(--cream);color:var(--ink-text);min-height:100vh;-webkit-font-smoothing:antialiased;}
 img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} input,select,textarea{font-family:inherit;} a{text-decoration:none;color:inherit;}
-
-/* Responsive Shell Wrapper for Desktop SaaS vs Mobile App Experience */
-#app{max-width:1200px;margin:0 auto;min-height:100vh;position:relative;background:var(--cream);box-shadow:var(--shadow-2);padding-bottom:78px;}
-@media(max-width:768px){
-  #app{max-width:560px;box-shadow:none;padding-bottom:78px;}
-}
-
+#app{max-width:560px;margin:0 auto;min-height:100vh;position:relative;background:var(--cream);padding-bottom:78px;}
 .screen{display:none;} .screen.active{display:block;animation:fadeIn .3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
-/* Professional Topbar / Desktop Navbar */
-.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(251,246,234,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:21px;color:var(--ink);cursor:pointer;}
-.brand .mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(145deg,var(--gold),var(--coral));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-family:var(--font-display);font-size:16px;}
-
-.desktop-nav{display:flex;align-items:center;gap:24px;}
-.desktop-nav a{font-size:14px;font-weight:600;color:var(--muted);transition:color .2s;}
-.desktop-nav a:hover, .desktop-nav a.active{color:var(--teal);}
-@media(max-width:768px){
-  .desktop-nav{display:none;}
-}
-
-.topbar-actions{display:flex;align-items:center;gap:12px;}
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(251,246,234,0.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--ink);}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,var(--gold),var(--coral));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-family:var(--font-display);}
 .icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:center;color:var(--ink);}
 .icon-btn:disabled{opacity:.35;pointer-events:none;}
-.avatar-chip{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,var(--teal),var(--teal-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--font-display);cursor:pointer;}
-
-/* Hero Section */
-.hero{position:relative;padding:50px 28px 40px;background:radial-gradient(120% 100% at 20% 0%, #1c3a32 0%, var(--ink) 60%);color:var(--cream);overflow:hidden;border-radius:0 0 28px 28px;margin-bottom:20px;}
-@media(min-width:768px){
-  .hero{display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;gap:40px;padding:70px 40px;}
-}
-.hero-eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--gold-soft);background:rgba(231,199,124,0.12);padding:6px 14px;border-radius:99px;border:1px solid rgba(231,199,124,0.3);display:inline-block;margin-bottom:14px;}
-.hero h1{font-family:var(--font-display);font-weight:700;font-size:36px;line-height:1.15;margin:0 0 14px;}
-@media(min-width:768px){.hero h1{font-size:46px;}}
+.avatar-chip{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,var(--teal),var(--teal-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--font-display);}
+.hero{position:relative;padding:26px 18px 20px;background:radial-gradient(120% 100% at 20% 0%, #1c3a32 0%, var(--ink) 60%);color:var(--cream);overflow:hidden;}
+.hero-eyebrow{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--gold-soft);background:rgba(231,199,124,0.12);padding:6px 12px;border-radius:99px;border:1px solid rgba(231,199,124,0.3);}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:30px;line-height:1.1;margin:14px 0 8px;}
 .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:600;}
-.hero p{font-size:15px;color:rgba(251,246,234,0.78);margin:0 0 24px;max-width:42ch;line-height:1.6;}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
-.hero-preview-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);padding:16px;border-radius:20px;backdrop-filter:blur(10px);text-align:center;}
-.hero-preview-card img{border-radius:12px;max-height:320px;margin:0 auto;object-fit:cover;}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:14px;border:none;font-weight:700;font-size:14px;transition:transform .1s;}
+.hero p{font-size:14px;color:rgba(251,246,234,0.72);margin:0 0 18px;max-width:38ch;}
+.hero-cta{display:flex;gap:10px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:14px;border:none;font-weight:700;font-size:14px;}
 .btn:active{transform:scale(0.96);} .btn:disabled{opacity:.5;pointer-events:none;}
 .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-2));color:#fff;}
 .btn-gold{background:linear-gradient(135deg,var(--gold),#B8842E);color:#1c1204;}
 .btn-ghost{background:rgba(251,246,234,0.1);color:var(--cream);border:1px solid rgba(251,246,234,0.28);}
 .btn-outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);}
 .btn-block{width:100%;} .btn-sm{padding:8px 14px;font-size:13px;border-radius:11px;}
-
-/* Sections & Cards */
-.section{padding:24px 20px 8px;}
-@media(min-width:768px){.section{padding:32px 32px 12px;}}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
-.section-head h2{font-family:var(--font-display);font-size:22px;margin:0;color:var(--ink);}
-.section-head .see-all{font-size:13px;font-weight:700;color:var(--teal);cursor:pointer;}
-
-.hscroll{display:flex;gap:14px;overflow-x:auto;padding:4px 4px 14px;margin:0 -4px;}
+.section{padding:20px 18px 6px;} .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;}
+.section-head h2{font-family:var(--font-display);font-size:19px;margin:0;} .section-head .see-all{font-size:12px;font-weight:700;color:var(--teal);}
+.hscroll{display:flex;gap:12px;overflow-x:auto;padding:2px 18px 14px;margin:0 -18px;}
 .hscroll::-webkit-scrollbar{display:none;}
-.tcard{flex:0 0 auto;width:160px;border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-1);border:1px solid var(--line);position:relative;cursor:pointer;transition:transform .2s;}
-.tcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);}
-.tcard .thumb{height:200px;position:relative;display:flex;align-items:flex-end;background-size:cover;background-position:center;}
+.tcard{flex:0 0 auto;width:150px;border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-1);border:1px solid var(--line);position:relative;}
+.tcard .thumb{height:190px;position:relative;display:flex;align-items:flex-end;background-size:cover;background-position:center;}
 .tcard .thumb::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,0.55) 100%);}
-.tcard .thumb .badge{position:absolute;top:8px;left:8px;font-size:10px;font-weight:800;background:rgba(255,255,255,0.92);color:var(--ink);padding:4px 8px;border-radius:7px;text-transform:uppercase;}
+.tcard .thumb .badge{position:absolute;top:8px;left:8px;font-size:9.5px;font-weight:800;background:rgba(255,255,255,0.92);color:var(--ink);padding:4px 8px;border-radius:7px;text-transform:uppercase;}
 .tcard .thumb .lockbadge{position:absolute;inset:0;background:rgba(19,36,32,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;z-index:2;}
-.tcard .fav{position:absolute;bottom:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;font-size:13px;z-index:2;display:flex;align-items:center;justify-content:center;}
-.tcard .tlabel{position:relative;color:#fff;font-family:var(--font-display);font-weight:700;font-size:14px;padding:10px;}
-.tcard .meta{padding:10px 12px 12px;} .tcard .meta .cat{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px;}
-.tcard .use-btn{width:100%;padding:8px;border-radius:9px;background:var(--ink);color:var(--cream);font-size:12px;font-weight:700;border:none;}
-
-.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 20px 20px;}
-@media(min-width:768px){.tgrid{grid-template-columns:repeat(4,1fr);padding:0 32px 30px;}}
-.tgrid .tcard{width:100%;}
-
-.pill-row{display:flex;gap:8px;overflow-x:auto;padding:4px 20px 10px;margin:0 -20px;}
-@media(min-width:768px){.pill-row{padding:4px 32px 10px;margin:0 -32px;}}
-.pill-row::-webkit-scrollbar{display:none;}
-.pill{flex:0 0 auto;padding:9px 16px;border-radius:99px;font-size:13px;font-weight:700;background:var(--paper);border:1px solid var(--line);white-space:nowrap;cursor:pointer;}
+.tcard .fav{position:absolute;bottom:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;font-size:12px;z-index:2;}
+.tcard .tlabel{position:relative;color:#fff;font-family:var(--font-display);font-weight:700;font-size:13.5px;padding:10px;}
+.tcard .meta{padding:8px 10px 10px;} .tcard .meta .cat{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.tcard .use-btn{width:100%;padding:7px;border-radius:9px;background:var(--ink);color:var(--cream);font-size:11px;font-weight:700;border:none;}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 14px;} .tgrid .tcard{width:100%;}
+.pill-row{display:flex;gap:8px;overflow-x:auto;padding:0 18px 4px;margin:0 -18px;} .pill-row::-webkit-scrollbar{display:none;}
+.pill{flex:0 0 auto;padding:9px 14px;border-radius:99px;font-size:12px;font-weight:700;background:var(--paper);border:1px solid var(--line);white-space:nowrap;}
 .pill.active{background:var(--ink);color:var(--cream);border-color:var(--ink);}
-
-.cat-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 20px 8px;}
-@media(min-width:768px){.cat-tiles{grid-template-columns:repeat(8,1fr);padding:0 32px 12px;}}
-.cat-tile{cursor:pointer;}
-.cat-tile .ic{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--paper);border:1px solid var(--line);margin:0 auto 8px;transition:all .2s;}
-.cat-tile:hover .ic{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--shadow-1);}
-.cat-tile span{font-size:11px;font-weight:700;text-align:center;display:block;}
-
-/* Features Grid Section */
-.features-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:16px;padding:0 20px;}
-@media(min-width:768px){.features-grid{grid-template-columns:repeat(4,1fr);padding:0 32px;}}
-.feature-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow-1);}
-.feature-card .f-icon{font-size:28px;margin-bottom:12px;}
-.feature-card h3{font-family:var(--font-display);font-size:17px;margin:0 0 6px;color:var(--ink);}
-.feature-card p{font-size:13px;color:var(--muted);margin:0;line-height:1.5;}
-
-/* CTA Free Demo Banner */
-.cta-banner{margin:20px;background:linear-gradient(135deg,var(--teal),var(--teal-2));border-radius:24px;padding:28px 24px;color:#fff;text-align:center;box-shadow:var(--shadow-2);}
-@media(min-width:768px){.cta-banner{margin:32px;padding:40px;display:flex;align-items:center;justify-content:space-between;text-align:left;}}
-.cta-banner h3{font-family:var(--font-display);font-size:24px;margin:0 0 8px;}
-.cta-banner p{font-size:14px;opacity:0.85;margin:0 0 16px;max-width:40ch;}
-@media(min-width:768px){.cta-banner p{margin:0;}}
-
-/* Bottom Nav for Mobile */
-.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:50;max-width:560px;margin:0 auto;background:rgba(251,246,234,0.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;padding:9px 6px calc(9px + env(safe-area-inset-bottom));}
-@media(min-width:768px){.bottomnav{display:none !important;}}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:10px;font-weight:700;cursor:pointer;}
+.cat-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 18px 6px;}
+.cat-tile .ic{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--paper);border:1px solid var(--line);margin:0 auto 6px;}
+.cat-tile span{font-size:10px;font-weight:700;text-align:center;display:block;}
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:50;max-width:560px;margin:0 auto;background:rgba(251,246,234,0.92);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;padding:9px 6px calc(9px + env(safe-area-inset-bottom));}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:10px;font-weight:700;}
 .nav-item.active{color:var(--teal);} .nav-item svg{width:21px;height:21px;}
-.fab{position:absolute;top:-26px;left:50%;transform:translateX(-50%);width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,var(--coral),var(--coral-2));display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 10px 24px rgba(225,85,59,0.45);border:3px solid var(--cream);cursor:pointer;}
-
-/* Auth & Sheets */
+.fab{position:absolute;top:-26px;left:50%;transform:translateX(-50%);width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,var(--coral),var(--coral-2));display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 10px 24px rgba(225,85,59,0.45);border:3px solid var(--cream);}
 .auth-wrap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:32px 24px;background:radial-gradient(130% 90% at 50% -10%, #1c3a32 0%, var(--ink) 65%);}
-.auth-card{background:var(--paper);border-radius:26px;padding:28px 24px 24px;box-shadow:var(--shadow-3);max-width:420px;width:100%;margin:0 auto;}
-.auth-logo .mark{width:45px;height:45px;border-radius:12px;background:linear-gradient(145deg,var(--gold),var(--coral));display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-display);font-weight:800;font-size:21px;margin:0 auto;}
+.auth-card{background:var(--paper);border-radius:26px;padding:28px 24px 24px;box-shadow:var(--shadow-3);}
+.auth-logo .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,var(--gold),var(--coral));display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-display);font-weight:800;font-size:19px;margin:0 auto;}
 .auth-title{font-family:var(--font-display);font-size:23px;font-weight:700;text-align:center;margin:14px 0 4px;}
 .auth-sub{text-align:center;color:var(--muted);font-size:13px;margin:0 0 20px;}
 .field{margin-bottom:14px;} .field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;}
@@ -145,9 +82,8 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
 .error-text{color:var(--coral-2);font-size:11.5px;margin-top:5px;font-weight:600;}
 .auth-switch{text-align:center;font-size:13px;color:var(--muted);margin-top:16px;} .auth-switch a{color:var(--teal);font-weight:700;}
 .auth-tabs{display:flex;background:var(--cream);border-radius:12px;padding:4px;margin-bottom:18px;}
-.auth-tab{flex:1;text-align:center;padding:9px;border-radius:9px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;}
+.auth-tab{flex:1;text-align:center;padding:9px;border-radius:9px;font-size:13px;font-weight:700;color:var(--muted);}
 .auth-tab.active{background:var(--paper);color:var(--ink);}
-
 #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--cream);padding:12px 18px;border-radius:12px;font-size:13px;font-weight:600;z-index:200;opacity:0;pointer-events:none;transition:all .28s;max-width:80%;text-align:center;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .overlay{position:fixed;inset:0;background:rgba(19,36,32,0.55);z-index:100;opacity:0;pointer-events:none;transition:opacity .2s;}
@@ -156,79 +92,182 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
 .sheet.show{transform:translateY(0);}
 .sheet-handle{width:36px;height:4px;background:var(--line);border-radius:99px;margin:0 auto 14px;}
 .sheet-title{font-family:var(--font-display);font-size:18px;font-weight:700;margin:0 0 14px;}
-
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 20px 8px;}
-@media(min-width:768px){.stat-row{padding:0 32px 12px;}}
-.stat-card{background:var(--paper);border-radius:16px;padding:16px 14px;border:1px solid var(--line);text-align:center;}
-.stat-card .num{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--teal);} .stat-card .lbl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;}
-
-.plan-card{margin:0 20px 16px;padding:20px;border-radius:20px;background:linear-gradient(135deg,var(--ink),#1c3a32);color:#fff;}
-@media(min-width:768px){.plan-card{margin:0 32px 20px;}}
-.plan-card .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:13px;color:rgba(255,255,255,0.75);}
-.plan-card .planname{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--gold-soft);}
-
-.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 20px;}
-@media(min-width:768px){.poster-grid{grid-template-columns:repeat(4,1fr);padding:0 32px;}}
-.poster-item{border-radius:14px;overflow:hidden;background:var(--paper);border:1px solid var(--line);cursor:pointer;transition:transform .2s;}
-.poster-item:hover{transform:translateY(-2px);}
-.poster-item .pv{height:190px;background-size:cover;background-position:center;} .poster-item .pinfo{padding:10px 12px;font-size:12px;color:var(--muted);font-weight:600;}
-
-.empty-state{text-align:center;padding:44px 24px;color:var(--muted);} .empty-state .ic{font-size:38px;margin-bottom:10px;}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 18px 4px;}
+.stat-card{background:var(--paper);border-radius:16px;padding:14px 12px;border:1px solid var(--line);text-align:center;}
+.stat-card .num{font-family:var(--font-display);font-size:20px;font-weight:700;} .stat-card .lbl{font-size:9.5px;color:var(--muted);font-weight:700;text-transform:uppercase;}
+.plan-card{margin:0 18px 16px;padding:16px;border-radius:16px;background:linear-gradient(135deg,var(--ink),#1c3a32);color:#fff;}
+.plan-card .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12.5px;color:rgba(255,255,255,0.75);}
+.plan-card .planname{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--gold-soft);}
+.poster-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px;}
+.poster-item{border-radius:14px;overflow:hidden;background:var(--paper);border:1px solid var(--line);}
+.poster-item .pv{height:170px;background-size:cover;background-position:center;} .poster-item .pinfo{padding:9px 10px 11px;font-size:11px;color:var(--muted);font-weight:600;}
+.empty-state{text-align:center;padding:44px 24px;color:var(--muted);} .empty-state .ic{font-size:34px;margin-bottom:10px;}
 .empty-state h3{font-family:var(--font-display);color:var(--ink);margin:0 0 6px;}
-
 /* Editor */
 .editor-shell{background:var(--ink);min-height:100vh;color:var(--cream);}
-.editor-top{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(251,246,234,0.14);position:sticky;top:0;background:var(--ink);z-index:30;gap:12px;}
-.editor-top .title{font-size:13px;font-weight:700;flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.limit-banner{margin:0 16px 12px;padding:10px 14px;border-radius:12px;background:rgba(225,85,59,0.12);border:1px solid rgba(225,85,59,0.28);font-size:12px;color:var(--gold-soft);display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.editor-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(251,246,234,0.14);position:sticky;top:0;background:var(--ink);z-index:30;gap:8px;}
+.editor-top .title{font-size:12px;font-weight:700;flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.limit-banner{margin:0 14px 12px;padding:10px 13px;border-radius:12px;background:rgba(225,85,59,0.12);border:1px solid rgba(225,85,59,0.28);font-size:11.5px;color:var(--gold-soft);display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .limit-banner button{font-size:11px;font-weight:800;color:var(--coral);background:#fff;padding:6px 10px;border-radius:8px;border:none;}
-.canvas-stage{display:flex;justify-content:center;align-items:center;padding:16px;}
+.canvas-stage{display:flex;justify-content:center;align-items:center;padding:14px;}
 .canvas-frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-3);border:1px solid rgba(251,246,234,0.14);max-width:100%;transition:transform .18s;}
 #posterCanvas{display:block;max-width:100%;height:auto;touch-action:none;}
-.canvas-hint{text-align:center;font-size:11px;color:rgba(251,246,234,0.45);padding:0 20px 10px;}
-.editor-tabs{display:flex;gap:8px;padding:4px 16px 14px;overflow-x:auto;} .editor-tabs::-webkit-scrollbar{display:none;}
-.etab{flex:0 0 auto;padding:10px 16px;border-radius:12px;font-size:12.5px;font-weight:700;background:rgba(251,246,234,0.06);color:rgba(251,246,234,0.65);cursor:pointer;}
+.canvas-hint{text-align:center;font-size:10.5px;color:rgba(251,246,234,0.45);padding:0 20px 8px;}
+.editor-tabs{display:flex;gap:6px;padding:4px 14px 12px;overflow-x:auto;} .editor-tabs::-webkit-scrollbar{display:none;}
+.etab{flex:0 0 auto;padding:9px 14px;border-radius:12px;font-size:12px;font-weight:700;background:rgba(251,246,234,0.06);color:rgba(251,246,234,0.65);}
 .etab.active{background:var(--paper);color:var(--ink);}
-.editor-panel{background:var(--paper);border-radius:24px 24px 0 0;padding:20px 18px 28px;color:var(--ink-text);min-height:220px;}
+.editor-panel{background:var(--paper);border-radius:22px 22px 0 0;padding:18px 16px 24px;color:var(--ink-text);min-height:200px;}
 .panel-block{display:none;} .panel-block.active{display:block;}
-.slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
-.slot-thumb{aspect-ratio:1;border-radius:12px;background:var(--cream);border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-size:20px;color:var(--muted);cursor:pointer;}
+.slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;}
+.slot-thumb{aspect-ratio:1;border-radius:10px;background:var(--cream);border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;font-size:18px;color:var(--muted);}
 .slot-thumb img{width:100%;height:100%;object-fit:cover;}
-.logo-upload{width:70px;height:70px;border-radius:50%;background:var(--cream);border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:20px;color:var(--muted);margin-bottom:12px;cursor:pointer;}
+.logo-upload{width:64px;height:64px;border-radius:50%;background:var(--cream);border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:20px;color:var(--muted);margin-bottom:12px;}
 .logo-upload img{width:100%;height:100%;object-fit:cover;}
-.swatch-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;} .swatch{width:36px;height:36px;border-radius:10px;border:2px solid transparent;cursor:pointer;}
+.swatch-row{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;} .swatch{width:34px;height:34px;border-radius:10px;border:2px solid transparent;}
 .swatch.active{border-color:var(--ink);}
 .font-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.font-chip{padding:9px 14px;border-radius:11px;border:1.5px solid var(--line);font-size:12.5px;font-weight:700;background:var(--cream);cursor:pointer;}
+.font-chip{padding:9px 13px;border-radius:11px;border:1.5px solid var(--line);font-size:12px;font-weight:700;background:var(--cream);}
 .font-chip.active{border-color:var(--teal);color:var(--teal);background:rgba(14,110,93,0.07);}
-.sticker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
-.sticker-item{aspect-ratio:1;border-radius:12px;background:var(--cream);border:1.5px solid var(--line);overflow:hidden;cursor:pointer;}
-.ml-chip{font-family:var(--font-ml);padding:8px 12px;border-radius:10px;background:var(--cream-2);border:1px solid var(--line);font-size:13px;font-weight:600;cursor:pointer;}
+.sticker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.sticker-item{aspect-ratio:1;border-radius:10px;background:var(--cream);border:1.5px solid var(--line);overflow:hidden;}
+.ml-chip{font-family:var(--font-ml);padding:8px 12px;border-radius:10px;background:var(--cream-2);border:1px solid var(--line);font-size:12.5px;font-weight:600;}
 .sticker-item img{width:100%;height:100%;object-fit:contain;background:#fff;}
-.sticker-controls{display:flex;flex-wrap:wrap;gap:8px;} .sticker-controls .btn{flex:1;min-width:110px;}
-.zoom-row{display:flex;align-items:center;justify-content:center;gap:12px;padding:0 16px 8px;}
-.zoom-row span{font-size:12px;font-weight:700;color:rgba(251,246,234,0.7);min-width:42px;text-align:center;}
-.divider{height:8px;background:var(--cream-2);margin:18px -18px;}
-.footer-note{text-align:center;font-size:12px;color:var(--muted);padding:30px 24px 12px;}
+.sticker-controls{display:flex;flex-wrap:wrap;gap:8px;} .sticker-controls .btn{flex:1;min-width:100px;}
+.zoom-row{display:flex;align-items:center;justify-content:center;gap:10px;padding:0 14px 6px;}
+.zoom-row span{font-size:11px;font-weight:700;color:rgba(251,246,234,0.7);min-width:38px;text-align:center;}
+.divider{height:8px;background:var(--cream-2);margin:16px -16px;}
+.footer-note{text-align:center;font-size:11px;color:var(--muted);padding:24px 24px 8px;}
+@media(min-width:420px){.hero h1{font-size:34px;}}
 
-/* Professional Footer */
-.site-footer{background:var(--ink);color:var(--cream);padding:40px 28px 24px;margin-top:40px;border-radius:24px 24px 0 0;}
-.site-footer .footer-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:30px;}
-@media(min-width:768px){.site-footer .footer-grid{grid-template-columns:2fr 1fr 1fr;}}
-.site-footer h4{font-family:var(--font-display);font-size:18px;margin:0 0 10px;color:var(--gold-soft);}
-.site-footer p{font-size:13.5px;color:rgba(251,246,234,0.7);margin:0;line-height:1.6;}
-.footer-links{display:flex;flex-direction:column;gap:8px;}
-.footer-links a{font-size:13px;color:rgba(251,246,234,0.7);transition:color .2s;}
-.footer-links a:hover{color:var(--gold-soft);}
-.footer-bottom{border-top:1px solid rgba(251,246,234,0.1);padding-top:20px;text-align:center;font-size:12px;color:rgba(251,246,234,0.5);}
+/* ======================================================================
+   DESKTOP / SaaS-SITE LAYER — purely additive.
+   Everything above this line is the original mobile app CSS, untouched.
+   Nothing below overrides anything below the 1024px breakpoint, so the
+   mobile "app-like" experience is exactly what it was before.
+   ====================================================================== */
 
-@media(min-width:420px){.hero h1{font-size:38px;}}
+/* Landing page (shown to logged-out visitors) needs to look good stand-alone
+   on mobile too, since it's the very first screen a phone visitor sees. */
+.landing-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:rgba(251,246,234,0.9);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40;}
+.free-demo-card{margin:18px;padding:26px 22px;border-radius:22px;background:linear-gradient(135deg,var(--teal),var(--teal-2));color:#fff;text-align:center;box-shadow:var(--shadow-2);}
+.free-demo-card h2{font-family:var(--font-display);font-size:21px;margin:0 0 8px;}
+.free-demo-card p{opacity:.85;margin:0 0 16px;font-size:13.5px;}
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px;}
+.feature-card{background:var(--paper);border-radius:16px;padding:16px 14px;border:1px solid var(--line);box-shadow:var(--shadow-1);}
+.feature-card .fic{font-size:24px;margin-bottom:8px;}
+.feature-card h3{font-family:var(--font-display);font-size:14.5px;margin:0 0 4px;}
+.feature-card p{font-size:11.5px;color:var(--muted);margin:0;line-height:1.4;}
+.pricing-section{padding:0 18px;}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;}
+.pricing-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-1);}
+.pricing-card.featured{border-color:var(--gold);box-shadow:0 10px 24px rgba(204,154,60,0.2);position:relative;}
+.pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:-11px;right:16px;background:var(--gold);color:#1c1204;font-size:9.5px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:.04em;}
+.pricing-card .pname{font-family:var(--font-display);font-size:19px;font-weight:700;}
+.pricing-card .pprice{font-size:28px;font-weight:800;margin:8px 0;color:var(--ink);}
+.pricing-card .pprice span{font-size:13px;font-weight:600;color:var(--muted);}
+.pricing-card ul{list-style:none;padding:0;margin:14px 0;font-size:13px;color:var(--muted);}
+.pricing-card li{padding:5px 0;padding-left:22px;position:relative;}
+.pricing-card li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:800;}
+.site-footer{margin-top:8px;background:var(--ink);color:rgba(251,246,234,.72);padding:32px 18px 20px;}
+.site-footer h4{color:#fff;font-family:var(--font-display);margin:0 0 10px;font-size:16px;}
+.site-footer p.tagline{font-size:12.5px;opacity:.8;margin:0 0 18px;max-width:40ch;}
+.site-footer .foot-links{display:flex;flex-wrap:wrap;gap:10px 20px;margin-bottom:18px;}
+.site-footer .foot-links a{color:rgba(251,246,234,.8);font-size:12.5px;cursor:pointer;}
+.site-footer .foot-links a:hover{color:var(--gold-soft);}
+.site-footer .foot-bottom{padding-top:14px;border-top:1px solid rgba(251,246,234,.14);font-size:11.5px;text-align:center;color:rgba(251,246,234,.5);}
+.desktop-navbar{display:none;}
+
+/* These app-facing blocks only appear once you scroll to the bottom of the
+   logged-in Home tab on a WIDE screen — kept out of the compact mobile Home
+   entirely so the phone app experience stays exactly as it was. */
+.desktop-extra-sections{display:none;}
+
+body.desktop-view{background:var(--cream-2);}
+body.desktop-view #app{max-width:1280px;padding-bottom:0;}
+body.desktop-view .bottomnav{display:none !important;}
+body.desktop-view .topbar{display:none;}
+body.desktop-view .landing-header{display:none;}
+
+body.desktop-view .desktop-navbar{display:block;position:sticky;top:0;z-index:70;width:100%;background:rgba(251,246,234,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+body.desktop-view .desktop-navbar .navbar-inner{max-width:1280px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+body.desktop-view .desktop-navbar .nav-links{display:flex;gap:30px;align-items:center;}
+body.desktop-view .desktop-navbar .nav-links a{font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;}
+body.desktop-view .desktop-navbar .nav-links a:hover{color:var(--teal);}
+body.desktop-view .desktop-navbar .nav-cta{display:flex;gap:10px;align-items:center;}
+
+body.desktop-view .hero{display:flex;align-items:center;gap:56px;padding:72px 40px;border-radius:0;margin:0;}
+body.desktop-view .hero-copy{flex:1;max-width:600px;}
+body.desktop-view .hero h1{font-size:48px;}
+body.desktop-view .hero p{font-size:17px;max-width:48ch;}
+body.desktop-view .hero-cta{gap:14px;}
+body.desktop-view .hero-preview{flex:1;display:flex;justify-content:center;}
+body.desktop-view .hero-preview .mock-poster{width:340px;border-radius:22px;box-shadow:var(--shadow-3);overflow:hidden;border:1px solid rgba(251,246,234,0.25);}
+
+body.desktop-view .free-demo-card{max-width:1280px;margin:32px auto;padding:36px 48px;border-radius:26px;display:flex;align-items:center;justify-content:space-between;gap:24px;text-align:left;}
+body.desktop-view .free-demo-card h2{font-size:26px;}
+body.desktop-view .free-demo-card p{margin:0;max-width:44ch;}
+
+body.desktop-view .section{padding:56px 40px 8px;}
+body.desktop-view .section > .section-head, body.desktop-view .section-head{max-width:1280px;margin:0 auto 16px;}
+body.desktop-view .section-head h2{font-size:27px;}
+
+body.desktop-view .features-grid{grid-template-columns:repeat(4,1fr);gap:22px;max-width:1280px;margin:0 auto;padding:8px 40px 8px;}
+body.desktop-view .feature-card{padding:24px 20px;border-radius:18px;}
+body.desktop-view .feature-card .fic{font-size:30px;}
+body.desktop-view .feature-card h3{font-size:16.5px;}
+body.desktop-view .feature-card p{font-size:12.5px;}
+
+body.desktop-view .cat-tiles{grid-template-columns:repeat(6,1fr);max-width:1280px;margin:0 auto;padding:0 40px 8px;}
+body.desktop-view .hscroll{max-width:1280px;margin:0 auto;padding:2px 40px 20px;flex-wrap:wrap;overflow:visible;}
+body.desktop-view .tcard{width:230px;}
+
+body.desktop-view .pricing-section{max-width:1280px;margin:0 auto;padding:8px 40px 8px;}
+body.desktop-view .pricing-grid{grid-template-columns:repeat(3,1fr);gap:22px;}
+body.desktop-view .pricing-card{padding:30px 26px;}
+
+body.desktop-view .site-footer{padding:48px 40px 24px;}
+body.desktop-view .site-footer .foot-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px;}
+body.desktop-view .site-footer .foot-links{flex-direction:column;gap:8px;}
+
+body.desktop-view .desktop-extra-sections{display:block;}
+
+/* Keep the poster editor centered and comfortable instead of pinned to a
+   phone-width column on a big monitor — editor itself is unchanged. */
+body.desktop-view .editor-shell{max-width:640px;margin:0 auto;}
+
+/* The view-mode toggle: always visible, lets you flip between the mobile app
+   layout and the desktop site layout regardless of your actual screen width —
+   this is how you preview the desktop design from a phone. */
+.legal-body{max-width:760px;margin:0 auto;padding:8px 18px 60px;font-size:14px;line-height:1.75;color:var(--ink-text);}
+.legal-body h2{font-family:var(--font-display);font-size:18px;margin:26px 0 10px;}
+.legal-body p, .legal-body li{color:#33413c;}
+.legal-body ul{padding-left:20px;}
+.pub-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:rgba(251,246,234,0.9);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40;}
+.pub-header .back-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+body.desktop-view .pub-header{display:none;}
+#viewModeToggle{position:fixed;right:14px;bottom:88px;z-index:90;padding:10px 16px;border-radius:99px;border:none;background:var(--ink);color:var(--cream);font-size:12px;font-weight:700;box-shadow:var(--shadow-2);cursor:pointer;}
+body.desktop-view #viewModeToggle{bottom:20px;}
+
 </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- Auth Screen -->
+  <nav class="desktop-navbar" id="desktopNavbar">
+    <div class="navbar-inner">
+      <div class="brand"><div class="mark">OP</div>Offer Poster Studio</div>
+      <div class="nav-links">
+        <a onclick="handleNavHome()">Home</a>
+        <a onclick="handleNavTemplates()">Templates</a>
+        <a onclick="handleNavFeatures()">Features</a>
+        <a onclick="handleNavPricing()">Pricing</a>
+        <a onclick="handleNavContact()">Contact</a>
+        <a onclick="handleNavCreate()">Create Poster</a>
+      </div>
+      <div class="nav-cta" id="navCtaArea"></div>
+    </div>
+  </nav>
+
   <section class="screen" id="screen-auth">
     <div class="auth-wrap">
       <div class="auth-card">
@@ -254,142 +293,244 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
     </div>
   </section>
 
-  <!-- Main App Shell -->
-  <div id="mainShell" style="display:none;">
-    <!-- Desktop / Mobile Topbar Navbar -->
-    <div class="topbar">
-      <div class="brand" onclick="goto('home')"><div class="mark">OP</div>Offer Poster Studio</div>
-      <div class="desktop-nav">
-        <a href="#" onclick="goto('home');return false;" class="active" id="navLinkHome">Home</a>
-        <a href="#" onclick="goto('marketplace');return false;" id="navLinkTemplates">Templates</a>
-        <a href="#" onclick="goto('library');return false;" id="navLinkLibrary">Product Photos</a>
-        <a href="#" onclick="goto('payment');return false;" id="navLinkPricing">Pricing</a>
+  <section class="screen" id="screen-landing">
+    <div class="landing-header">
+      <div class="brand"><div class="mark">OP</div>Offer Poster Studio</div>
+      <button class="btn btn-primary btn-sm" onclick="showAuth();setAuthMode('login')">Login</button>
+    </div>
+
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">⚡ Ready in under 60 seconds</span>
+        <h1>Create Stunning <em>Offer Posters</em> in Minutes</h1>
+        <p>Create professional promotional posters for your shop, supermarket or business — easily and quickly.</p>
+        <div class="hero-cta">
+          <button class="btn btn-gold" onclick="showAuth();setAuthMode('signup')">Create Your Poster</button>
+          <button class="btn btn-ghost" onclick="scrollToSection('landingTemplatesSection')">Explore Templates</button>
+        </div>
       </div>
-      <div class="topbar-actions">
-        <button class="btn btn-primary btn-sm" onclick="startBlankPoster()" style="display:none; @media(min-width:768px){display:inline-flex;}">+ Create Poster</button>
-        <div class="avatar-chip" id="avatarChip" onclick="goto('dashboard')">A</div>
+      <div class="hero-preview">
+        <div class="mock-poster">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=70" alt="Sample supermarket offer poster preview" style="width:100%;display:block;">
+        </div>
       </div>
     </div>
 
-    <!-- Home Screen -->
+    <div class="free-demo-card">
+      <div>
+        <h2>Create Your First Poster FREE</h2>
+        <p>Try Offer Poster Studio and create your first promotional poster for free.</p>
+      </div>
+      <button class="btn btn-gold" onclick="showAuth();setAuthMode('signup')">Get Started Free</button>
+    </div>
+
+    <div class="section" id="featuresSection">
+      <div class="section-head"><h2>Why Offer Poster Studio</h2></div>
+      <div class="features-grid" id="landingFeaturesGrid"></div>
+    </div>
+
+    <div class="section" id="landingTemplatesSection">
+      <div class="section-head"><h2>Popular Templates</h2></div>
+      <div class="cat-tiles" id="landingCatGrid" style="padding:0 18px;"></div>
+    </div>
+
+    <div class="section pricing-section" id="pricingSection">
+      <div class="section-head"><h2>Simple, Transparent Pricing</h2></div>
+      <div class="pricing-grid" id="landingPricingGrid"></div>
+    </div>
+
+    <div class="site-footer" id="landingFooter"></div>
+  </section>
+
+  <!-- Public pages: reachable from the desktop navbar / footer links, regardless of
+       login state, without leaving this single HTML file. -->
+  <section class="screen" id="screen-pub-templates">
+    <div class="pub-header"><button class="back-btn" onclick="closePublicScreen()">←</button><div class="brand"><div class="mark">OP</div>Offer Poster Studio</div></div>
+    <div class="section" style="padding-top:22px;">
+      <div class="section-head"><h2>Popular Templates</h2><p style="color:var(--muted);font-size:13px;margin-top:6px;">Pick a template, drop in your own photos and prices.</p></div>
+      <div class="cat-tiles" id="pubTemplatesGrid" style="padding:0 18px;"></div>
+    </div>
+    <div class="free-demo-card" style="margin-top:8px;">
+      <div><h2>Don't see what you need?</h2><p>Start from a blank canvas and build your own layout in the editor.</p></div>
+      <button class="btn btn-gold" onclick="handleNavCreate()">Create Blank Poster</button>
+    </div>
+    <div class="site-footer" id="pubTemplatesFooter"></div>
+  </section>
+
+  <section class="screen" id="screen-pub-features">
+    <div class="pub-header"><button class="back-btn" onclick="closePublicScreen()">←</button><div class="brand"><div class="mark">OP</div>Offer Poster Studio</div></div>
+    <div class="section" style="padding-top:22px;">
+      <div class="section-head"><h2>Everything you need to design offers fast</h2><p style="color:var(--muted);font-size:13px;margin-top:6px;">Built specifically for shops and supermarkets.</p></div>
+      <div class="features-grid" id="pubFeaturesGrid"></div>
+    </div>
+    <div class="site-footer" id="pubFeaturesFooter"></div>
+  </section>
+
+  <section class="screen" id="screen-pub-pricing">
+    <div class="pub-header"><button class="back-btn" onclick="closePublicScreen()">←</button><div class="brand"><div class="mark">OP</div>Offer Poster Studio</div></div>
+    <div class="section pricing-section" style="padding-top:22px;">
+      <div class="section-head"><h2>Simple, Transparent Pricing</h2><p style="color:var(--muted);font-size:13px;margin-top:6px;">Start free. Upgrade anytime for unlimited downloads.</p></div>
+      <div class="pricing-grid" id="pubPricingGrid"></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Frequently Asked</h2></div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 18px;display:grid;gap:12px;">
+        <div class="pricing-card"><h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:15px;">Can I cancel anytime?</h3><p style="color:var(--muted);font-size:13px;margin:0;">Yes — Premium and Business are simple monthly plans with no long-term lock-in.</p></div>
+        <div class="pricing-card"><h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:15px;">How do I pay?</h3><p style="color:var(--muted);font-size:13px;margin:0;">Payments are made via UPI. Your plan activates once the payment is verified.</p></div>
+      </div>
+    </div>
+    <div class="site-footer" id="pubPricingFooter"></div>
+  </section>
+
+  <section class="screen" id="screen-pub-contact">
+    <div class="pub-header"><button class="back-btn" onclick="closePublicScreen()">←</button><div class="brand"><div class="mark">OP</div>Offer Poster Studio</div></div>
+    <div class="section" style="padding-top:22px;">
+      <div class="section-head"><h2>Contact Us</h2><p style="color:var(--muted);font-size:13px;margin-top:6px;">We're happy to help with your account, plan or poster.</p></div>
+      <div style="max-width:1280px;margin:0 auto;padding:0 18px;display:grid;gap:14px;">
+        <div class="pricing-card">
+          <h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:17px;">💬 WhatsApp Support</h3>
+          <p style="color:var(--muted);font-size:13.5px;margin:0 0 14px;">The fastest way to reach us — usually a reply within a few hours.</p>
+          <a href="https://wa.me/919526605590" target="_blank" class="btn btn-block" style="background:#25D366;color:#fff;">Message us on WhatsApp</a>
+        </div>
+        <div class="pricing-card">
+          <h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:17px;">🧾 Account &amp; Billing</h3>
+          <p style="color:var(--muted);font-size:13.5px;margin:0 0 14px;">For plan upgrades or billing questions, sign in and use the Studio tab.</p>
+          <button class="btn btn-outline btn-block" onclick="handleNavHome()">Go to My Studio</button>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer" id="pubContactFooter"></div>
+  </section>
+
+  <section class="screen" id="screen-pub-privacy">
+    <div class="pub-header"><button class="back-btn" onclick="closePublicScreen()">←</button><div class="brand"><div class="mark">OP</div>Offer Poster Studio</div></div>
+    <div class="legal-body">
+      <h1 style="font-family:var(--font-display);font-size:24px;margin:20px 0 4px;">Privacy Policy</h1>
+      <p style="color:var(--muted);font-size:12.5px;margin:0 0 10px;">Last updated: 2026</p>
+      <p>Offer Poster Studio ("we", "us") provides a poster-design tool for shops and businesses. This page explains what information we collect and how it is used.</p>
+      <h2>Information we collect</h2>
+      <ul>
+        <li>Account details you provide: email address, password (securely handled by our authentication provider), and shop/business name.</li>
+        <li>Content you create: uploaded product photos, logos, poster text and saved poster drafts.</li>
+        <li>Payment details you submit for plan upgrades: UPI transaction ID and, if provided, a payment screenshot — used only to verify and activate your plan.</li>
+        <li>Basic usage data such as download counts, needed to enforce plan limits.</li>
+      </ul>
+      <h2>How we use your information</h2>
+      <ul>
+        <li>To provide the poster editor, save your drafts, and let you download your posters.</li>
+        <li>To activate and manage your subscription plan.</li>
+        <li>To respond to support requests you send us.</li>
+      </ul>
+      <h2>Data storage</h2>
+      <p>Your account data, uploaded images and poster drafts are stored securely with our backend provider (Supabase). We do not sell your personal data to third parties.</p>
+      <h2>Your choices</h2>
+      <p>You can edit your business profile at any time from the app. To request deletion of your account and associated data, contact us via the Contact page.</p>
+      <h2>Contact</h2>
+      <p>Questions about this policy can be sent to us via <a onclick="showPublicScreen('contact')" style="color:var(--teal);font-weight:700;cursor:pointer;">our contact page</a>.</p>
+    </div>
+    <div class="site-footer" id="pubPrivacyFooter"></div>
+  </section>
+
+  <section class="screen" id="screen-pub-terms">
+    <div class="pub-header"><button class="back-btn" onclick="closePublicScreen()">←</button><div class="brand"><div class="mark">OP</div>Offer Poster Studio</div></div>
+    <div class="legal-body">
+      <h1 style="font-family:var(--font-display);font-size:24px;margin:20px 0 4px;">Terms &amp; Conditions</h1>
+      <p style="color:var(--muted);font-size:12.5px;margin:0 0 10px;">Last updated: 2026</p>
+      <p>By creating an account or using Offer Poster Studio, you agree to the following terms.</p>
+      <h2>Using the service</h2>
+      <ul>
+        <li>You must provide accurate account information and are responsible for your account's security.</li>
+        <li>You agree not to upload content that is illegal, infringing, or that you do not have the right to use.</li>
+        <li>Free plan usage limits (such as daily downloads) apply as shown in the app and may change from time to time.</li>
+      </ul>
+      <h2>Your content</h2>
+      <p>You retain ownership of the photos, logos and text you upload. By uploading content, you confirm you have the right to use it in your posters.</p>
+      <h2>Plans and payment</h2>
+      <ul>
+        <li>Premium and Business plans are paid monthly via UPI and activate once payment is verified.</li>
+        <li>Prices shown in the app apply; we do not automatically charge you — each renewal is a manual UPI payment you submit for verification.</li>
+      </ul>
+      <h2>Service availability</h2>
+      <p>We aim to keep Offer Poster Studio available and reliable but do not guarantee uninterrupted access. Features may be added, changed or removed over time.</p>
+      <h2>Limitation of liability</h2>
+      <p>Offer Poster Studio is provided "as is". We are not liable for indirect or consequential losses arising from use of the service.</p>
+      <h2>Contact</h2>
+      <p>Questions about these terms can be sent via <a onclick="showPublicScreen('contact')" style="color:var(--teal);font-weight:700;cursor:pointer;">our contact page</a>.</p>
+    </div>
+    <div class="site-footer" id="pubTermsFooter"></div>
+  </section>
+
+  <div id="mainShell" style="display:none;">
+    <div class="topbar">
+      <div class="brand"><div class="mark">OP</div>Offer Poster Studio</div>
+      <div style="display:flex;gap:8px;"><div class="avatar-chip" id="avatarChip" onclick="goto('dashboard')">A</div></div>
+    </div>
+
     <section class="screen" id="screen-home">
       <div class="hero">
-        <div>
-          <span class="hero-eyebrow">⚡ Ready in under 60 seconds</span>
-          <h1>Create Stunning Offer Posters in <em>Minutes.</em></h1>
-          <p>Create professional promotional posters for your shop, supermarket or business — easily and quickly.</p>
-          <div class="hero-cta">
-            <button class="btn btn-gold" onclick="goto('marketplace')">Explore Templates</button>
-            <button class="btn btn-ghost" onclick="startBlankPoster()">Create Your Poster</button>
-          </div>
-        </div>
-        <div class="hero-preview-card" style="display:none; @media(min-width:768px){display:block;}">
-          <div style="font-size:12px;font-weight:700;color:var(--gold-soft);margin-bottom:8px;text-transform:uppercase;">Live Poster Preview</div>
-          <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&q=80" alt="Poster Preview">
+        <span class="hero-eyebrow">⚡ Ready in under 60 seconds</span>
+        <h1>Posters that make Kerala <em>shop today.</em></h1>
+        <p>Pick a template, drop in your photos and prices, download in HD.</p>
+        <div class="hero-cta">
+          <button class="btn btn-gold" onclick="goto('marketplace')">Browse Templates</button>
+          <button class="btn btn-ghost" onclick="startBlankPoster()">+ Blank Poster</button>
         </div>
       </div>
-
-      <!-- Supermarket Special Banner -->
       <div class="section" style="padding-bottom: 0;">
-        <div style="background: linear-gradient(135deg, var(--teal), var(--teal-2)); border-radius: 20px; padding: 20px 24px; color: #fff; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-2); flex-wrap: wrap; gap: 16px;">
+        <div style="background: linear-gradient(135deg, var(--teal), var(--teal-2)); border-radius: 16px; padding: 16px; color: #fff; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-2);">
           <div>
-            <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: var(--gold-soft); letter-spacing: 0.05em;">Supermarket Special</div>
-            <div style="font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-top: 2px;">Shelf Price Tags (പ്രൈസ് ടാഗ്)</div>
-            <div style="font-size: 13px; opacity: 0.85; margin-top: 2px;">ഷെൽഫിൽ ഒട്ടിക്കാൻ ചെറിയ പ്രൈസ് കാർഡുകൾ ഉണ്ടാക്കൂ</div>
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--gold-soft); letter-spacing: 0.05em;">Supermarket Special</div>
+            <div style="font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-top: 2px;">Shelf Price Tags (പ്രൈസ് ടാഗ്)</div>
+            <div style="font-size: 12.5px; opacity: 0.85; margin-top: 2px;">ഷെൽഫിൽ ഒട്ടിക്കാൻ ചെറിയ പ്രൈസ് കാർഡുകൾ ഉണ്ടാക്കൂ</div>
           </div>
-          <button class="btn btn-gold" onclick="startShelfTagPoster()">Create Tag Now</button>
+          <button class="btn btn-gold btn-sm" onclick="startShelfTagPoster()">Create Tag</button>
         </div>
       </div>
-
-      <!-- Features Section -->
-      <div class="section">
-        <div class="section-head"><h2>Powerful Features for Your Business</h2></div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="f-icon">🖼️</div>
-            <h3>Poster Maker</h3>
-            <p>Design eye-catching promotional posters in seconds with our simple drag-and-drop studio.</p>
-          </div>
-          <div class="feature-card">
-            <div class="f-icon">🎨</div>
-            <h3>Ready Templates</h3>
-            <p>Choose from dozens of professionally designed festival, weekly loot, and sale templates.</p>
-          </div>
-          <div class="feature-card">
-            <div class="f-icon">🛒</div>
-            <h3>Supermarket Offers</h3>
-            <p>Dedicated tools for grocery stores, clothing boutiques, electronics, and daily deals.</p>
-          </div>
-          <div class="feature-card">
-            <div class="f-icon">⬇️</div>
-            <h3>High Quality Download</h3>
-            <p>Export in HD format ready to print or share instantly on WhatsApp status and Facebook.</p>
-          </div>
-        </div>
+      <div class="section" style="padding-bottom:0;">
+        <div class="section-head"><h2>🔥 Bold Sale Banners</h2></div>
+        <p style="font-size:12.5px;color:var(--muted);margin:-6px 0 12px;">Ready-made bold offer banners — theme, headline and badges already set, just add your photo and details.</p>
       </div>
-
+      <div class="hscroll" id="boldSaleRow"></div>
+      <div class="section" style="padding-bottom:0;">
+        <div class="section-head"><h2>🖼️ Single Product Templates</h2></div>
+        <p style="font-size:12.5px;color:var(--muted);margin:-6px 0 12px;">One big product photo, bold theme and price already set — tap the photo to swap it, tap any text to edit it.</p>
+      </div>
+      <div class="hscroll" id="singleProductRow"></div>
       <div class="section">
         <div class="section-head">
-          <h2>📦 Free Product Photos Library</h2>
+          <h2>📦 Free Product Photos</h2>
           <span class="see-all" onclick="goto('library')">View all</span>
         </div>
       </div>
       <div class="hscroll" id="homeLibraryRow"></div>
-
       <div class="section" style="padding-top:16px;">
-        <div style="position:relative;max-width:600px;margin:0 auto;">
+        <div style="position:relative;">
           <input type="text" id="homeSearchInput" placeholder="Search templates..." onkeydown="if(event.key==='Enter') runHomeSearch();"
-            style="width:100%;padding:14px 48px 14px 18px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);font-size:14.5px;outline:none;box-shadow:var(--shadow-1);">
-          <button onclick="runHomeSearch()" style="position:absolute;right:6px;top:6px;bottom:6px;width:38px;border:none;background:var(--ink);color:#fff;border-radius:10px;cursor:pointer;">🔍</button>
+            style="width:100%;padding:13px 44px 13px 15px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);font-size:14px;outline:none;">
+          <button onclick="runHomeSearch()" style="position:absolute;right:6px;top:6px;bottom:6px;width:34px;border:none;background:var(--ink);color:#fff;border-radius:10px;">🔍</button>
         </div>
       </div>
-
       <div class="section"><div class="section-head"><h2>🔥 Trending Now</h2><span class="see-all" onclick="goto('marketplace')">See all</span></div></div>
       <div class="hscroll" id="trendingRow"></div>
-
       <div class="section"><div class="section-head"><h2>Shop by Category</h2></div></div>
       <div class="cat-tiles" id="catTiles"></div>
-
       <div class="section"><div class="section-head"><h2>👑 Premium Templates</h2><span class="see-all" onclick="goto('payment')">Go Premium</span></div></div>
       <div class="hscroll" id="premiumRow"></div>
-
       <div class="section"><div class="section-head"><h2>✨ Featured</h2></div></div>
       <div class="hscroll" id="featuredRow"></div>
+      <p class="footer-note">© Offer Poster Studio · Live-synced with Admin Panel</p>
 
-      <!-- Free Demo CTA Card -->
-      <div class="cta-banner">
-        <div>
-          <h3>Create Your First Poster FREE</h3>
-          <p>Try Offer Poster Studio and create your first promotional poster for free with no obligations.</p>
+      <div class="desktop-extra-sections">
+        <div class="section" id="homeFeaturesSection">
+          <div class="section-head"><h2>Why Offer Poster Studio</h2></div>
+          <div class="features-grid" id="homeFeaturesGrid"></div>
         </div>
-        <button class="btn btn-gold" onclick="startBlankPoster()">Start Designing Now</button>
+        <div class="section pricing-section" id="homePricingSection">
+          <div class="section-head"><h2>Simple, Transparent Pricing</h2></div>
+          <div class="pricing-grid" id="homePricingGrid"></div>
+        </div>
+        <div class="site-footer" id="homeFooter"></div>
       </div>
-
-      <!-- Professional Footer -->
-      <footer class="site-footer">
-        <div class="footer-grid">
-          <div>
-            <div class="brand" style="color:#fff;margin-bottom:12px;"><div class="mark">OP</div>Offer Poster Studio</div>
-            <p>Professional promotional poster maker for businesses in Kerala. Create, download and grow your sales.</p>
-          </div>
-          <div class="footer-links">
-            <h4>Quick Links</h4>
-            <a href="#" onclick="goto('home');return false;">Home</a>
-            <a href="#" onclick="goto('marketplace');return false;">Templates</a>
-            <a href="#" onclick="goto('payment');return false;">Pricing Plans</a>
-            <a href="#" onclick="goto('library');return false;">Product Photos</a>
-          </div>
-          <div class="footer-links">
-            <h4>Support & Contact</h4>
-            <a href="https://wa.me/919526605590" target="_blank">WhatsApp Support</a>
-            <a href="#" onclick="goto('dashboard');return false;">My Studio / Account</a>
-            <a href="#" onclick="goto('profile');return false;">Business Profile</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          © 2026 Offer Poster Studio · www.offerposterstudio.in · All rights reserved.
-        </div>
-      </footer>
     </section>
 
     <!-- Product Download Library Screen -->
@@ -402,37 +543,35 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
         <input type="text" id="libSearchInput" placeholder="Search products..." oninput="renderLibraryGallery()" style="width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);font-size:14px;outline:none;">
       </div>
       <div class="pill-row" id="libCategoryPills" style="margin-bottom:12px;"></div>
-      <div id="libGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 20px 40px; @media(min-width:768px){grid-template-columns:repeat(4,1fr);padding:0 32px 40px;}"></div>
+      <div id="libGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 40px;"></div>
     </section>
 
-    <!-- Marketplace / Templates Screen -->
     <section class="screen" id="screen-marketplace">
-      <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">Template Library</div></div>
+      <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">Templates</div></div>
       <div class="section" style="padding-top:14px;">
-        <input type="text" id="searchInput" placeholder="Search templates..." oninput="renderMarketplace()" style="width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);font-size:14px;outline:none;max-width:600px;margin:0 auto;display:block;">
+        <input type="text" id="searchInput" placeholder="Search templates..." oninput="renderMarketplace()" style="width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);font-size:14px;outline:none;">
       </div>
       <div class="pill-row" id="categoryPills"></div>
       <div class="pill-row" id="tagPills" style="margin-top:4px;padding-bottom:12px;"></div>
       <div class="tgrid" id="marketplaceGrid"></div>
     </section>
 
-    <!-- Dashboard / My Studio Screen -->
     <section class="screen" id="screen-dashboard">
-      <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">My Studio</div><button class="icon-btn" onclick="logout()" title="Log Out">⎋</button></div>
-      <div class="section" style="padding-top:16px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
-          <div class="avatar-chip" style="width:54px;height:54px;font-size:19px;" id="dashAvatar">A</div>
-          <div><div style="font-weight:800;font-size:16px;" id="dashName">—</div><div style="font-size:12.5px;color:var(--muted);" id="dashEmail">—</div></div>
+      <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">My Studio</div><button class="icon-btn" onclick="logout()">⎋</button></div>
+      <div class="section" style="padding-top:14px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div class="avatar-chip" style="width:50px;height:50px;font-size:17px;" id="dashAvatar">A</div>
+          <div><div style="font-weight:800;font-size:15px;" id="dashName">—</div><div style="font-size:12px;color:var(--muted);" id="dashEmail">—</div></div>
         </div>
-        <button class="btn btn-outline btn-sm" onclick="goto('profile')">✏️ Edit Business Profile</button>
+        <button class="btn btn-outline btn-block btn-sm" onclick="goto('profile')">✏️ Edit Business Profile</button>
       </div>
       <div class="plan-card">
         <div class="row"><span>CURRENT PLAN</span><span id="planDaysLeft"></span></div>
         <div class="planname" id="planName">Free Plan</div>
         <div class="row" style="margin-top:8px;"><span id="planExpiryRow"></span>
-          <button class="btn btn-gold btn-sm" onclick="goto('payment')" id="planUpgradeBtn">Upgrade Plan</button></div>
+          <button class="btn btn-gold btn-sm" onclick="goto('payment')" id="planUpgradeBtn">Upgrade</button></div>
       </div>
-      <div style="margin: 0 20px 16px; @media(min-width:768px){margin:0 32px 20px;}">
+      <div style="margin: 0 18px 16px;">
         <a href="https://wa.me/919526605590?text=ഹലോ,%20എനിക്ക്%20Offer%20Poster%20Studio-യുമായി%20ബന്ധപ്പെട്ട്%20ഒരു%20സംശയമുണ്ട്." target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:#25D366;color:#fff;border-radius:14px;font-weight:700;font-size:14px;text-decoration:none;">
           💬 WhatsApp വഴി സഹായം തേടാം
         </a>
@@ -442,7 +581,7 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
         <div class="stat-card"><div class="num" id="statDownloads">0</div><div class="lbl">Downloads</div></div>
         <div class="stat-card"><div class="num" id="statFavs">0</div><div class="lbl">Favorites</div></div>
       </div>
-      <div class="section"><div class="pill-row" style="padding:0;margin:0 0 14px;">
+      <div class="section"><div class="pill-row" style="padding:0;margin:0 0 12px;">
         <div class="pill active" data-tab="all" onclick="setDashTab('all')">My Posters</div>
         <div class="pill" data-tab="favorites" onclick="setDashTab('favorites')">Favorites</div>
       </div></div>
@@ -451,11 +590,10 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
       <p class="footer-note">Only your latest 3 posters are kept automatically.</p>
     </section>
 
-    <!-- Profile Screen -->
     <section class="screen" id="screen-profile">
       <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">Business Profile</div><button class="icon-btn" onclick="goto('dashboard')">✕</button></div>
-      <div class="section" style="padding-top:20px;max-width:600px;margin:0 auto;">
-        <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px;">
+      <div class="section" style="padding-top:16px;">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px;">
           <div class="logo-upload" id="profileLogoPreview" onclick="document.getElementById('profileLogoInput').click()">➕</div>
           <button class="btn btn-outline btn-sm" onclick="document.getElementById('profileLogoInput').click()">📤 Upload Logo</button>
         </div>
@@ -464,17 +602,15 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
         <div class="field"><label>Business Category</label><select id="profCategory"></select></div>
         <div class="field"><label>WhatsApp Number</label><input type="text" id="profWhatsapp"></div>
         <div class="field"><label>Address</label><input type="text" id="profAddress"></div>
-        <button class="btn btn-primary btn-block" onclick="saveProfile()" style="margin-top:8px;">Save Profile</button>
+        <button class="btn btn-primary btn-block" onclick="saveProfile()">Save Profile</button>
       </div>
     </section>
 
-    <!-- Payment Screen -->
     <section class="screen" id="screen-payment">
-      <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">Pricing & Plans</div><button class="icon-btn" onclick="goto('dashboard')">✕</button></div>
-      <div class="section" style="padding-top:20px;max-width:600px;margin:0 auto;" id="paymentBody"></div>
+      <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">Upgrade Plan</div><button class="icon-btn" onclick="goto('dashboard')">✕</button></div>
+      <div class="section" style="padding-top:16px;" id="paymentBody"></div>
     </section>
 
-    <!-- Editor Screen -->
     <section class="screen" id="screen-editor">
       <div class="editor-shell">
         <div class="editor-top">
@@ -526,7 +662,7 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
 
             <div class="divider"></div>
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">SELECTED TEXT ON POSTER</label>
-            <div class="sticker-controls" id="textLayerControls"><p style="font-size:12px;color:var(--muted);">Tap any text on the poster to select it.</p></div>
+            <div class="sticker-controls" id="textLayerControls"><p style="font-size:12px;color:var(--muted);">Tap any text on the poster (shop name, headline, price pill, address, etc.) to select it — then move, resize, rotate, edit or delete it.</p></div>
 
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:16px 0 8px;">ALL TEXT LAYERS</label>
             <div class="font-row" id="textLayerChips"></div>
@@ -571,6 +707,9 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
           </div>
 
           <div class="panel-block" id="panel-stickers">
+            <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">🔥 BOLD SALE BADGES · TAP TO ADD</label>
+            <div class="sticker-grid" id="badgeLibraryGrid" style="grid-template-columns:repeat(4,1fr);"></div>
+            <div class="divider"></div>
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">TAP TO ADD · DRAG TO POSITION</label>
             <div class="sticker-grid" id="stickerLibraryGrid"></div>
             <div class="divider"></div>
@@ -578,6 +717,13 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
             <div class="sticker-controls" id="stickerControls"><p style="font-size:12px;color:var(--muted);">Tap a sticker on the poster to select it.</p></div>
           </div>
           <div class="panel-block" id="panel-style">
+            <div style="display:flex;align-items:center;justify-content:space-between;background:var(--cream-2);border-radius:12px;padding:12px 14px;margin-bottom:16px;">
+              <div>
+                <div style="font-weight:700;font-size:13px;">🖼️ Full Screen (No Border)</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px;">One flat color, no header/footer bands or side border.</div>
+              </div>
+              <button class="btn btn-sm" id="borderlessToggleBtn" onclick="toggleBorderless()" style="flex-shrink:0;"></button>
+            </div>
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">COLOR THEME</label>
             <div class="swatch-row" id="colorSwatches"></div>
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:16px 0 8px;">TEXT COLOR (Shop Name / Headline / Address)</label>
@@ -602,7 +748,6 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
     </section>
   </div>
 
-  <!-- Mobile Bottom Navigation Bar -->
   <div class="bottomnav" id="bottomNav" style="display:none;">
     <div class="nav-item active" data-nav="home" onclick="goto('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</div>
     <div class="nav-item" data-nav="marketplace" onclick="goto('marketplace')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Templates</div>
@@ -612,10 +757,10 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
   </div>
 </div>
 
+<button id="viewModeToggle" onclick="toggleDesktopView()">🖥️ Desktop View</button>
 <div id="toast"></div>
 <div class="overlay" id="overlay" onclick="closeSheets()"></div>
 
-<!-- Forgot Password Sheet -->
 <div class="sheet" id="sheetForgot">
   <div class="sheet-handle"></div><div class="sheet-title">Reset your password</div>
   <p style="font-size:13px;color:var(--muted);margin-top:-6px;">We'll email you a reset link.</p>
@@ -624,7 +769,6 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
   <button class="btn btn-primary btn-block" onclick="submitForgot()">Send reset link</button>
 </div>
 
-<!-- Slot Edit Sheet -->
 <div class="sheet" id="sheetSlotEdit">
   <div class="sheet-handle"></div><div class="sheet-title">Edit this photo</div>
   <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
@@ -638,25 +782,58 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
     <div class="field" style="flex:1;"><label>Offer Price</label><input type="text" id="slotOfferPrice" placeholder="₹399"></div>
   </div>
   <div class="field"><label>Product Name</label><input type="text" id="slotOfferText" placeholder="e.g. Sunflower Oil"></div>
-  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">PHOTO SIZE (ZOOM)</label>
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">PHOTO SIZE (ZOOM INSIDE BOX)</label>
   <div style="display:flex;gap:8px;margin-bottom:14px;">
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="adjustSlotZoom(0.15)">🔍+ വലുതാക്കുക</button>
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="adjustSlotZoom(-0.15)">🔍− ചെറുതാക്കുക</button>
   </div>
+
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">MOVE PHOTO BOX (SCREEN-ൽ എവിടെയും)</label>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">
+    <div></div>
+    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(0, -0.03)">⬆️</button>
+    <div></div>
+    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(-0.03, 0)">⬅️</button>
+    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(0, 0.03)">⬇️</button>
+    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(0.03, 0)">➡️</button>
+  </div>
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:8px 0 6px;">RESIZE PHOTO BOX</label>
+  <div style="display:flex;gap:6px;margin-bottom:6px;">
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('w', 1.1)">↔️+ വീതി</button>
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('w', 0.9)">↔️− വീതി</button>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:14px;">
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('h', 1.1)">↕️+ ഉയരം</button>
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('h', 0.9)">↕️− ഉയരം</button>
+  </div>
+
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">MOVE MRP / PRICE TAG</label>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">
+    <div></div>
+    <button class="btn btn-outline btn-sm" onclick="movePriceTag(0, -0.02)">⬆️</button>
+    <div></div>
+    <button class="btn btn-outline btn-sm" onclick="movePriceTag(-0.02, 0)">⬅️</button>
+    <button class="btn btn-outline btn-sm" onclick="movePriceTag(0, 0.02)">⬇️</button>
+    <button class="btn btn-outline btn-sm" onclick="movePriceTag(0.02, 0)">➡️</button>
+  </div>
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:8px 0 6px;">RESIZE MRP / PRICE TAG</label>
+  <div style="display:flex;gap:6px;margin-bottom:14px;">
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizePriceTag(1.15)">🔍+ വലുതാക്കുക</button>
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizePriceTag(0.87)">🔍− ചെറുതാക്കുക</button>
+  </div>
+
   <button class="btn btn-primary btn-block" onclick="saveSlotPrices()">Save Photo Details</button>
   <div style="display:flex;gap:8px;margin-top:10px;">
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="deleteSlotContent()">🗑 Remove Photo</button>
   </div>
 </div>
 
-<!-- Inline Text Edit Sheet -->
 <div class="sheet" id="sheetInlineEdit">
   <div class="sheet-handle"></div><div class="sheet-title" id="inlineEditTitle">Edit text</div>
   <div id="inlineEditFields"></div>
   <button class="btn btn-primary btn-block" onclick="closeSheets()">Done</button>
 </div>
 
-<!-- Export / Download Sheet -->
 <div class="sheet" id="sheetExport">
   <div class="sheet-handle"></div><div class="sheet-title">Download poster</div>
   <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">SIZE</label>
@@ -669,7 +846,6 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
   <button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="saveDraft()">Save as Draft</button>
 </div>
 
-<!-- Supabase JS Client & Core Functional Script -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const SUPABASE_URL = 'https://peftmuasykbcrhtkhhjf.supabase.co';
@@ -729,9 +905,43 @@ let STATE = {
   editor: null
 };
 
+// ===== View mode (mobile app layout vs desktop site layout) =====
+// desktopOverride: null = auto (follow real window width), true = forced desktop,
+// false = forced mobile. The toggle button lets you preview the desktop design on a
+// phone (or the mobile design on a desktop) regardless of your actual screen width —
+// auto-detection alone isn't enough since phones can't just "become" 1280px wide.
+let desktopOverride = null;
+const DESKTOP_BREAKPOINT = 900;
+function isDesktopViewActive() {
+  return desktopOverride === null ? window.innerWidth >= DESKTOP_BREAKPOINT : desktopOverride;
+}
+function applyViewMode() {
+  const desktop = isDesktopViewActive();
+  document.body.classList.toggle('desktop-view', desktop);
+  const meta = document.querySelector('meta[name="viewport"]');
+  if (meta) {
+    if (desktopOverride === true && window.innerWidth < DESKTOP_BREAKPOINT) {
+      // Forcing desktop layout on a physically narrow screen: widen the virtual
+      // viewport so the full desktop design is visible (pinch-zoom/scroll to see it),
+      // the same trick browsers use for "Request Desktop Site".
+      meta.setAttribute('content', 'width=1280');
+    } else {
+      meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    }
+  }
+  const btn = document.getElementById('viewModeToggle');
+  if (btn) btn.textContent = desktop ? '📱 Mobile View' : '🖥️ Desktop View';
+}
+function toggleDesktopView() {
+  desktopOverride = !isDesktopViewActive();
+  applyViewMode();
+}
+window.addEventListener('resize', () => { if (desktopOverride === null) applyViewMode(); });
+applyViewMode();
+
 async function boot() {
   const user = await getCurrentUser();
-  if (!user) { showAuth(); return; }
+  if (!user) { showLanding(); return; }
   try { await sb.rpc('expire_plans'); } catch (e) { /* non-fatal */ }
   const profile = await getCurrentProfile();
   if (!profile) { showAuth(); return; }
@@ -772,16 +982,159 @@ async function loadSharedData() {
   }
 }
 function showAuth() {
+  document.getElementById('screen-landing').classList.remove('active');
   document.getElementById('screen-auth').classList.add('active');
   document.getElementById('mainShell').style.display = 'none';
   document.getElementById('bottomNav').style.display = 'none';
+  renderNavCta();
+}
+function showLanding() {
+  document.getElementById('screen-auth').classList.remove('active');
+  document.getElementById('screen-landing').classList.add('active');
+  document.getElementById('mainShell').style.display = 'none';
+  document.getElementById('bottomNav').style.display = 'none';
+  renderFeaturesGrid('landingFeaturesGrid');
+  renderLandingCategories('landingCatGrid');
+  renderPricingCards('landingPricingGrid', { mode: 'landing' });
+  renderSiteFooter('landingFooter');
+  renderNavCta();
 }
 function enterApp() {
   document.getElementById('screen-auth').classList.remove('active');
+  document.getElementById('screen-landing').classList.remove('active');
   document.getElementById('mainShell').style.display = 'block';
   document.getElementById('bottomNav').style.display = 'flex';
   document.getElementById('avatarChip').textContent = (STATE.profile.shop_name || 'U').charAt(0).toUpperCase();
+  renderNavCta();
   goto('home');
+}
+
+// ===== Desktop navbar + marketing sections (additive; used by screen-landing and,
+// for logged-in desktop visitors, appended to the bottom of screen-home) =====
+function renderNavCta() {
+  const el = document.getElementById('navCtaArea'); if (!el) return;
+  if (STATE.user && STATE.profile) {
+    el.innerHTML = `<button class="btn btn-outline btn-sm" onclick="goto('dashboard')">👤 ${escapeHtml(STATE.profile.shop_name || 'Profile')}</button>
+      <button class="btn btn-primary btn-sm" onclick="handleNavCreate()">Create Poster</button>`;
+  } else {
+    el.innerHTML = `<button class="btn btn-outline btn-sm" onclick="showAuth();setAuthMode('login')">Login</button>
+      <button class="btn btn-primary btn-sm" onclick="showAuth();setAuthMode('signup')">Get Started</button>`;
+  }
+}
+function handleNavHome() { if (STATE.user) { goto('home'); } else { showLanding(); } }
+function handleNavTemplates() { if (STATE.user) { goto('marketplace'); } else { showPublicScreen('templates'); } }
+function handleNavCreate() { if (STATE.user) { startBlankPoster(); } else { showAuth(); setAuthMode('signup'); } }
+function handleNavFeatures() { showPublicScreen('features'); }
+function handleNavPricing() { showPublicScreen('pricing'); }
+function handleNavContact() { showPublicScreen('contact'); }
+function scrollToSection(id) { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+// ===== In-file "pages": Templates / Features / Pricing / Contact / Privacy / Terms.
+// These behave like real separate pages (their own screen, own scroll position, a Back
+// button, and a URL hash you can share/bookmark) but never leave this one HTML file. =====
+const PUBLIC_SCREENS = ['templates', 'features', 'pricing', 'contact', 'privacy', 'terms'];
+let screenBeforePublic = null;
+function showPublicScreen(name) {
+  if (!PUBLIC_SCREENS.includes(name)) return;
+  if (STATE.currentScreen && STATE.currentScreen !== 'pub') screenBeforePublic = { user: !!STATE.user, screen: STATE.currentScreen };
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-pub-' + name).classList.add('active');
+  document.getElementById('mainShell').style.display = 'none';
+  document.getElementById('bottomNav').style.display = 'none';
+  STATE.currentScreen = 'pub';
+  window.scrollTo(0, 0);
+  history.replaceState(null, '', '#' + name);
+  if (name === 'templates') { renderLandingCategories('pubTemplatesGrid'); renderSiteFooter('pubTemplatesFooter'); }
+  if (name === 'features') { renderFeaturesGrid('pubFeaturesGrid'); renderSiteFooter('pubFeaturesFooter'); }
+  if (name === 'pricing') { renderPricingCards('pubPricingGrid', { mode: STATE.user ? 'home' : 'landing' }); renderSiteFooter('pubPricingFooter'); }
+  if (name === 'contact') { renderSiteFooter('pubContactFooter'); }
+  if (name === 'privacy') { renderSiteFooter('pubPrivacyFooter'); }
+  if (name === 'terms') { renderSiteFooter('pubTermsFooter'); }
+}
+function closePublicScreen() {
+  history.replaceState(null, '', location.pathname);
+  if (STATE.user) {
+    document.getElementById('mainShell').style.display = 'block';
+    goto((screenBeforePublic && screenBeforePublic.user) ? screenBeforePublic.screen : 'home');
+  } else {
+    showLanding();
+  }
+}
+
+const MARKETING_FEATURES = [
+  { ic: '🖼️', title: 'Poster Maker', desc: 'Design offer posters visually — no design skill needed.' },
+  { ic: '🎨', title: 'Ready Templates', desc: 'Dozens of ready-made layouts for every occasion.' },
+  { ic: '🛒', title: 'Supermarket Offers', desc: 'Built for grocery, supermarket & retail price tags.' },
+  { ic: '📱', title: 'WhatsApp Sharing', desc: 'Export and share straight to WhatsApp status or groups.' },
+  { ic: '📸', title: 'Multiple Photos', desc: 'Add multiple product photos in one clean layout.' },
+  { ic: '✨', title: 'Premium Designs', desc: 'Unlock premium templates and festival specials.' },
+  { ic: '⬇️', title: 'High Quality Download', desc: 'Export sharp, high-resolution PNG or JPG posters.' },
+  { ic: '📲', title: 'Social Media Ready', desc: 'Perfectly sized for Instagram, Facebook & Status.' }
+];
+function renderFeaturesGrid(containerId) {
+  const el = document.getElementById(containerId); if (!el) return;
+  el.innerHTML = MARKETING_FEATURES.map(f => `
+    <div class="feature-card"><div class="fic">${f.ic}</div><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.desc)}</p></div>
+  `).join('');
+}
+
+const MARKETING_CATEGORIES = [
+  { icon: '1️⃣', label: '1 Photo' }, { icon: '2️⃣', label: '2 Photos' }, { icon: '4️⃣', label: '4 Photos' },
+  { icon: '6️⃣', label: '6 Photos' }, { icon: '9️⃣', label: '9 Photos' }, { icon: '🔟', label: '12 Photos' },
+  { icon: '🛒', label: 'Supermarket' }, { icon: '🎉', label: 'Festival' }, { icon: '🍔', label: 'Food' },
+  { icon: '📱', label: 'Electronics' }, { icon: '👗', label: 'Fashion' }
+];
+function renderLandingCategories(containerId) {
+  const el = document.getElementById(containerId); if (!el) return;
+  el.innerHTML = MARKETING_CATEGORIES.map(c => `
+    <div class="cat-tile" onclick="showAuth();setAuthMode('signup')"><div class="ic">${c.icon}</div><span>${escapeHtml(c.label)}</span></div>
+  `).join('');
+}
+
+function renderPricingCards(containerId, opts) {
+  const el = document.getElementById(containerId); if (!el) return;
+  const mode = (opts && opts.mode) || 'landing';
+  const premiumPrice = (STATE.settings && STATE.settings.premium_price) ?? 299;
+  const businessPrice = (STATE.settings && STATE.settings.business_plan_price) ?? 999;
+  const freeLimit = (STATE.settings && STATE.settings.free_download_limit) ?? 1;
+  const ctaFor = (plan) => mode === 'home'
+    ? `onclick="goto('payment')"`
+    : `onclick="showAuth();setAuthMode('signup')"`;
+  const plans = [
+    { name: 'Free', price: '₹0', suffix: '', features: [`${freeLimit} download/day`, 'Basic templates', 'Watermark on export'], cta: 'Get Started', featured: false },
+    { name: 'Premium', price: fmtMoney(premiumPrice), suffix: '/month', features: ['Unlimited downloads', 'All premium templates', 'No watermark', 'HD export'], cta: 'Choose Premium', featured: true },
+    { name: 'Business', price: fmtMoney(businessPrice), suffix: '/month', features: ['Everything in Premium', 'Priority support', 'Multiple shop profiles'], cta: 'Choose Business', featured: false }
+  ];
+  el.innerHTML = plans.map(p => `
+    <div class="pricing-card ${p.featured ? 'featured' : ''}">
+      <div class="pname">${p.name}</div>
+      <div class="pprice">${p.price}<span>${p.suffix}</span></div>
+      <ul>${p.features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}</ul>
+      <button class="btn ${p.featured ? 'btn-gold' : 'btn-outline'} btn-block" ${ctaFor(p.name)}>${p.cta}</button>
+    </div>
+  `).join('');
+}
+
+function renderSiteFooter(containerId) {
+  const el = document.getElementById(containerId); if (!el) return;
+  el.innerHTML = `
+    <div class="foot-inner">
+      <div style="max-width:340px;">
+        <h4>Offer Poster Studio</h4>
+        <p class="tagline">Professional promotional poster maker for businesses.</p>
+      </div>
+      <div class="foot-links">
+        <a onclick="handleNavHome()">Home</a>
+        <a onclick="handleNavTemplates()">Templates</a>
+        <a onclick="handleNavPricing()">Pricing</a>
+        <a onclick="handleNavFeatures()">Features</a>
+        <a onclick="handleNavContact()">Contact</a>
+        <a onclick="showPublicScreen('privacy')">Privacy Policy</a>
+        <a onclick="showPublicScreen('terms')">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© ${new Date().getFullYear()} Offer Poster Studio · www.offerposterstudio.in</div>
+  `;
 }
 
 function setAuthMode(mode) {
@@ -832,14 +1185,7 @@ function goto(screen) {
   STATE.currentScreen = screen;
   document.querySelectorAll('#mainShell .screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + screen).classList.add('active');
-  
-  // Update desktop active navigation links
-  document.querySelectorAll('.desktop-nav a').forEach(a => a.classList.remove('active'));
-  if(screen === 'home') document.getElementById('navLinkHome')?.classList.add('active');
-  if(screen === 'marketplace') document.getElementById('navLinkTemplates')?.classList.add('active');
-  if(screen === 'library') document.getElementById('navLinkLibrary')?.classList.add('active');
-  if(screen === 'payment') document.getElementById('navLinkPricing')?.classList.add('active');
-
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const navMap = { home: 'home', marketplace: 'marketplace', dashboard: 'dashboard', profile: 'profile' };
   document.querySelectorAll(`.nav-item[data-nav="${navMap[screen] || screen}"]`).forEach(n => n.classList.add('active'));
   document.getElementById('bottomNav').style.display = (screen === 'editor') ? 'none' : 'flex';
@@ -876,11 +1222,14 @@ function tplCard(t) {
 function setEditorTab(tab) {
   document.querySelectorAll('.etab').forEach(e => e.classList.toggle('active', e.dataset.tab === tab));
   document.querySelectorAll('.panel-block').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
-  if (tab === 'style') { renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); }
+  if (tab === 'style') { renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderBorderlessToggle(); }
   if (tab === 'headertpl') { renderHeaderTplLibrary(); }
   if (tab === 'text') { renderTextControls(); renderTextLayerChips(); }
 }
 
+// All solid, single-tone colors on purpose — no gradients or 2-color mixes here, since this
+// swatch row sets a flat fill for text (headline/shop-name/footer), unlike the background
+// THEME_COLORS/GRADIENT_PRESETS row above.
 const TEXT_COLORS = [
   '#152420', '#FFFFFF', '#000000', '#5B6E67',
   '#CC9A3C', '#FFD700', '#F59E0B', '#FB923C',
@@ -905,6 +1254,23 @@ function setTextTheme(c) {
   renderPoster();
 }
 
+// "Full Screen (No Border)" — removes the header/footer bands and side border strips so
+// the whole canvas is one flat, changeable color/gradient behind the photo and text.
+function toggleBorderless() {
+  pushHistory();
+  STATE.editor.borderless = !STATE.editor.borderless;
+  renderBorderlessToggle();
+  renderPoster();
+}
+function renderBorderlessToggle() {
+  const btn = document.getElementById('borderlessToggleBtn'); if (!btn || !STATE.editor) return;
+  const on = !!STATE.editor.borderless;
+  btn.textContent = on ? 'ON' : 'OFF';
+  btn.className = 'btn btn-sm ' + (on ? 'btn-gold' : 'btn-outline');
+}
+
+// Discount / date pill and product-name caption each get their own independent color,
+// separate from the main Text Color above (which only affects shop name / headline / address).
 function renderPillColorSwatches() {
   const row = document.getElementById('pillColorSwatches');
   if (!row) return;
@@ -933,6 +1299,8 @@ function setProductTextColor(c) {
 }
  
 function renderHome() {
+  renderBoldSaleRow();
+  renderSingleProductRow();
   const trending = document.getElementById('trendingRow');
   if (trending) trending.innerHTML = STATE.templates.filter(t => t.trending).slice(0, 10).map(tplCard).join('') || emptyRowMsg('No trending templates yet.');
 
@@ -960,6 +1328,12 @@ function renderHome() {
       </div>
     `).join('') || '<p style="padding:0 18px;color:var(--muted);font-size:13px;">No photos available.</p>';
   }
+
+  // Desktop-only marketing sections appended to the bottom of Home (invisible on mobile —
+  // see .desktop-extra-sections in CSS — so the phone app view is unaffected).
+  renderFeaturesGrid('homeFeaturesGrid');
+  renderPricingCards('homePricingGrid', { mode: 'home' });
+  renderSiteFooter('homeFooter');
 }
 
 function emptyRowMsg(m) { return `<p style="padding:0 18px;color:var(--muted);font-size:13px;">${m}</p>`; }
@@ -1089,9 +1463,9 @@ function renderPayment() {
         <option value="business">Business — ${fmtMoney(businessPrice)}/month</option>
       </select>
     </div>
-    <div style="background:var(--cream-2);border-radius:12px;padding:16px;margin-bottom:16px;text-align:center;">
+    <div style="background:var(--cream-2);border-radius:12px;padding:14px;margin-bottom:14px;text-align:center;">
       <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Pay via UPI to</div>
-      <div style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-top:4px;" id="payUpiId">${escapeHtml(STATE.settings.upi_id || 'yourshop@upi')}</div>
+      <div style="font-family:var(--font-display);font-size:17px;font-weight:700;margin-top:4px;" id="payUpiId">${escapeHtml(STATE.settings.upi_id || 'yourshop@upi')}</div>
       ${STATE.settings.qr_image_url ? `<img src="${STATE.settings.qr_image_url}" style="max-width:160px;margin:10px auto 0;border-radius:8px;">` : ''}
     </div>
     <button class="btn btn-gold btn-block" style="margin-bottom:16px;" onclick="payViaUpiApp()">📲 Pay <span id="payAmountLabel">${fmtMoney(premiumPrice)}</span> via UPI App</button>
@@ -1158,12 +1532,97 @@ const GRADIENT_PRESETS = [
   { id: 'forest', colors: ['#052e16', '#15803D', '#84CC16'] },
   { id: 'midnight', colors: ['#0B1024', '#1E1B4B', '#4338CA'] },
   { id: 'candy', colors: ['#DB2777', '#F59E0B'] },
-  { id: 'emerald', colors: ['#022c22', '#0F766E', '#2DD4BF'] }
+  { id: 'emerald', colors: ['#022c22', '#0F766E', '#2DD4BF'] },
+  { id: 'cashback', colors: ['#7C2D12', '#DC2626', '#F97316'] },
+  { id: 'saleburst', colors: ['#F59E0B', '#EC4899', '#7C3AED'] },
+  { id: 'blackfriday', colors: ['#000000', '#111827', '#DC2626'] }
 ];
 const BUILTIN_STICKERS = [
   { cat: 'festival', items: ['🎉', '🪔', '🎊', '🌟', '🎆', '🕌', '🎄', '🧨', '🥳', '🎇'] },
   { cat: 'badges', items: ['🏷️', '🔥', '⭐', '💯', '✅', '🆕', '⚡', '🎯'] },
   { cat: 'general', items: ['❤️', '👍', '🛍️', '🎁', '📢', '💰', '🛒', '⏰'] },
+];
+// Real drawn badge graphics (not emoji) for the bold "sale poster" look — starburst % OFF
+// tags, ribbon-style SALE badges, etc. Draggable/resizable/rotatable like any other sticker.
+const BADGE_PRESETS = [
+  { id: 'off50', shape: 'burst', lines: ['50%', 'OFF'], bg: '#8C3AA8', fg: '#ffffff' },
+  { id: 'off70', shape: 'burst', lines: ['75%', 'OFF'], bg: '#DC2626', fg: '#ffffff' },
+  { id: 'off30', shape: 'circle', lines: ['30%', 'OFF'], bg: '#059669', fg: '#ffffff' },
+  { id: 'sale', shape: 'circle', lines: ['SALE'], bg: '#F59E0B', fg: '#1c1204' },
+  { id: 'hotdeal', shape: 'burst', lines: ['HOT', 'DEAL'], bg: '#EA580C', fg: '#ffffff' },
+  { id: 'dontmiss', shape: 'ribbon', lines: ["DON'T", 'MISS IT'], bg: '#B91C1C', fg: '#ffffff' },
+  { id: 'newarrival', shape: 'circle', lines: ['NEW'], bg: '#0EA5E9', fg: '#ffffff' },
+  { id: 'limited', shape: 'ribbon', lines: ['LIMITED', 'OFFER'], bg: '#111827', fg: '#ffffff' }
+];
+// Full ready-made banner presets matching the bold "sale poster" reference style — theme,
+// headline, font and badge stickers already set up; the person just adds their own photo,
+// shop name and contact details on top.
+const BOLD_POSTER_PRESETS = [
+  {
+    id: 'cashback', title: 'Cashback Offer', thumb: 'linear-gradient(135deg,#7C2D12,#DC2626,#F97316)',
+    themeGradientId: 'cashback', font: 'titan',
+    headline: '100% OFF CASHBACK OFFER', dateRange: 'ONLY FOR TWO DAYS', discount: '',
+    badges: []
+  },
+  {
+    id: 'saleburst', title: 'Sale Burst', thumb: 'linear-gradient(135deg,#F59E0B,#EC4899,#7C3AED)',
+    themeGradientId: 'saleburst', font: 'chango',
+    headline: 'SALE ONLY TODAY', dateRange: 'THIS WEEK ONLY', discount: '',
+    badges: [{ presetId: 'sale', x: 0.33, y: 0.6, scale: 1.9 }, { presetId: 'off50', x: 0.78, y: 0.68, scale: 1.2 }]
+  },
+  {
+    id: 'blackfriday', title: 'Black Friday Sale', thumb: 'linear-gradient(135deg,#000000,#111827,#DC2626)',
+    themeGradientId: 'blackfriday', font: 'anton',
+    headline: 'BLACK FRIDAY SALE', dateRange: '25 NOV', discount: 'UP TO 75% OFF',
+    badges: [{ presetId: 'dontmiss', x: 0.86, y: 0.14, scale: 1.05 }]
+  }
+];
+// Ready-made single-product-photo poster templates: one big product photo slot with a
+// placeholder image + sample price/name — replace the photo and edit every text exactly
+// like any other poster, the bold theme/headline/badge are just the starting point.
+const SINGLE_PRODUCT_PRESETS = [
+  {
+    id: 'freshdeal', title: 'Fresh Deal', thumb: 'linear-gradient(135deg,#022c22,#0F766E,#2DD4BF)',
+    themeGradientId: 'emerald', font: 'righteous',
+    headline: 'FRESH DEAL TODAY', dateRange: 'LIMITED STOCK', discount: '',
+    demoImg: 0, mrp: '199', offerPrice: '149', offerText: 'Fresh Product Pack',
+    badges: [{ presetId: 'off30', x: 0.82, y: 0.18, scale: 1.1 }]
+  },
+  {
+    id: 'megasale', title: 'Mega Sale', thumb: 'linear-gradient(135deg,#7C2D12,#EA580C,#F59E0B)',
+    themeGradientId: 'sunset', font: 'bungee',
+    headline: 'MEGA SALE OFFER', dateRange: 'THIS WEEKEND', discount: '',
+    demoImg: 1, mrp: '999', offerPrice: '599', offerText: 'Best Seller Item',
+    badges: [{ presetId: 'off50', x: 0.82, y: 0.18, scale: 1.15 }]
+  },
+  {
+    id: 'newarrival', title: 'New Arrival', thumb: 'linear-gradient(135deg,#061B4A,#0D5FDB,#35A7FF)',
+    themeGradientId: 'ocean', font: 'russo',
+    headline: 'NEW ARRIVAL', dateRange: 'JUST LAUNCHED', discount: '',
+    demoImg: 2, mrp: '', offerPrice: '499', offerText: 'New Product Name',
+    badges: [{ presetId: 'newarrival', x: 0.82, y: 0.18, scale: 1.1 }]
+  },
+  {
+    id: 'bestprice', title: 'Best Price', thumb: 'linear-gradient(135deg,#082A73,#8C3AA8)',
+    themeGradientId: 'royal', font: 'paytone',
+    headline: 'BEST PRICE GUARANTEE', dateRange: '', discount: '',
+    demoImg: 3, mrp: '799', offerPrice: '549', offerText: 'Top Quality Product',
+    badges: []
+  },
+  {
+    id: 'flashsale', title: 'Flash Sale', thumb: 'linear-gradient(135deg,#111827,#DC2626)',
+    themeGradientId: 'blackfriday', font: 'titan',
+    headline: 'FLASH SALE', dateRange: 'TODAY ONLY', discount: '',
+    demoImg: 4, mrp: '1299', offerPrice: '699', offerText: 'Hot Selling Product',
+    badges: [{ presetId: 'off70', x: 0.82, y: 0.18, scale: 1.15 }]
+  },
+  {
+    id: 'premiumpick', title: 'Premium Pick', thumb: 'linear-gradient(135deg,#1c1204,#B8842E,#F5B82E)',
+    themeGradientId: 'gold', font: 'lilita',
+    headline: 'PREMIUM PICK', dateRange: '', discount: '',
+    demoImg: 5, mrp: '', offerPrice: '', offerText: 'Premium Product',
+    badges: [{ presetId: 'sale', x: 0.82, y: 0.18, scale: 1 }]
+  }
 ];
 const ML_PHRASES = ['🌙Ramadan Offer','🌸Onam Festival','🎄Christmas Carnival','🕌Eid Offers','🪔Diwali Sale','👗Fashion Sale','📱Mobile Fest','🛒Grocery Offer','💍Jewellery Offer','🧴Beauty Sale','🏠Home Essentials','🛍️ഇന്ന്.മാത്രം ഓഫർ', '🛍️മെഗാ സെയിൽ', '🛍️വമ്പൻ വിലക്കുറവ്', '📦സ്റ്റോക്ക് ക്ലിയറൻസ്', '🌸ഓണം.സ്പെഷ്യൽ ഓഫർ', '🧨വിഷു ഓഫർ', '🌜പെരുന്നാൾ ഓഫർ', '🚚പരിമിതകാല ഓഫർ'];
 const FONT_OPTIONS = [
@@ -1192,7 +1651,10 @@ const FONT_OPTIONS = [
   { id: 'paytone', label: 'Paytone', css: 'Paytone One, sans-serif' }
 ];
 const MALAYALAM_FONT_IDS = ['ml', 'ml-baloo', 'ml-manjari', 'ml-chilanka', 'ml-gayathri', 'ml-serif', 'ml-suranna', 'ml-uroob'];
-
+// Picks the right font for a piece of text: if the text is Malayalam and the user has
+// chosen one of the Malayalam-capable fonts in Style tab, use that font's own look
+// (e.g. the bold "അടിപൊളി" Baloo style); otherwise fall back to the safe default
+// Malayalam font so Malayalam text never renders in a Latin-only font as boxes.
 function resolveTextFontCss(ed, isMl, fontFamily, mlFont) {
   if (isMl) {
     if (MALAYALAM_FONT_IDS.includes(ed.font)) {
@@ -1208,6 +1670,7 @@ function getSlotRects(count, layoutType = 'grid') {
   const gap = 0.012, rects = [];
   const n = parseInt(count);
  
+  // 1️⃣ Weekend Loot സ്റ്റൈൽ ലേഔട്ട്
   if (layoutType === 'layout_loot') {
     rects.push({ x: 0.02, y: 0.02, w: 0.45, h: 0.30 }); 
     rects.push({ x: 0.50, y: 0.02, w: 0.22, h: 0.14 }); 
@@ -1227,6 +1690,7 @@ function getSlotRects(count, layoutType = 'grid') {
     return rects;
   }
 
+  // 2️⃣ Eid Night Fiesta സ്റ്റൈൽ ലേഔട്ട്
   if (layoutType === 'layout_fiesta') {
     rects.push({ x: 0.02, y: 0.02, w: 0.22, h: 0.20 });
     rects.push({ x: 0.26, y: 0.02, w: 0.22, h: 0.20 });
@@ -1246,6 +1710,7 @@ function getSlotRects(count, layoutType = 'grid') {
     return rects;
   }
 
+  // 3️⃣ Buy More Save More ലേഔട്ട്
   if (layoutType === 'layout_buymore') {
     rects.push({ x: 0.02, y: 0.02, w: 0.31, h: 0.30 });
     rects.push({ x: 0.35, y: 0.02, w: 0.31, h: 0.30 });
@@ -1258,6 +1723,7 @@ function getSlotRects(count, layoutType = 'grid') {
     return rects;
   }
 
+  // 4️⃣ Onam Special ലേഔട്ട്
   if (layoutType === 'layout_onam') {
     rects.push({ x: 0.02, y: 0.02, w: 0.31, h: 0.31 });
     rects.push({ x: 0.35, y: 0.02, w: 0.31, h: 0.31 });
@@ -1270,6 +1736,7 @@ function getSlotRects(count, layoutType = 'grid') {
     return rects;
   }
 
+  // സാധാരണ ഗ്രീഡ് ലേഔട്ടുകൾ
   if (n === 4 && layoutType === 'combo') {
     rects.push({ x: 0, y: 0, w: 1, h: 0.52 });
     rects.push({ x: 0, y: 0.54, w: 0.32, h: 0.44 });
@@ -1278,6 +1745,15 @@ function getSlotRects(count, layoutType = 'grid') {
     return rects;
   }
   
+  
+
+  if (n === 4 && layoutType === 'combo') {
+    rects.push({ x: 0, y: 0, w: 1, h: 0.52 });
+    rects.push({ x: 0, y: 0.54, w: 0.32, h: 0.44 });
+    rects.push({ x: 0.34, y: 0.54, w: 0.32, h: 0.44 });
+    rects.push({ x: 0.68, y: 0.54, w: 0.32, h: 0.44 });
+    return rects;
+  }
   function grid(cols, rows) {
     const cw = (1 - gap * (cols + 1)) / cols, rh = (1 - gap * (rows + 1)) / rows;
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) rects.push({ x: gap + c * (cw + gap), y: gap + r * (rh + gap), w: cw, h: rh });
@@ -1315,19 +1791,8 @@ function renderHeaderTplLibrary() {
     { image_url: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=600&q=80' },
     { image_url: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=600&q=80' },
     { image_url: 'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?w=600&q=80' },
-    { image_url: 'https://images.unsplash.com/photo-1513151233558-d860539817?w=600&q=80' },
-    { image_url:  'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=60'},
-    { image_url:  'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=400&q=60'},
-    { image_url: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=60'},
-    { image_url:  'https://images.unsplash.com/photo-1567306301408-9b74779a11af?w=400&q=60'},
-    { image_url:  'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=400&q=60'},
-    { image_url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&q=60'},
-    { image_url: 'https://images.unsplash.com/photo-1573883431205-98b5f10aaedb?w=400&q=60'},
-    { image_url: 'https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=400&q=60'},
-    { image_url:  'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&q=60'},
-    { image_url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=60'},
-    { image_url: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=60'},
- ];
+    { image_url: 'https://images.unsplash.com/photo-1513151233558-d860539817?w=600&q=80' }
+  ];
   const banners = (STATE.banners && STATE.banners.length > 0) ? STATE.banners : BUILTIN_HEADER_BANNERS;
   const grid = document.getElementById('headerTplLibraryGrid');
   if (grid) {
@@ -1428,7 +1893,7 @@ function enterEditor() {
   document.getElementById('fWhatsapp').value = STATE.editor.whatsapp;
   document.getElementById('fAddress').value = STATE.editor.address;
   document.getElementById('logoUpload').innerHTML = STATE.editor.logo ? `<img src="${STATE.editor.logo}">` : '➕';
-  renderSlotGrid(); renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderFontChips(); renderLayoutChips(); renderStickerLibrary(); renderStickerControls(); renderMlQuick(); renderTextControls(); renderTextLayerChips();
+  renderSlotGrid(); renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderBorderlessToggle(); renderFontChips(); renderLayoutChips(); renderStickerLibrary(); renderBadgeLibrary(); renderStickerControls(); renderMlQuick(); renderTextControls(); renderTextLayerChips();
   updatePlanBanner(); setEditorTab('photos'); resetZoom();
   historyStack = []; redoStack = []; updateUndoRedoButtons();
   renderPoster();
@@ -1465,8 +1930,92 @@ function startShelfTagPoster() {
     id: uid(), 
     dbId: null
   };
+  
   enterEditor();
   toast('Professional Shelf Tag loaded!');
+}
+function startBoldSalePoster(id) {
+  const preset = BOLD_POSTER_PRESETS.find(p => p.id === id); if (!preset) return;
+  const grad = GRADIENT_PRESETS.find(g => g.id === preset.themeGradientId);
+  STATE.editor = blankEditorState(null);
+  STATE.editor.title = preset.title;
+  STATE.editor.themeType = 'gradient';
+  STATE.editor.themeGradient = grad ? grad.colors : STATE.editor.themeGradient;
+  STATE.editor.font = preset.font;
+  STATE.editor.headline = preset.headline;
+  STATE.editor.dateRange = preset.dateRange || '';
+  STATE.editor.discount = preset.discount || '';
+  STATE.editor.stickers = (preset.badges || []).map(b => {
+    const bp = BADGE_PRESETS.find(x => x.id === b.presetId) || BADGE_PRESETS[0];
+    return {
+      id: uid(), badge: true, badgeId: b.presetId,
+      shape: bp.shape, lines: [...bp.lines], bg: bp.bg, fg: bp.fg,
+      x: b.x, y: b.y, scale: b.scale || 1, rotation: b.rotation || 0
+    };
+  });
+  enterEditor();
+  toast(preset.title + ' banner loaded!');
+}
+function renderBoldSaleRow() {
+  const row = document.getElementById('boldSaleRow'); if (!row) return;
+  row.innerHTML = BOLD_POSTER_PRESETS.map(p => `
+    <div class="tcard" onclick="startBoldSalePoster('${p.id}')">
+      <div class="thumb" style="background:${p.thumb};display:flex;align-items:center;justify-content:center;">
+        <span class="badge">BOLD</span>
+        <div class="tlabel" style="text-shadow:0 2px 6px rgba(0,0,0,.6);">${escapeHtml(p.title)}</div>
+      </div>
+      <div class="meta"><div class="cat">Ready-made banner</div>
+        <button class="use-btn" onclick="event.stopPropagation();startBoldSalePoster('${p.id}')">Create Banner</button>
+      </div>
+    </div>
+  `).join('');
+}
+function startSingleProductPoster(id) {
+  const preset = SINGLE_PRODUCT_PRESETS.find(p => p.id === id); if (!preset) return;
+  const grad = GRADIENT_PRESETS.find(g => g.id === preset.themeGradientId);
+  STATE.editor = blankEditorState(null);
+  STATE.editor.title = preset.title;
+  STATE.editor.layout = '1';
+  STATE.editor.layoutType = 'grid';
+  STATE.editor.borderless = true;
+  STATE.editor.themeType = 'gradient';
+  STATE.editor.themeGradient = grad ? grad.colors : STATE.editor.themeGradient;
+  STATE.editor.font = preset.font;
+  STATE.editor.headline = preset.headline;
+  STATE.editor.dateRange = preset.dateRange || '';
+  STATE.editor.discount = preset.discount || '';
+  const rect = getSlotRects('1', 'grid')[0];
+  const demoImg = STATE.products && STATE.products.length
+    ? STATE.products[preset.demoImg % STATE.products.length].image_url
+    : DEMO_STOCK_IMAGES[preset.demoImg % DEMO_STOCK_IMAGES.length];
+  STATE.editor.slots = [{
+    ...rect, offX: 0.5, offY: 0.5, zoom: 1,
+    img: demoImg, mrp: preset.mrp || '', offerPrice: preset.offerPrice || '', offerText: preset.offerText || ''
+  }];
+  STATE.editor.stickers = (preset.badges || []).map(b => {
+    const bp = BADGE_PRESETS.find(x => x.id === b.presetId) || BADGE_PRESETS[0];
+    return {
+      id: uid(), badge: true, badgeId: b.presetId,
+      shape: bp.shape, lines: [...bp.lines], bg: bp.bg, fg: bp.fg,
+      x: b.x, y: b.y, scale: b.scale || 1, rotation: b.rotation || 0
+    };
+  });
+  enterEditor();
+  toast(preset.title + ' template loaded — tap the photo to replace it!');
+}
+function renderSingleProductRow() {
+  const row = document.getElementById('singleProductRow'); if (!row) return;
+  row.innerHTML = SINGLE_PRODUCT_PRESETS.map(p => `
+    <div class="tcard" onclick="startSingleProductPoster('${p.id}')">
+      <div class="thumb" style="background-image:url('${(STATE.products && STATE.products.length ? STATE.products[p.demoImg % STATE.products.length].image_url : DEMO_STOCK_IMAGES[p.demoImg % DEMO_STOCK_IMAGES.length])}');">
+        <span class="badge">1 PHOTO</span>
+        <div class="tlabel">${escapeHtml(p.title)}</div>
+      </div>
+      <div class="meta"><div class="cat">Single product template</div>
+        <button class="use-btn" onclick="event.stopPropagation();startSingleProductPoster('${p.id}')">Use Template</button>
+      </div>
+    </div>
+  `).join('');
 }
 function exitEditor() { goto('marketplace'); }
 
@@ -1498,7 +2047,7 @@ function refreshEditorUI() {
   document.getElementById('fDiscount').value = ed.discount; document.getElementById('fWhatsapp').value = ed.whatsapp;
   document.getElementById('fAddress').value = ed.address;
   document.getElementById('logoUpload').innerHTML = ed.logo ? `<img src="${ed.logo}">` : '➕';
-  renderSlotGrid(); renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderFontChips(); renderLayoutChips(); renderStickerControls(); renderTextControls(); renderTextLayerChips();
+  renderSlotGrid(); renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderBorderlessToggle(); renderFontChips(); renderLayoutChips(); renderStickerControls(); renderTextControls(); renderTextLayerChips();
 }
 
 let pendingSlotIndex = null;
@@ -1569,6 +2118,44 @@ function adjustSlotZoom(delta) {
   renderPoster();
   toast('Photo size adjusted');
 }
+// Moves the whole photo box (not just panning the image inside it) — the box can go
+// anywhere on the screen, edge to edge, independent of any header/footer/border.
+function moveSlotBox(dx, dy) {
+  if (pendingSlotIndex === null) return;
+  pushHistory();
+  const s = STATE.editor.slots[pendingSlotIndex];
+  s.x = Math.max(0, Math.min(1 - s.w, s.x + dx));
+  s.y = Math.max(0, Math.min(1 - s.h, s.y + dy));
+  renderSlotGrid(); renderPoster();
+}
+function resizeSlotBox(dim, factor) {
+  if (pendingSlotIndex === null) return;
+  pushHistory();
+  const s = STATE.editor.slots[pendingSlotIndex];
+  if (dim === 'w') {
+    s.w = Math.max(0.15, Math.min(1 - s.x, s.w * factor));
+  } else {
+    s.h = Math.max(0.15, Math.min(1 - s.y, s.h * factor));
+  }
+  renderSlotGrid(); renderPoster();
+}
+// Moves just the MRP/offer-price tag away from its default top-left corner of the photo —
+// independent of the photo box itself.
+function movePriceTag(dx, dy) {
+  if (pendingSlotIndex === null) return;
+  pushHistory();
+  const s = STATE.editor.slots[pendingSlotIndex];
+  s.priceOffX = Math.max(-0.5, Math.min(0.7, (s.priceOffX || 0) + dx));
+  s.priceOffY = Math.max(-0.3, Math.min(0.8, (s.priceOffY || 0) + dy));
+  renderPoster();
+}
+function resizePriceTag(factor) {
+  if (pendingSlotIndex === null) return;
+  pushHistory();
+  const s = STATE.editor.slots[pendingSlotIndex];
+  s.priceScale = Math.min(2.5, Math.max(0.4, (s.priceScale || 1) * factor));
+  renderPoster();
+}
 
 function handleLogoSelect(e) {
   const file = e.target.files[0]; if (!file) return;
@@ -1610,7 +2197,7 @@ function renderLayoutChips() {
   const currentLayout = STATE.editor.layout || '4';
   const currentType = STATE.editor.layoutType || 'grid';
   document.getElementById('layoutChips').innerHTML = `
-    <div class="font-chip ${currentType === 'layout_loot' ? 'active' : ''}" onclick="setLayoutCustom('layout_loot', '15')">🟩 1. Weekend Loot Style</div>
+      <div class="font-chip ${currentType === 'layout_loot' ? 'active' : ''}" onclick="setLayoutCustom('layout_loot', '15')">🟩 1. Weekend Loot Style</div>
     <div class="font-chip ${currentType === 'layout_fiesta' ? 'active' : ''}" onclick="setLayoutCustom('layout_fiesta', '15')">🟣 2. Eid Fiesta Style</div>
     <div class="font-chip ${currentType === 'layout_buymore' ? 'active' : ''}" onclick="setLayoutCustom('layout_buymore', '8')">🔴 3. Buy More Style</div>
     <div class="font-chip ${currentType === 'layout_onam' ? 'active' : ''}" onclick="setLayoutCustom('layout_onam', '8')">🟡 4. Onam Special Style</div>
@@ -1659,6 +2246,15 @@ function renderStickerLibrary() {
   ` : '';
   document.getElementById('stickerLibraryGrid').innerHTML = builtinHtml + adminHtml;
 }
+function renderBadgeLibrary() {
+  const grid = document.getElementById('badgeLibraryGrid'); if (!grid) return;
+  const shapeRadius = { burst: '10%', ribbon: '8px', circle: '50%' };
+  grid.innerHTML = BADGE_PRESETS.map(b => `
+    <div class="sticker-item" onclick="addBadgeSticker('${b.id}')" style="display:flex;align-items:center;justify-content:center;background:${b.bg};color:${b.fg};border-radius:${shapeRadius[b.shape]};font-weight:900;font-size:10px;line-height:1.15;text-align:center;font-family:'Anton',sans-serif;padding:4px;">
+      ${b.lines.join('<br>')}
+    </div>
+  `).join('');
+}
 function addEmojiSticker(emoji) {
   pushHistory();
   if (!STATE.editor.stickers) STATE.editor.stickers = [];
@@ -1675,23 +2271,64 @@ function addImageSticker(assetId, imageUrl) {
   STATE.editor._selectedSticker = id;
   renderPoster(); renderStickerControls(); toast('Sticker added (behind text)');
 }
+function addBadgeSticker(badgeId) {
+  pushHistory();
+  if (!STATE.editor.stickers) STATE.editor.stickers = [];
+  const preset = BADGE_PRESETS.find(b => b.id === badgeId) || BADGE_PRESETS[0];
+  const id = uid();
+  STATE.editor.stickers.push({
+    id, badge: true, badgeId,
+    shape: preset.shape, lines: [...preset.lines], bg: preset.bg, fg: preset.fg,
+    x: 0.5, y: 0.5, scale: 1.3, rotation: 0
+  });
+  STATE.editor._selectedSticker = id;
+  badgeTextHistoryPushed = false;
+  renderPoster(); renderStickerControls(); toast('Badge added (behind text)');
+}
 function getSelectedSticker() { if (!STATE.editor?._selectedSticker) return null; return STATE.editor.stickers.find(s => s.id === STATE.editor._selectedSticker) || null; }
-function selectStickerByIdx(idx) { const st = STATE.editor.stickers[idx]; if (!st) return; deselectText(); STATE.editor._selectedSticker = st.id; renderPoster(); renderStickerControls(); setEditorTab('stickers'); }
+function selectStickerByIdx(idx) { const st = STATE.editor.stickers[idx]; if (!st) return; deselectText(); badgeTextHistoryPushed = false; STATE.editor._selectedSticker = st.id; renderPoster(); renderStickerControls(); setEditorTab('stickers'); }
 function deselectSticker() { if (STATE.editor?._selectedSticker) { STATE.editor._selectedSticker = null; renderPoster(); renderStickerControls(); } }
+const BADGE_COLOR_CHOICES = ['#8C3AA8', '#DC2626', '#059669', '#F59E0B', '#EA580C', '#B91C1C', '#0EA5E9', '#111827', '#7C3AED', '#DB2777', '#152420', '#FFFFFF'];
 function renderStickerControls() {
   const st = getSelectedSticker(); const box = document.getElementById('stickerControls');
   if (!st) { box.innerHTML = `<p style="font-size:12px;color:var(--muted);">Tap a sticker on the poster to select it.</p>`; return; }
-  box.innerHTML = `
+  const commonButtons = `
     <button class="btn btn-outline btn-sm" onclick="resizeSticker(1.15)">🔍+ Bigger</button>
     <button class="btn btn-outline btn-sm" onclick="resizeSticker(0.87)">🔍− Smaller</button>
     <button class="btn btn-outline btn-sm" onclick="rotateSticker(-15)">↺ Rotate Left</button>
     <button class="btn btn-outline btn-sm" onclick="rotateSticker(15)">↻ Rotate Right</button>
     <button class="btn btn-outline btn-sm" onclick="duplicateSticker()">📄 Duplicate</button>
     <button class="btn btn-outline btn-sm" style="border-color:var(--coral);color:var(--coral);" onclick="deleteSticker()">🗑 Delete</button>`;
+  if (st.badge) {
+    // Badges are fully editable: their own text and color, not just position/size — every
+    // badge you add can be changed independently, it doesn't stay locked to the preset.
+    const currentText = (st.lines || []).join(' / ');
+    box.innerHTML = `
+      <div class="field" style="width:100%;margin-bottom:0;"><label>Badge Text (use / for a new line)</label>
+        <input type="text" value="${escapeHtml(currentText)}" oninput="updateBadgeText(this.value)"></div>
+      <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;width:100%;margin:10px 0 6px;">BADGE COLOR</label>
+      <div class="swatch-row" style="width:100%;margin-bottom:8px;">
+        ${BADGE_COLOR_CHOICES.map(c => `<div class="swatch ${st.bg === c ? 'active' : ''}" style="background:${c};border:1.5px solid #cbd5e1;" onclick="setBadgeColor('${c}')"></div>`).join('')}
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="setBadgeTextColor(${st.fg === '#ffffff' ? "'#1c1204'" : "'#ffffff'"})">🎨 Toggle Text Color (${st.fg === '#ffffff' ? 'White' : 'Dark'})</button>
+      ${commonButtons}`;
+  } else {
+    box.innerHTML = commonButtons;
+  }
 }
+function updateBadgeText(value) {
+  const st = getSelectedSticker(); if (!st || !st.badge) return;
+  if (!badgeTextHistoryPushed) { pushHistory(); badgeTextHistoryPushed = true; }
+  st.lines = value.split('/').map(s => s.trim()).filter(s => s.length).slice(0, 3);
+  if (!st.lines.length) st.lines = [''];
+  renderPoster();
+}
+let badgeTextHistoryPushed = false;
+function setBadgeColor(color) { const st = getSelectedSticker(); if (!st || !st.badge) return; pushHistory(); st.bg = color; renderPoster(); renderStickerControls(); }
+function setBadgeTextColor(color) { const st = getSelectedSticker(); if (!st || !st.badge) return; pushHistory(); st.fg = color; renderPoster(); renderStickerControls(); }
 function resizeSticker(f) { const st = getSelectedSticker(); if (!st) return; pushHistory(); st.scale = Math.min(3, Math.max(0.3, (st.scale || 1) * f)); renderPoster(); }
 function rotateSticker(d) { const st = getSelectedSticker(); if (!st) return; pushHistory(); st.rotation = ((st.rotation || 0) + d) % 360; renderPoster(); }
-function duplicateSticker() { const st = getSelectedSticker(); if (!st) return; pushHistory(); const copy = { ...st, id: uid(), x: Math.min(1, st.x + 0.06), y: Math.min(1, st.y + 0.06) }; STATE.editor.stickers.push(copy); STATE.editor._selectedSticker = copy.id; renderPoster(); renderStickerControls(); }
+function duplicateSticker() { const st = getSelectedSticker(); if (!st) return; pushHistory(); const copy = { ...st, id: uid(), lines: st.lines ? [...st.lines] : undefined, x: Math.min(1, st.x + 0.06), y: Math.min(1, st.y + 0.06) }; STATE.editor.stickers.push(copy); STATE.editor._selectedSticker = copy.id; renderPoster(); renderStickerControls(); }
 function deleteSticker() { const st = getSelectedSticker(); if (!st) return; pushHistory(); STATE.editor.stickers = STATE.editor.stickers.filter(s => s.id !== st.id); STATE.editor._selectedSticker = null; renderPoster(); renderStickerControls(); }
 
 function getSelectedText() { if (!STATE.editor?._selectedText) return null; return STATE.editor.texts.find(t => t.id === STATE.editor._selectedText) || null; }
@@ -1712,7 +2349,7 @@ function toggleSelectOrShowText(id) {
 function renderTextControls() {
   const box = document.getElementById('textLayerControls'); if (!box) return;
   const tl = getSelectedText();
-  if (!tl) { box.innerHTML = `<p style="font-size:12px;color:var(--muted);">Tap any text on the poster to select it.</p>`; return; }
+  if (!tl) { box.innerHTML = `<p style="font-size:12px;color:var(--muted);">Tap any text on the poster (shop name, headline, price pill, address, etc.) to select it — then move, resize, rotate, bend, edit or delete it.</p>`; return; }
   const curveLabel = tl.key === 'pill' ? '' : `<div style="width:100%;font-size:10.5px;color:var(--muted);margin:2px 0 2px;">BEND: ${tl.curve || 0}${tl.curve ? (tl.curve > 0 ? ' (up)' : ' (down)') : ' (straight)'}</div>`;
   box.innerHTML = `
     <div style="width:100%;font-size:12px;font-weight:700;margin-bottom:6px;">${escapeHtml(textLayerLabel(tl.key))}</div>
@@ -1772,6 +2409,46 @@ function loadImg(src) {
 function hexToRgba(hex, a) { const v = hex.replace('#', ''); const r = parseInt(v.substring(0, 2), 16), g = parseInt(v.substring(2, 4), 16), b = parseInt(v.substring(4, 6), 16); return `rgba(${r},${g},${b},${a})`; }
 function shadeColor(hex, percent) { const v = hex.replace('#', ''); let r = parseInt(v.substring(0, 2), 16), g = parseInt(v.substring(2, 4), 16), b = parseInt(v.substring(4, 6), 16); r = Math.min(255, Math.max(0, Math.round(r + (percent / 100) * 255))); g = Math.min(255, Math.max(0, Math.round(g + (percent / 100) * 255))); b = Math.min(255, Math.max(0, Math.round(b + (percent / 100) * 255))); return `rgb(${r},${g},${b})`; }
 function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+function drawStarburst(ctx, cx, cy, outerR, innerR, spikes, color, label) {
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(-0.12); ctx.beginPath();
+  for (let i = 0; i < spikes * 2; i++) { const r = i % 2 === 0 ? outerR : innerR; const a = (Math.PI / spikes) * i; const x = Math.sin(a) * r, y = -Math.cos(a) * r; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+  ctx.closePath(); ctx.fillStyle = color; ctx.shadowColor = 'rgba(0,0,0,0.35)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 3; ctx.fill();
+  ctx.shadowColor = 'transparent'; ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `900 ${Math.round(innerR * 0.62)}px sans-serif`; ctx.fillText(label, 0, 2); ctx.restore();
+}
+// Draws a bold "sale poster" style badge sticker at the current canvas origin (0,0), sized
+// to fit within `size` — the burst/circle/ribbon shapes seen in cashback/sale/black-friday
+// style posters, with real crisp text instead of an emoji.
+function drawBadgeSticker(ctx, st, size) {
+  const preset = BADGE_PRESETS.find(b => b.id === st.badgeId) || BADGE_PRESETS[0];
+  const shape = st.shape || preset.shape;
+  const lines = (st.lines && st.lines.length) ? st.lines : preset.lines;
+  const bg = st.bg || preset.bg;
+  const fg = st.fg || preset.fg;
+  const r = size / 2;
+  ctx.save();
+  if (shape === 'burst') {
+    ctx.beginPath();
+    const spikes = 12, outerR = r, innerR = r * 0.8;
+    for (let i = 0; i < spikes * 2; i++) { const rr = i % 2 === 0 ? outerR : innerR; const a = (Math.PI / spikes) * i; const x = Math.sin(a) * rr, y = -Math.cos(a) * rr; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+    ctx.closePath();
+    ctx.fillStyle = bg; ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3; ctx.fill();
+  } else if (shape === 'ribbon') {
+    roundRect(ctx, -r, -r * 0.42, r * 2, r * 0.84, 8);
+    ctx.fillStyle = bg; ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3; ctx.fill();
+  } else {
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fillStyle = bg; ctx.shadowColor = 'rgba(0,0,0,.4)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3; ctx.fill();
+  }
+  ctx.shadowColor = 'transparent';
+  ctx.fillStyle = fg; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const lineH = r * (shape === 'ribbon' ? 0.62 : 0.52);
+  const fontPx = Math.round(r * (lines.length > 1 ? 0.42 : 0.5));
+  ctx.font = `900 ${fontPx}px 'Anton', sans-serif`;
+  const totalH = (lines.length - 1) * lineH;
+  lines.forEach((line, i) => ctx.fillText(line, 0, -totalH / 2 + i * lineH));
+  ctx.restore();
+}
 function wrapLines(ctx, text, maxWidth) {
   const words = (text || '').split(' ').filter(Boolean); let line = '', lines = [];
   for (let n = 0; n < words.length; n++) { const test = line + words[n] + ' '; if (ctx.measureText(test).width > maxWidth && line !== '') { lines.push(line.trim()); line = words[n] + ' '; } else line = test; }
@@ -1784,15 +2461,26 @@ function wrapFillTextCenter(ctx, text, cx, y, maxWidth, lineHeight, maxLines) {
 }
 function parseNum(str) { if (!str) return null; const n = parseFloat(String(str).replace(/[^0-9.]/g, '')); return isNaN(n) ? null : n; }
 
+// A curve value of 0 = straight. |curve| up to 100 = tighter bend. Sign decides bend direction
+// (up "smile" vs down "frown"). Radius is chosen so the bend stays gentle at low values and
+// pronounced near 100, independent of how long the text is.
 function curveRadiusForAmount(curve) {
   return Math.max(90, 2600 - Math.abs(curve) * 24);
 }
+// Extra vertical room (sagitta of the arc) a curved line of the given width needs, so the
+// selection box and hit-testing still cover the bent glyphs.
 function curveSagitta(curve, textWidth) {
   if (!curve) return 0;
   const radius = curveRadiusForAmount(curve);
   const halfW = Math.min(textWidth / 2, radius - 1);
   return radius - Math.sqrt(Math.max(0, radius * radius - halfW * halfW));
 }
+// Splits text into whole visual characters ("grapheme clusters") rather than raw Unicode
+// code points. This matters a lot for Malayalam and other Indic scripts: a vowel sign like
+// ു or ി is a separate code point that only renders correctly glued to its base consonant.
+// Array.from() would split them apart and draw each piece alone at a different angle along
+// the arc — which makes them disappear or render as broken marks. Intl.Segmenter keeps
+// each base+matra/conjunct together as one unit so curved Malayalam text stays readable.
 function graphemeSplit(text) {
   if (typeof Intl !== 'undefined' && Intl.Segmenter) {
     try {
@@ -1802,6 +2490,9 @@ function graphemeSplit(text) {
   }
   return Array.from(text);
 }
+// Draws `text` character-by-character along a circular arc centered directly below (curve>0)
+// or above (curve<0) the current origin, so the whole string bends like a banner. `drawFn(ch)`
+// does the actual per-character fill/stroke using whatever style is active.
 function drawCurvedText(ctx, text, curve, drawFn) {
   const chars = graphemeSplit(text);
   if (!chars.length) return;
@@ -1813,6 +2504,10 @@ function drawCurvedText(ctx, text, curve, drawFn) {
   ctx.textAlign = 'center';
   ctx.textBaseline = sign > 0 ? 'bottom' : 'top';
   ctx.save();
+  // Re-center: rotating/translating by `radius` (often 1500-2500px) would otherwise place
+  // every character that far from the point the text was actually dragged to — off the
+  // canvas entirely. Shifting the circle's center by `radius` first puts the arc's crest
+  // (angle 0) back at the origin, so the bent text stays right where it was placed.
   ctx.translate(0, sign * radius);
   for (let i = 0; i < chars.length; i++) {
     const half = (widths[i] / 2) / radius;
@@ -1829,6 +2524,9 @@ function drawCurvedText(ctx, text, curve, drawFn) {
 }
 
 function textLayerBoundingBoxAt00(ctx, ed, tl, content, W, H, fontFamily, mlFont) {
+  // Measures a text layer's box assuming it were drawn centered at (0,0), used both for
+  // actual drawing (after ctx.translate/rotate) and for hit-testing (after inverse-rotating
+  // the tap point into the text's local space).
   const scale = tl.scale || 1;
   const curve = tl.curve || 0;
   if (tl.key === 'headline') {
@@ -1837,6 +2535,7 @@ function textLayerBoundingBoxAt00(ctx, ed, tl, content, W, H, fontFamily, mlFont
     let fontPx = W * textLayerBaseSizeFrac('headline') * scale;
     ctx.font = `900 ${Math.round(fontPx)}px ${fam}`;
     if (curve) {
+      // Curved headline is drawn as one continuous arc, not wrapped into lines.
       const full = content.trim();
       while (ctx.measureText(full).width > W * 0.95 && fontPx > 10) {
         fontPx -= 2; ctx.font = `900 ${Math.round(fontPx)}px ${fam}`;
@@ -1888,6 +2587,9 @@ function drawTextLayer(ctx, ed, tl, content, W, H, fontFamily, mlFont) {
   if (tl.key === 'headline') {
     ctx.font = `900 ${Math.round(m.fontPx)}px ${m.fam}`;
     if (curve) {
+      // Curved headline keeps the bold outline but uses a flat fill instead of the vertical
+      // gradient (a per-character gradient would look inconsistent along a bend). If the
+      // user picked a Text Color, use it; otherwise fall back to the default gold look.
       const flatColor = ed.textColor || '#FFC000';
       drawCurvedText(ctx, m.full, curve, (ch) => {
         for (let d = 8; d >= 1; d--) { ctx.fillStyle = '#8B2500'; ctx.fillText(ch, d * 0.6, d * 0.6); }
@@ -1901,6 +2603,8 @@ function drawTextLayer(ctx, ed, tl, content, W, H, fontFamily, mlFont) {
         for (let d = 10; d >= 1; d--) { ctx.fillStyle = '#8B2500'; ctx.fillText(text, d, y + d); }
         ctx.lineWidth = 7; ctx.strokeStyle = '#6B1D00'; ctx.strokeText(text, 0, y);
         if (ed.textColor) {
+          // A Text Color was explicitly picked — use it as a flat fill instead of the
+          // default rainbow-gold gradient, so the color swatch actually has an effect.
           ctx.fillStyle = ed.textColor;
         } else {
           const g = ctx.createLinearGradient(0, y - m.fontPx / 2, 0, y + m.fontPx / 2);
@@ -1921,6 +2625,8 @@ function drawTextLayer(ctx, ed, tl, content, W, H, fontFamily, mlFont) {
     ctx.fillText(content, 0, 1); ctx.restore();
   } else {
     ctx.font = `${m.weight} ${Math.round(m.fontPx)}px ${m.fam}`;
+    // headerShop used to be hardcoded white regardless of the Text Color swatch — now it
+    // honors ed.textColor too, falling back to a soft white if nothing was picked.
     const fallback = tl.key === 'headerShop' ? 'rgba(255,255,255,0.92)' : '#FFFFFF';
     const fillColor = ed.textColor || fallback;
     if (curve) {
@@ -1956,15 +2662,27 @@ async function drawPoster() {
   const mlFont = FONT_OPTIONS.find(f => f.id === 'ml').css;
   ctx.clearRect(0, 0, W, H);
 
-  const headerH = H * HEADER_FRAC; 
-  const footerH = H * FOOTER_FRAC; 
+  const borderless = !!ed.borderless;
+  const headerH = borderless ? 0 : H * HEADER_FRAC;
+  const footerH = borderless ? 0 : H * FOOTER_FRAC;
   const gridY = headerH; 
   const gridH = H - headerH - footerH;
-  const borderWidth = W * 0.025; 
+  const borderWidth = borderless ? 0 : W * 0.025; 
   const usableW = W - (borderWidth * 2);
   const outerPad = usableW * 0.02;
-
-  if (ed.heroBanner) {
+// 1. ഹെഡർ ബാനർ അല്ലെങ്കിൽ ഗ്രേഡിയന്റ് ബാക്ക്ഗ്രൗണ്ട് വരയ്ക്കുന്നു (borderless മോഡിൽ ഇത് വേണ്ട)
+  if (borderless) {
+    // Full-bleed single-screen background — one flat color/gradient covers the whole
+    // canvas, no separate header/footer bands or side border strips.
+    if (isGradientTheme) {
+      const full = ctx.createLinearGradient(0, 0, W, H);
+      full.addColorStop(0, gradA); full.addColorStop(1, gradB);
+      ctx.fillStyle = full;
+    } else {
+      ctx.fillStyle = theme;
+    }
+    ctx.fillRect(0, 0, W, H);
+  } else if (ed.heroBanner) {
     const him = await loadImg(ed.heroBanner);
     if (him && him.complete) {
       ctx.save(); 
@@ -1991,7 +2709,7 @@ async function drawPoster() {
   if (ed.logo) {
     const im = await loadImg(ed.logo);
     if (im) {
-      const baseSize = headerH * 0.42;
+      const baseSize = (borderless ? H * 0.30 : headerH) * 0.42;
       const wScale = ed.logoWidthScale !== undefined ? ed.logoWidthScale : (ed.logoScale || 1);
       const hScale = ed.logoHeightScale !== undefined ? ed.logoHeightScale : (ed.logoScale || 1);
       const lw = baseSize * wScale, lh = baseSize * hScale;
@@ -2002,16 +2720,26 @@ async function drawPoster() {
     }
   }
 
-  ctx.fillStyle = '#F2F6F8'; 
-  ctx.fillRect(borderWidth, gridY, usableW, gridH);
+  if (!borderless) {
+    ctx.fillStyle = '#F2F6F8'; 
+    ctx.fillRect(borderWidth, gridY, usableW, gridH);
+  }
 
   for (let i = 0; i < ed.slots.length; i++) {
     const s = ed.slots[i];
     const cx = borderWidth + outerPad + s.x * (usableW - outerPad * 2), cy = gridY + outerPad + s.y * (gridH - outerPad * 2);
     const cw = s.w * (usableW - outerPad * 2), ch = s.h * (gridH - outerPad * 2);
-    ctx.save(); roundRect(ctx, cx, cy, cw, ch, 12); ctx.fillStyle = '#fff'; ctx.shadowColor = 'rgba(19,36,32,0.14)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3; ctx.fill(); ctx.restore();
-    const pad = cw * 0.045, imgH = ch * 0.62, imgX = cx + pad, imgY = cy + pad * 0.8, imgW = cw - pad * 2;
-    ctx.save(); roundRect(ctx, imgX, imgY, imgW, imgH, 8); ctx.clip();
+    let pad, imgX, imgY, imgW, imgH;
+    if (borderless) {
+      // No white card behind the photo — it sits directly on the banner's own background
+      // and fills nearly the whole box, no space reserved below for a caption.
+      pad = cw * 0.012;
+      imgX = cx + pad; imgY = cy + pad; imgW = cw - pad * 2; imgH = ch - pad * 2;
+    } else {
+      ctx.save(); roundRect(ctx, cx, cy, cw, ch, 12); ctx.fillStyle = '#fff'; ctx.shadowColor = 'rgba(19,36,32,0.14)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3; ctx.fill(); ctx.restore();
+      pad = cw * 0.045; imgH = ch * 0.62; imgX = cx + pad; imgY = cy + pad * 0.8; imgW = cw - pad * 2;
+    }
+    ctx.save(); roundRect(ctx, imgX, imgY, imgW, imgH, borderless ? 16 : 8); ctx.clip();
     if (s.img) {
       const im = await loadImg(s.img);
       if (im) {
@@ -2029,8 +2757,11 @@ async function drawPoster() {
     ctx.restore();
 
     const mrpNum = parseNum(s.mrp), offNum = parseNum(s.offerPrice);
+    const priceScale = s.priceScale || 1;
+    const priceTagX = imgX + cw * 0.01 + (s.priceOffX || 0) * cw;
+    const priceTagY = imgY + ch * 0.02 + (s.priceOffY || 0) * ch;
     if (s.mrp) {
-      const tw2 = Math.max(cw * 0.30, imgW * 0.34), th = ch * 0.11, tx = imgX + cw * 0.01, ty = imgY + ch * 0.02;
+      const tw2 = Math.max(cw * 0.30, imgW * 0.34) * priceScale, th = ch * 0.11 * priceScale, tx = priceTagX, ty = priceTagY;
       roundRect(ctx, tx, ty, tw2, th, 4); ctx.fillStyle = '#FFD23C'; ctx.fill();
       ctx.fillStyle = '#1c1204'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = `700 ${Math.round(th * 0.42)}px Manrope`; ctx.fillText('MRP', tx + tw2 / 2, ty + th * 0.32);
@@ -2040,7 +2771,7 @@ async function drawPoster() {
         ctx.fillStyle = '#fff'; ctx.font = `900 ${Math.round(th * 0.6)}px Manrope`; ctx.fillText('₹' + s.offerPrice, tx + tw2 / 2, t2y + th * 0.58);
       }
     } else if (s.offerPrice) {
-      const tw2 = Math.max(cw * 0.30, imgW * 0.34), th = ch * 0.11, tx = imgX + cw * 0.01, ty = imgY + ch * 0.02;
+      const tw2 = Math.max(cw * 0.30, imgW * 0.34) * priceScale, th = ch * 0.11 * priceScale, tx = priceTagX, ty = priceTagY;
       roundRect(ctx, tx, ty, tw2, th, 4); ctx.fillStyle = '#E1273B'; ctx.fill();
       ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = `900 ${Math.round(th * 0.55)}px Manrope`; ctx.fillText('₹' + s.offerPrice, tx + tw2 / 2, ty + th * 0.58);
@@ -2053,24 +2784,43 @@ async function drawPoster() {
       ctx.font = `700 ${Math.round(r * 0.32)}px Manrope`; ctx.fillText('OFF', ccx, ccy + r * 0.32);
     }
     if (s.offerText) {
-      ctx.fillStyle = ed.productTextColor || '#152420';
-      ctx.font = `700 ${Math.round(cw * 0.062)}px ${fontFamily}`; 
-      ctx.textAlign = 'center'; 
-      ctx.textBaseline = 'middle';
-      wrapFillTextCenter(ctx, s.offerText, cx + cw / 2, imgY + imgH + (ch - imgH - pad * 0.8) / 2, cw - pad * 1.6, cw * 0.07, 2);
+      if (borderless) {
+        // No reserved caption space below the photo here — show it as a semi-transparent
+        // bar overlaid on the bottom edge of the photo itself instead.
+        const capH = ch * 0.13;
+        ctx.save();
+        roundRect(ctx, imgX, imgY + imgH - capH, imgW, capH, 0);
+        ctx.fillStyle = 'rgba(0,0,0,0.5)'; ctx.fill();
+        ctx.fillStyle = ed.productTextColor || '#FFFFFF';
+        ctx.font = `700 ${Math.round(cw * 0.055)}px ${fontFamily}`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        wrapFillTextCenter(ctx, s.offerText, imgX + imgW / 2, imgY + imgH - capH / 2, imgW - cw * 0.06, cw * 0.06, 1);
+        ctx.restore();
+      } else {
+        // Its own independent color (Style tab → PRODUCT NAME TEXT COLOR), separate from the
+        // main Text Color. Falls back to dark, which reads well on the light product card.
+        ctx.fillStyle = ed.productTextColor || '#152420';
+        ctx.font = `700 ${Math.round(cw * 0.062)}px ${fontFamily}`; 
+        ctx.textAlign = 'center'; 
+        ctx.textBaseline = 'middle';
+        wrapFillTextCenter(ctx, s.offerText, cx + cw / 2, imgY + imgH + (ch - imgH - pad * 0.8) / 2, cw - pad * 1.6, cw * 0.07, 2);
+      }
     }
   }
 
-  const footY = H - footerH;
-  ctx.fillStyle = isGradientTheme ? shadeColor(gradB, -35) : shadeColor(theme, -35);
-  ctx.fillRect(0, footY, W, footerH);
+  if (!borderless) {
+    const footY = H - footerH;
+    ctx.fillStyle = isGradientTheme ? shadeColor(gradB, -35) : shadeColor(theme, -35);
+    ctx.fillRect(0, footY, W, footerH);
 
-  const sideGrad = ctx.createLinearGradient(0, 0, W, 0);
-  sideGrad.addColorStop(0, gradA);
-  sideGrad.addColorStop(1, gradB);
-  ctx.fillStyle = sideGrad;
-  ctx.fillRect(0, headerH, borderWidth, gridH);               
-  ctx.fillRect(W - borderWidth, headerH, borderWidth, gridH);   
+    // Draw Side Borders over everything so they are clearly visible
+    const sideGrad = ctx.createLinearGradient(0, 0, W, 0);
+    sideGrad.addColorStop(0, gradA);
+    sideGrad.addColorStop(1, gradB);
+    ctx.fillStyle = sideGrad;
+    ctx.fillRect(0, headerH, borderWidth, gridH);               
+    ctx.fillRect(W - borderWidth, headerH, borderWidth, gridH);   
+  }
 
   if (STATE.profile.plan === 'free') {
     ctx.save(); ctx.globalAlpha = 0.12; ctx.fillStyle = '#132420';
@@ -2078,6 +2828,7 @@ async function drawPoster() {
     ctx.fillText(STATE.settings.watermark_text || 'OFFER POSTER STUDIO', 0, 0); ctx.restore();
   }
 
+  // Stickers are drawn here — BEFORE the text layer pass below — so text always stays on top and readable.
   if (ed.stickers && ed.stickers.length) {
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     for (const st of ed.stickers) {
@@ -2086,6 +2837,8 @@ async function drawPoster() {
       if (st.emoji) {
         ctx.font = `${Math.round(r.size * 0.82)}px sans-serif`;
         ctx.fillText(st.emoji, 0, 0);
+      } else if (st.badge) {
+        drawBadgeSticker(ctx, st, r.size);
       } else if (st.imageUrl) {
         const im = await loadImg(st.imageUrl);
         if (im) ctx.drawImage(im, -r.size / 2, -r.size / 2, r.size, r.size);
@@ -2099,6 +2852,7 @@ async function drawPoster() {
     }
   }
 
+  // Draggable text layers — always drawn last, on top of stickers and every other layer.
   if (ed.texts) {
     for (const tl of ed.texts) {
       if (tl.visible === false) continue;
@@ -2116,9 +2870,15 @@ function canvasPos(evt) {
   return { x: (clientX - rect.left) / rect.width * canvas.width, y: (clientY - rect.top) / rect.height * canvas.height };
 }
 function slotImageRect(s) {
-  const W = canvas.width, H = canvas.height, headerH = H * HEADER_FRAC, footerH = H * FOOTER_FRAC, gridY = headerH, gridH = H - headerH - footerH;
-  const borderWidth = W * 0.025, usableW = W - (borderWidth * 2), outerPad = usableW * 0.02;
+  const W = canvas.width, H = canvas.height, ed = STATE.editor;
+  const borderless = !!(ed && ed.borderless);
+  const headerH = borderless ? 0 : H * HEADER_FRAC, footerH = borderless ? 0 : H * FOOTER_FRAC, gridY = headerH, gridH = H - headerH - footerH;
+  const borderWidth = borderless ? 0 : W * 0.025, usableW = W - (borderWidth * 2), outerPad = usableW * 0.02;
   const cx = borderWidth + outerPad + s.x * (usableW - outerPad * 2), cy = gridY + outerPad + s.y * (gridH - outerPad * 2), cw = s.w * (usableW - outerPad * 2), ch = s.h * (gridH - outerPad * 2);
+  if (borderless) {
+    const pad = cw * 0.012;
+    return { x: cx + pad, y: cy + pad, w: cw - pad * 2, h: ch - pad * 2 };
+  }
   const pad = cw * 0.045, imgH = ch * 0.62;
   return { x: cx + pad, y: cy + pad * 0.8, w: cw - pad * 2, h: imgH };
 }
@@ -2263,8 +3023,13 @@ async function doExport() {
   canvas.width = exportSize.w * mult; canvas.height = exportSize.h * mult;
   await drawPoster();
 
+  // The rounded corners you see in the editor are only a CSS effect on the preview frame —
+  // the canvas pixels themselves were always a plain rectangle, so downloads came out square-
+  // cornered. Baking the same rounding into the exported image here fixes that.
   const cornerRadius = Math.round(Math.min(exportCanvas.width, exportCanvas.height) * 0.035);
   if (exportFormat === 'jpg') {
+    // JPG has no transparency, so the corners need a real fill behind them instead of being
+    // left see-through (which would otherwise render as solid black in most photo viewers).
     ectx.fillStyle = '#FBF6EA';
     ectx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
   }
@@ -2325,9 +3090,9 @@ function renderLibraryGallery() {
     libGrid.innerHTML = list.length ? list.map(p => `
       <div class="poster-item">
         <div class="pv" style="background-image:url('${p.image_url}')"></div>
-        <div style="padding:12px;">
-          <div style="font-weight:700;font-size:13px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(p.name)}</div>
-          <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px;">MRP: ₹${p.mrp || '-'} | Offer: ₹${p.offer_price || '-'}</div>
+        <div style="padding:10px;">
+          <div style="font-weight:700;font-size:12.5px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(p.name)}</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">MRP: ₹${p.mrp || '-'} | Offer: ₹${p.offer_price || '-'}</div>
           <button class="btn btn-primary btn-block btn-sm" onclick="downloadProductImage('${p.image_url}', '${escapeHtml(p.name)}')">📥 Download Photo</button>
         </div>
       </div>
@@ -2365,8 +3130,19 @@ async function downloadProductImage(url, name) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  boot();
+document.addEventListener('DOMContentLoaded', async () => {
+  await boot();
+  // Deep-link support: opening this file at #signup / #login jumps straight to that auth
+  // tab; opening at #templates / #features / #pricing / #contact / #privacy / #terms opens
+  // that page directly — so links and bookmarks to a "page" behave like real page links.
+  const hash = (location.hash || '').replace('#', '');
+  if (!STATE.user) {
+    if (hash === 'signup') { showAuth(); setAuthMode('signup'); }
+    else if (hash === 'login') { showAuth(); setAuthMode('login'); }
+    else if (PUBLIC_SCREENS.includes(hash)) { showPublicScreen(hash); }
+  } else if (PUBLIC_SCREENS.includes(hash)) {
+    showPublicScreen(hash);
+  }
 });
 </script>
 </body>
