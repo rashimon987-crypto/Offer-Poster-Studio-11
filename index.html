@@ -781,30 +781,15 @@ body.desktop-view #viewModeToggle{bottom:20px;}
     <div class="field" style="flex:1;"><label>MRP</label><input type="text" id="slotMrp" placeholder="₹599"></div>
     <div class="field" style="flex:1;"><label>Offer Price</label><input type="text" id="slotOfferPrice" placeholder="₹399"></div>
   </div>
-  <div class="field"><label>Product Name</label><input type="text" id="slotOfferText" placeholder="e.g. Sunflower Oil"></div>
+  <button class="btn btn-outline btn-sm btn-block" id="addProductNameBtn" style="margin-bottom:12px;" onclick="toggleProductNameField()">➕ Add Product Name</button>
+  <div class="field" id="productNameFieldWrap" style="display:none;">
+    <label>Product Name</label>
+    <input type="text" id="slotOfferText" placeholder="e.g. Sunflower Oil" oninput="onSlotOfferTextInput(this.value)">
+  </div>
   <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">PHOTO SIZE (ZOOM INSIDE BOX)</label>
   <div style="display:flex;gap:8px;margin-bottom:14px;">
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="adjustSlotZoom(0.15)">🔍+ വലുതാക്കുക</button>
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="adjustSlotZoom(-0.15)">🔍− ചെറുതാക്കുക</button>
-  </div>
-
-  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">MOVE PHOTO BOX (SCREEN-ൽ എവിടെയും)</label>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">
-    <div></div>
-    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(0, -0.03)">⬆️</button>
-    <div></div>
-    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(-0.03, 0)">⬅️</button>
-    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(0, 0.03)">⬇️</button>
-    <button class="btn btn-outline btn-sm" onclick="moveSlotBox(0.03, 0)">➡️</button>
-  </div>
-  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:8px 0 6px;">RESIZE PHOTO BOX</label>
-  <div style="display:flex;gap:6px;margin-bottom:6px;">
-    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('w', 1.1)">↔️+ വീതി</button>
-    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('w', 0.9)">↔️− വീതി</button>
-  </div>
-  <div style="display:flex;gap:6px;margin-bottom:14px;">
-    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('h', 1.1)">↕️+ ഉയരം</button>
-    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeSlotBox('h', 0.9)">↕️− ഉയരം</button>
   </div>
 
   <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">MOVE MRP / PRICE TAG</label>
@@ -821,10 +806,23 @@ body.desktop-view #viewModeToggle{bottom:20px;}
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizePriceTag(1.15)">🔍+ വലുതാക്കുക</button>
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizePriceTag(0.87)">🔍− ചെറുതാക്കുക</button>
   </div>
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:8px 0 6px;">PRICE TAG SHAPE</label>
+  <div class="font-row" id="priceStyleChips" style="margin-bottom:14px;"></div>
+
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">MOVE % OFF BADGE</label>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;">
+    <div></div>
+    <button class="btn btn-outline btn-sm" onclick="movePctBadge(0, -0.03)">⬆️</button>
+    <div></div>
+    <button class="btn btn-outline btn-sm" onclick="movePctBadge(-0.03, 0)">⬅️</button>
+    <button class="btn btn-outline btn-sm" onclick="movePctBadge(0, 0.03)">⬇️</button>
+    <button class="btn btn-outline btn-sm" onclick="movePctBadge(0.03, 0)">➡️</button>
+  </div>
 
   <button class="btn btn-primary btn-block" onclick="saveSlotPrices()">Save Photo Details</button>
   <div style="display:flex;gap:8px;margin-top:10px;">
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="deleteSlotContent()">🗑 Remove Photo</button>
+    <button class="btn btn-outline btn-sm" style="flex:1;border-color:var(--coral);color:var(--coral);" onclick="deleteSlotBox()">🗑 Delete This Box</button>
   </div>
 </div>
 
@@ -1513,14 +1511,15 @@ async function submitPayment() {
 
 const HEADER_FRAC = 0.35, FOOTER_FRAC = 0.085;
 const THEME_COLORS = [
-  '#061B4A', '#082A73', '#0D5FDB', '#35A7FF', '#0EA5E9', '#0F766E',
-  '#F5B82E', '#FFD447', '#F47B20', '#EA580C', '#CA8A04',
-  '#DC2626', '#B91C1C', '#E1553B', '#BE185D', '#DB2777',
-  '#7C2D12', '#6D28D9', '#9333EA', '#4338CA',
-  '#166534', '#15803D', '#0E6E5D',
-  '#111827', '#1F2937', '#FFFFFF', '#FFF8E8'
+  '#061B4A', '#082A73', '#0D5FDB', '#35A7FF', '#0EA5E9', '#0F766E', '#0891B2',
+  '#F5B82E', '#FFD447', '#F47B20', '#EA580C', '#CA8A04', '#FFE066',
+  '#DC2626', '#B91C1C', '#E1553B', '#BE185D', '#DB2777', '#F43F5E', '#FB7185',
+  '#7C2D12', '#6D28D9', '#9333EA', '#4338CA', '#8B5CF6', '#A78BFA',
+  '#166534', '#15803D', '#0E6E5D', '#22C55E', '#65A30D',
+  '#111827', '#1F2937', '#FFFFFF', '#FFF8E8', '#FFD1DC', '#B4F8C8', '#A0E7E5'
 ];
 const GRADIENT_PRESETS = [
+  // Bold / vivid — high contrast, punchy for sale banners
   { id: 'supermarket', colors: ['#061B4A', '#0D5FDB', '#35A7FF'] },
   { id: 'gold', colors: ['#F5B82E', '#FFD447', '#F47B20'] },
   { id: 'premium', colors: ['#061B4A', '#082A73', '#F5B82E'] },
@@ -1535,7 +1534,24 @@ const GRADIENT_PRESETS = [
   { id: 'emerald', colors: ['#022c22', '#0F766E', '#2DD4BF'] },
   { id: 'cashback', colors: ['#7C2D12', '#DC2626', '#F97316'] },
   { id: 'saleburst', colors: ['#F59E0B', '#EC4899', '#7C3AED'] },
-  { id: 'blackfriday', colors: ['#000000', '#111827', '#DC2626'] }
+  { id: 'blackfriday', colors: ['#000000', '#111827', '#DC2626'] },
+  { id: 'neonpink', colors: ['#DB2777', '#8B5CF6', '#06B6D4'] },
+  { id: 'ruby', colors: ['#450a0a', '#B91C1C', '#FCA5A5'] },
+  { id: 'tropical', colors: ['#059669', '#FACC15', '#F97316'] },
+  { id: 'galaxy', colors: ['#1E1B4B', '#7C3AED', '#EC4899'] },
+  { id: 'lagoon', colors: ['#003049', '#0891B2', '#5EEAD4'] },
+  { id: 'volcano', colors: ['#1c1204', '#EA580C', '#FDE047'] },
+  { id: 'sapphire', colors: ['#020617', '#1D4ED8', '#38BDF8'] },
+  // Light / soft pastel mixes — for a lighter, gentler "adipoli" look
+  { id: 'peachlight', colors: ['#FFEDD5', '#FED7AA', '#FCA5A5'] },
+  { id: 'mintlight', colors: ['#D1FAE5', '#A7F3D0', '#5EEAD4'] },
+  { id: 'lilaclight', colors: ['#EDE9FE', '#DDD6FE', '#FBCFE8'] },
+  { id: 'skylight', colors: ['#E0F2FE', '#BAE6FD', '#93C5FD'] },
+  { id: 'blushlight', colors: ['#FFF1F2', '#FBCFE8', '#F9A8D4'] },
+  { id: 'lemonlight', colors: ['#FEFCE8', '#FEF08A', '#FDE047'] },
+  { id: 'limelight', colors: ['#F7FEE7', '#D9F99D', '#BEF264'] },
+  { id: 'creamgold', colors: ['#FFFBEB', '#FDE68A', '#FBBF24'] },
+  { id: 'roseGold', colors: ['#FFF1E6', '#FBCFE8', '#F0ABFC'] }
 ];
 const BUILTIN_STICKERS = [
   { cat: 'festival', items: ['🎉', '🪔', '🎊', '🌟', '🎆', '🕌', '🎄', '🧨', '🥳', '🎇'] },
@@ -1585,42 +1601,42 @@ const SINGLE_PRODUCT_PRESETS = [
     id: 'freshdeal', title: 'Fresh Deal', thumb: 'linear-gradient(135deg,#022c22,#0F766E,#2DD4BF)',
     themeGradientId: 'emerald', font: 'righteous',
     headline: 'FRESH DEAL TODAY', dateRange: 'LIMITED STOCK', discount: '',
-    demoImg: 0, mrp: '199', offerPrice: '149', offerText: 'Fresh Product Pack',
+    demoImg: 0, mrp: '199', offerPrice: '149',
     badges: [{ presetId: 'off30', x: 0.82, y: 0.18, scale: 1.1 }]
   },
   {
     id: 'megasale', title: 'Mega Sale', thumb: 'linear-gradient(135deg,#7C2D12,#EA580C,#F59E0B)',
     themeGradientId: 'sunset', font: 'bungee',
     headline: 'MEGA SALE OFFER', dateRange: 'THIS WEEKEND', discount: '',
-    demoImg: 1, mrp: '999', offerPrice: '599', offerText: 'Best Seller Item',
+    demoImg: 1, mrp: '999', offerPrice: '599',
     badges: [{ presetId: 'off50', x: 0.82, y: 0.18, scale: 1.15 }]
   },
   {
     id: 'newarrival', title: 'New Arrival', thumb: 'linear-gradient(135deg,#061B4A,#0D5FDB,#35A7FF)',
     themeGradientId: 'ocean', font: 'russo',
     headline: 'NEW ARRIVAL', dateRange: 'JUST LAUNCHED', discount: '',
-    demoImg: 2, mrp: '', offerPrice: '499', offerText: 'New Product Name',
+    demoImg: 2, mrp: '', offerPrice: '499',
     badges: [{ presetId: 'newarrival', x: 0.82, y: 0.18, scale: 1.1 }]
   },
   {
     id: 'bestprice', title: 'Best Price', thumb: 'linear-gradient(135deg,#082A73,#8C3AA8)',
     themeGradientId: 'royal', font: 'paytone',
     headline: 'BEST PRICE GUARANTEE', dateRange: '', discount: '',
-    demoImg: 3, mrp: '799', offerPrice: '549', offerText: 'Top Quality Product',
+    demoImg: 3, mrp: '799', offerPrice: '549',
     badges: []
   },
   {
     id: 'flashsale', title: 'Flash Sale', thumb: 'linear-gradient(135deg,#111827,#DC2626)',
     themeGradientId: 'blackfriday', font: 'titan',
     headline: 'FLASH SALE', dateRange: 'TODAY ONLY', discount: '',
-    demoImg: 4, mrp: '1299', offerPrice: '699', offerText: 'Hot Selling Product',
+    demoImg: 4, mrp: '1299', offerPrice: '699',
     badges: [{ presetId: 'off70', x: 0.82, y: 0.18, scale: 1.15 }]
   },
   {
     id: 'premiumpick', title: 'Premium Pick', thumb: 'linear-gradient(135deg,#1c1204,#B8842E,#F5B82E)',
     themeGradientId: 'gold', font: 'lilita',
     headline: 'PREMIUM PICK', dateRange: '', discount: '',
-    demoImg: 5, mrp: '', offerPrice: '', offerText: 'Premium Product',
+    demoImg: 5, mrp: '', offerPrice: '',
     badges: [{ presetId: 'sale', x: 0.82, y: 0.18, scale: 1 }]
   }
 ];
@@ -1990,7 +2006,7 @@ function startSingleProductPoster(id) {
     : DEMO_STOCK_IMAGES[preset.demoImg % DEMO_STOCK_IMAGES.length];
   STATE.editor.slots = [{
     ...rect, offX: 0.5, offY: 0.5, zoom: 1,
-    img: demoImg, mrp: preset.mrp || '', offerPrice: preset.offerPrice || '', offerText: preset.offerText || ''
+    img: demoImg, mrp: preset.mrp || '', offerPrice: preset.offerPrice || ''
   }];
   STATE.editor.stickers = (preset.badges || []).map(b => {
     const bp = BADGE_PRESETS.find(x => x.id === b.presetId) || BADGE_PRESETS[0];
@@ -2075,11 +2091,46 @@ function openSlotEditor(i) {
   pendingSlotIndex = i; STATE.editor._selectedSlot = i; renderSlotGrid();
   const s = STATE.editor.slots[i];
   document.getElementById('slotEditPreview').innerHTML = s.img ? `<img src="${s.img}">` : '➕';
-  document.getElementById('slotMrp').value = s.mrp || ''; document.getElementById('slotOfferPrice').value = s.offerPrice || ''; document.getElementById('slotOfferText').value = s.offerText || '';
+  document.getElementById('slotMrp').value = s.mrp || ''; document.getElementById('slotOfferPrice').value = s.offerPrice || '';
   document.getElementById('slotLibraryGrid').innerHTML = STATE.products.length ? STATE.products.map(p => `
     <div class="sticker-item" onclick="applyProductPhoto('${p.id}')" title="${escapeHtml(p.name)}"><img src="${p.image_url}"></div>`).join('')
     : `<p style="font-size:12px;color:var(--muted);grid-column:1/-1;">No product photos in the library yet.</p>`;
+  const hasName = !!(s.offerText && s.offerText.trim());
+  document.getElementById('slotOfferText').value = s.offerText || '';
+  document.getElementById('productNameFieldWrap').style.display = hasName ? 'block' : 'none';
+  document.getElementById('addProductNameBtn').textContent = hasName ? '🗑 Remove Product Name' : '➕ Add Product Name';
+  slotOfferTextHistoryPushed = false;
+  renderPriceStyleChips();
   openSheet('sheetSlotEdit');
+}
+// Product Name stays hidden until asked for — tapping the button reveals the field to type
+// into; tapping it again (once a name is showing) removes the label and clears the text.
+let slotOfferTextHistoryPushed = false;
+function toggleProductNameField() {
+  if (pendingSlotIndex === null) return;
+  const wrap = document.getElementById('productNameFieldWrap');
+  const btn = document.getElementById('addProductNameBtn');
+  const s = STATE.editor.slots[pendingSlotIndex];
+  const showing = wrap.style.display !== 'none';
+  if (showing) {
+    pushHistory();
+    s.offerText = '';
+    document.getElementById('slotOfferText').value = '';
+    wrap.style.display = 'none';
+    btn.textContent = '➕ Add Product Name';
+    renderPoster();
+  } else {
+    wrap.style.display = 'block';
+    btn.textContent = '🗑 Remove Product Name';
+    slotOfferTextHistoryPushed = false;
+    setTimeout(() => document.getElementById('slotOfferText').focus(), 50);
+  }
+}
+function onSlotOfferTextInput(value) {
+  if (pendingSlotIndex === null) return;
+  if (!slotOfferTextHistoryPushed) { pushHistory(); slotOfferTextHistoryPushed = true; }
+  STATE.editor.slots[pendingSlotIndex].offerText = value;
+  renderPoster();
 }
 function applyProductPhoto(productId) {
   const p = STATE.products.find(p => p.id === productId); if (!p || pendingSlotIndex === null) return;
@@ -2088,10 +2139,8 @@ function applyProductPhoto(productId) {
   s.img = p.image_url; s.offX = 0.5; s.offY = 0.5;
   if (!s.mrp && p.mrp) s.mrp = String(p.mrp);
   if (!s.offerPrice && p.offer_price) s.offerPrice = String(p.offer_price);
-  if (!s.offerText) s.offerText = p.name;
   document.getElementById('slotMrp').value = s.mrp || '';
   document.getElementById('slotOfferPrice').value = s.offerPrice || '';
-  document.getElementById('slotOfferText').value = s.offerText || '';
   document.getElementById('slotEditPreview').innerHTML = `<img src="${s.img}">`;
   renderSlotGrid(); renderPoster();
   toast('Product photo applied');
@@ -2100,7 +2149,10 @@ function saveSlotPrices() {
   if (pendingSlotIndex === null) return;
   pushHistory();
   const s = STATE.editor.slots[pendingSlotIndex];
-  s.mrp = document.getElementById('slotMrp').value.trim(); s.offerPrice = document.getElementById('slotOfferPrice').value.trim(); s.offerText = document.getElementById('slotOfferText').value.trim();
+  s.mrp = document.getElementById('slotMrp').value.trim(); s.offerPrice = document.getElementById('slotOfferPrice').value.trim();
+  if (document.getElementById('productNameFieldWrap').style.display !== 'none') {
+    s.offerText = document.getElementById('slotOfferText').value.trim();
+  }
   renderSlotGrid(); renderPoster(); closeSheets(); toast('Photo details saved');
 }
 function deleteSlotContent() {
@@ -2110,6 +2162,18 @@ function deleteSlotContent() {
   s.img = null; s.mrp = ''; s.offerPrice = ''; s.offerText = '';
   renderSlotGrid(); renderPoster(); closeSheets(); toast('Photo removed');
 }
+// Deletes the photo box itself (not just its content) — the layout loses this box entirely,
+// unlike "Remove Photo" which only clears the image/price and keeps an empty box.
+function deleteSlotBox() {
+  if (pendingSlotIndex === null) return;
+  if (STATE.editor.slots.length <= 1) { toast('At least one photo box is needed', true); return; }
+  pushHistory();
+  STATE.editor.slots.splice(pendingSlotIndex, 1);
+  pendingSlotIndex = null;
+  STATE.editor._selectedSlot = null;
+  renderSlotGrid(); renderPoster(); closeSheets();
+  toast('Photo box deleted');
+}
 function adjustSlotZoom(delta) {
   if (pendingSlotIndex === null) return;
   pushHistory();
@@ -2117,27 +2181,6 @@ function adjustSlotZoom(delta) {
   s.zoom = Math.min(2.5, Math.max(0.5, (s.zoom || 1) + delta));
   renderPoster();
   toast('Photo size adjusted');
-}
-// Moves the whole photo box (not just panning the image inside it) — the box can go
-// anywhere on the screen, edge to edge, independent of any header/footer/border.
-function moveSlotBox(dx, dy) {
-  if (pendingSlotIndex === null) return;
-  pushHistory();
-  const s = STATE.editor.slots[pendingSlotIndex];
-  s.x = Math.max(0, Math.min(1 - s.w, s.x + dx));
-  s.y = Math.max(0, Math.min(1 - s.h, s.y + dy));
-  renderSlotGrid(); renderPoster();
-}
-function resizeSlotBox(dim, factor) {
-  if (pendingSlotIndex === null) return;
-  pushHistory();
-  const s = STATE.editor.slots[pendingSlotIndex];
-  if (dim === 'w') {
-    s.w = Math.max(0.15, Math.min(1 - s.x, s.w * factor));
-  } else {
-    s.h = Math.max(0.15, Math.min(1 - s.y, s.h * factor));
-  }
-  renderSlotGrid(); renderPoster();
 }
 // Moves just the MRP/offer-price tag away from its default top-left corner of the photo —
 // independent of the photo box itself.
@@ -2154,6 +2197,32 @@ function resizePriceTag(factor) {
   pushHistory();
   const s = STATE.editor.slots[pendingSlotIndex];
   s.priceScale = Math.min(2.5, Math.max(0.4, (s.priceScale || 1) * factor));
+  renderPoster();
+}
+const PRICE_TAG_STYLES = [
+  { id: 'rect', label: '▭ Rectangle' },
+  { id: 'round', label: '⬭ Round' }
+];
+function renderPriceStyleChips() {
+  const row = document.getElementById('priceStyleChips'); if (!row || pendingSlotIndex === null) return;
+  const s = STATE.editor.slots[pendingSlotIndex];
+  const current = s.priceStyle || 'rect';
+  row.innerHTML = PRICE_TAG_STYLES.map(p => `<div class="font-chip ${current === p.id ? 'active' : ''}" onclick="setPriceStyle('${p.id}')">${p.label}</div>`).join('');
+}
+function setPriceStyle(style) {
+  if (pendingSlotIndex === null) return;
+  pushHistory();
+  STATE.editor.slots[pendingSlotIndex].priceStyle = style;
+  renderPriceStyleChips(); renderPoster();
+}
+// Moves the automatic "% OFF" circle badge (computed from MRP vs offer price) — independent
+// of the MRP/offer-price tag boxes and the photo box itself.
+function movePctBadge(dx, dy) {
+  if (pendingSlotIndex === null) return;
+  pushHistory();
+  const s = STATE.editor.slots[pendingSlotIndex];
+  s.pctOffX = Math.max(-0.8, Math.min(0.3, (s.pctOffX || 0) + dx));
+  s.pctOffY = Math.max(-0.3, Math.min(0.8, (s.pctOffY || 0) + dy));
   renderPoster();
 }
 
@@ -2409,6 +2478,22 @@ function loadImg(src) {
 function hexToRgba(hex, a) { const v = hex.replace('#', ''); const r = parseInt(v.substring(0, 2), 16), g = parseInt(v.substring(2, 4), 16), b = parseInt(v.substring(4, 6), 16); return `rgba(${r},${g},${b},${a})`; }
 function shadeColor(hex, percent) { const v = hex.replace('#', ''); let r = parseInt(v.substring(0, 2), 16), g = parseInt(v.substring(2, 4), 16), b = parseInt(v.substring(4, 6), 16); r = Math.min(255, Math.max(0, Math.round(r + (percent / 100) * 255))); g = Math.min(255, Math.max(0, Math.round(g + (percent / 100) * 255))); b = Math.min(255, Math.max(0, Math.round(b + (percent / 100) * 255))); return `rgb(${r},${g},${b})`; }
 function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+// Draws an MRP/price tag box in one of several shapes: 'rect' (default rounded box),
+// 'round' (full pill), or 'star' (starburst) — same (x,y,w,h) footprint either way, just
+// different silhouette, so text placement math elsewhere doesn't need to change.
+function drawPriceBox(ctx, style, x, y, w, h, fillColor) {
+  ctx.fillStyle = fillColor;
+  if (style === 'round') {
+    roundRect(ctx, x, y, w, h, h / 2); ctx.fill();
+  } else if (style === 'star') {
+    const cx = x + w / 2, cy = y + h / 2, outerR = Math.max(w, h) * 0.62, innerR = outerR * 0.72, spikes = 8;
+    ctx.beginPath();
+    for (let i = 0; i < spikes * 2; i++) { const r = i % 2 === 0 ? outerR : innerR; const a = (Math.PI / spikes) * i - 0.2; const px = cx + Math.sin(a) * r, py = cy - Math.cos(a) * r; if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); }
+    ctx.closePath(); ctx.fill();
+  } else {
+    roundRect(ctx, x, y, w, h, 4); ctx.fill();
+  }
+}
 function drawStarburst(ctx, cx, cy, outerR, innerR, spikes, color, label) {
   ctx.save(); ctx.translate(cx, cy); ctx.rotate(-0.12); ctx.beginPath();
   for (let i = 0; i < spikes * 2; i++) { const r = i % 2 === 0 ? outerR : innerR; const a = (Math.PI / spikes) * i; const x = Math.sin(a) * r, y = -Math.cos(a) * r; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
@@ -2758,26 +2843,28 @@ async function drawPoster() {
 
     const mrpNum = parseNum(s.mrp), offNum = parseNum(s.offerPrice);
     const priceScale = s.priceScale || 1;
+    const priceStyle = s.priceStyle || 'rect';
     const priceTagX = imgX + cw * 0.01 + (s.priceOffX || 0) * cw;
     const priceTagY = imgY + ch * 0.02 + (s.priceOffY || 0) * ch;
     if (s.mrp) {
       const tw2 = Math.max(cw * 0.30, imgW * 0.34) * priceScale, th = ch * 0.11 * priceScale, tx = priceTagX, ty = priceTagY;
-      roundRect(ctx, tx, ty, tw2, th, 4); ctx.fillStyle = '#FFD23C'; ctx.fill();
+      drawPriceBox(ctx, priceStyle, tx, ty, tw2, th, '#FFD23C');
       ctx.fillStyle = '#1c1204'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = `700 ${Math.round(th * 0.42)}px Manrope`; ctx.fillText('MRP', tx + tw2 / 2, ty + th * 0.32);
       ctx.font = `800 ${Math.round(th * 0.5)}px Manrope`; ctx.fillText('₹' + s.mrp, tx + tw2 / 2, ty + th * 0.78);
       if (s.offerPrice) {
-        const t2y = ty + th + ch * 0.012; roundRect(ctx, tx, t2y, tw2, th, 4); ctx.fillStyle = '#E1273B'; ctx.fill();
+        const t2y = ty + th + ch * 0.012; drawPriceBox(ctx, priceStyle, tx, t2y, tw2, th, '#E1273B');
         ctx.fillStyle = '#fff'; ctx.font = `900 ${Math.round(th * 0.6)}px Manrope`; ctx.fillText('₹' + s.offerPrice, tx + tw2 / 2, t2y + th * 0.58);
       }
     } else if (s.offerPrice) {
       const tw2 = Math.max(cw * 0.30, imgW * 0.34) * priceScale, th = ch * 0.11 * priceScale, tx = priceTagX, ty = priceTagY;
-      roundRect(ctx, tx, ty, tw2, th, 4); ctx.fillStyle = '#E1273B'; ctx.fill();
+      drawPriceBox(ctx, priceStyle, tx, ty, tw2, th, '#E1273B');
       ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = `900 ${Math.round(th * 0.55)}px Manrope`; ctx.fillText('₹' + s.offerPrice, tx + tw2 / 2, ty + th * 0.58);
     }
     if (mrpNum && offNum && mrpNum > offNum) {
-      const pct = Math.round((mrpNum - offNum) / mrpNum * 100), r = Math.min(cw, ch) * 0.115, ccx = imgX + imgW - r * 0.95, ccy = imgY + r * 0.95;
+      const pct = Math.round((mrpNum - offNum) / mrpNum * 100), r = Math.min(cw, ch) * 0.115;
+      const ccx = imgX + imgW - r * 0.95 + (s.pctOffX || 0) * cw, ccy = imgY + r * 0.95 + (s.pctOffY || 0) * ch;
       ctx.beginPath(); ctx.arc(ccx, ccy, r, 0, Math.PI * 2); ctx.fillStyle = '#8C3AA8'; ctx.fill();
       ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = `800 ${Math.round(r * 0.5)}px Manrope`; ctx.fillText(pct + '%', ccx, ccy - r * 0.14);
