@@ -834,6 +834,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
 
 <div class="sheet" id="sheetExport">
   <div class="sheet-handle"></div><div class="sheet-title">Download poster</div>
+  <div id="inAppBrowserWarning" style="display:none;background:rgba(225,85,59,0.1);border:1px solid rgba(225,85,59,0.3);border-radius:12px;padding:10px 13px;margin-bottom:14px;font-size:12px;color:var(--coral-2);"></div>
   <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">SIZE</label>
   <div class="pill-row" id="sizeChips" style="padding:0;margin:0 0 14px;"></div>
   <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">FORMAT</label>
@@ -3090,6 +3091,15 @@ function openExportSheet() {
   document.getElementById('sizeChips').innerHTML = SIZE_PRESETS.map(p => `<div class="pill ${exportSize.id === p.id ? 'active' : ''}" onclick="setExportSize('${p.id}')">${p.label}</div>`).join('');
   document.getElementById('formatChips').innerHTML = ['png', 'jpg'].map(f => `<div class="pill ${exportFormat === f ? 'active' : ''}" onclick="setExportFormat('${f}')">${f.toUpperCase()}</div>`).join('');
   document.getElementById('qualityChips').innerHTML = `<div class="pill ${!exportHD ? 'active' : ''}" onclick="setExportQuality(false)">Standard</div><div class="pill ${exportHD ? 'active' : ''}" onclick="setExportQuality(true)">✨ HD (2x)</div>`;
+  const warn = document.getElementById('inAppBrowserWarning');
+  if (warn) {
+    if (isInAppBrowser()) {
+      warn.style.display = 'block';
+      warn.innerHTML = '⚠️ Facebook/Instagram പോലുള്ള ആപ്പിനുള്ളിലെ ബ്രൗസറിൽ ആണ് ഇത് തുറന്നിരിക്കുന്നത് — Download ചിലപ്പോൾ പ്രവർത്തിക്കില്ല. പ്രശ്നമുണ്ടെങ്കിൽ മുകളിലെ ⋮ മെനുവിൽ നിന്ന് "Open in Chrome/Browser" തിരഞ്ഞെടുക്കുക.';
+    } else {
+      warn.style.display = 'none';
+    }
+  }
   openSheet('sheetExport');
 }
 function setExportSize(id) { exportSize = SIZE_PRESETS.find(p => p.id === id); openExportSheet(); }
@@ -3130,12 +3140,44 @@ async function doExport() {
 
   const mime = exportFormat === 'jpg' ? 'image/jpeg' : 'image/png';
   const dataUrl = exportCanvas.toDataURL(mime, 0.92);
-  const a = document.createElement('a'); a.href = dataUrl; a.download = `${(ed.title || 'poster').replace(/\s+/g, '_')}_${exportSize.id}${exportHD ? '_HD' : ''}.${exportFormat}`; a.click();
+  const filename = `${(ed.title || 'poster').replace(/\s+/g, '_')}_${exportSize.id}${exportHD ? '_HD' : ''}.${exportFormat}`;
+
+  // Facebook/Instagram/etc. open links in a restricted in-app browser where the normal
+  // <a download> trick often silently fails (it may just open the image instead of saving
+  // it). In that case, try the device's native Share sheet instead — "Save Image"/"Save to
+  // Photos" from there works even when a direct download doesn't.
+  let savedViaShare = false;
+  if (isInAppBrowser() && navigator.share) {
+    try {
+      const blob = await (await fetch(dataUrl)).blob();
+      const file = new File([blob], filename, { type: mime });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: ed.title || 'Poster' });
+        savedViaShare = true;
+      }
+    } catch (e) {
+      // Share sheet cancelled or unsupported — fall through to the normal download attempt.
+    }
+  }
+
+  if (!savedViaShare) {
+    const a = document.createElement('a'); a.href = dataUrl; a.download = filename; a.click();
+    if (isInAppBrowser() && !navigator.share) {
+      toast('Facebook/Instagram-ന്റെ ഉള്ളിലെ ബ്രൗസറിൽ Download പ്രവർത്തിച്ചില്ലെങ്കിൽ, മുകളിലെ ⋮ മെനുവിൽ നിന്ന് "Open in Chrome" / "Open in Browser" തിരഞ്ഞെടുത്ത് വീണ്ടും ശ്രമിക്കുക.', true);
+    }
+  }
 
   await sb.from('downloads_log').insert({ user_id: STATE.user.id, template_id: ed.templateId, format: exportFormat, size_preset: exportSize.id, hd: exportHD });
   if (ed.templateId) { const t = STATE.templates.find(t => t.id === ed.templateId); if (t) { t.downloads = (t.downloads || 0) + 1; await sb.from('templates').update({ downloads: t.downloads }).eq('id', ed.templateId); } }
   await savePosterRecord('final');
-  updatePlanBanner(); toast('Poster downloaded!'); closeSheets();
+  updatePlanBanner(); toast(savedViaShare ? 'Poster ready — saved via Share sheet!' : 'Poster downloaded!'); closeSheets();
+}
+// Facebook, Instagram, Messenger, WhatsApp, WeChat, Twitter/X, Snapchat, LINE, LinkedIn all
+// ship their own restrictive in-app browser (WebView) when you open a link from inside them —
+// these commonly block or silently no-op the <a download> trick that works fine in Chrome/Safari.
+function isInAppBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || '';
+  return /FBAN|FBAV|FB_IAB|Instagram|Line\/|MicroMessenger|Twitter|LinkedInApp|Snapchat/i.test(ua);
 }
 async function savePosterRecord(type) {
   const ed = STATE.editor;
