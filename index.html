@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Offer Poster Studio – Create Professional Offer Posters</title>
-<meta name="description" content="Create beautiful offer posters for supermarkets, shops and businesses. Design, download and share promotional posters easily.">
-<meta name="keywords" content="offer poster maker, poster design app, supermarket poster maker, discount poster template, shop offer banner design, festival offer poster, Kerala poster maker, WhatsApp offer poster maker">
-<meta property="og:title" content="Offer Poster Studio – Create Professional Offer Posters">
-<meta property="og:description" content="Create beautiful offer posters for supermarkets, shops and businesses. Design, download and share promotional posters easily.">
+<title>Offer Poster Studio – Offer Poster Maker for Indian Businesses</title>
+<meta name="description" content="Create professional offer posters in minutes for supermarkets, shops, restaurants and businesses across India. Design, download and share promotional posters in English and Malayalam — free to start.">
+<meta name="keywords" content="offer poster maker, offer poster maker india, free offer poster maker, business poster maker, shop poster maker, sale poster maker, poster design app, supermarket offer poster, restaurant offer poster, clothing sale poster, jewellery offer poster, grocery offer poster, mobile shop offer poster, festival poster maker, whatsapp poster maker, instagram poster maker, facebook poster maker, malayalam poster maker, indian business poster maker, discount poster template, shop offer banner design, festival offer poster, Kerala poster maker, WhatsApp offer poster maker">
+<meta property="og:title" content="Offer Poster Studio – Offer Poster Maker for Indian Businesses">
+<meta property="og:description" content="Create professional offer posters in minutes for supermarkets, shops, restaurants and businesses across India. Free to start, in English and Malayalam.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.offerposterstudio.in">
 <meta property="og:site_name" content="Offer Poster Studio">
@@ -274,24 +274,29 @@ body.desktop-view #viewModeToggle{bottom:20px;}
         <div class="auth-logo"><div class="mark">OP</div></div>
         <h1 class="auth-title" id="authTitle">Welcome back</h1>
         <p class="auth-sub" id="authSub">Sign in to keep making posters that sell.</p>
-        <div class="auth-tabs">
-          <div class="auth-tab active" id="tabLogin" onclick="setAuthMode('login')">Log In</div>
-          <div class="auth-tab" id="tabSignup" onclick="setAuthMode('signup')">Sign Up</div>
+
+        <button class="btn btn-outline btn-block" style="margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px;" onclick="signInWithGoogle()">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.6-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.5 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.5 15.9 18.9 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.5 5.1 29.6 3 24 3 16.3 3 9.7 7.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.3-1.8 13.7-4.9l-6.3-5.3C29.5 36.5 26.9 37.5 24 37.5c-5.3 0-9.7-3.4-11.3-8l-6.6 5.1C9.6 40.6 16.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.2-4.1 5.6l6.3 5.3C40.9 36.4 45 30.8 45 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
+          Continue with Google
+        </button>
+        <div style="text-align:center;font-size:12px;color:var(--muted);margin-bottom:6px;">
+          <a href="#" style="color:var(--teal);font-weight:700;" onclick="toggleEmailAuthForm();return false;" id="emailToggleLink"></a>
         </div>
-        <div id="signupExtra" style="display:none;">
-          <div class="field"><label>Shop / Business name</label><input type="text" id="signupShop" placeholder="e.g. Anand Supermarket"></div>
+  <div id="emailAuthForm" style="display:none;">
+          <div class="auth-tabs">
+            <div class="auth-tab active" id="tabLogin" onclick="setAuthMode('login')"></div>
+            <div class="auth-tab" id="tabSignup" onclick="setAuthMode('signup')"></div>
+          </div>
+         
+          <div id="authError" class="error-text" style="display:none;margin-bottom:10px;"></div>
+          <button class="btn btn-primary btn-block" onclick="submitAuth()" id="authSubmitBtn"></button>
+          <div class="auth-switch" id="authSwitchText"> <a href="#" onclick="setAuthMode('signup');return false;"></a></div>
         </div>
-        <div class="field"><label>Email</label><input type="email" id="authEmail" placeholder="you@shop.com"></div>
-        <div class="field"><label>Password</label><input type="password" id="authPassword" placeholder="••••••••">
-          <div style="text-align:right;margin-top:6px;"><a href="#" style="font-size:12px;color:var(--teal);font-weight:700;" onclick="openForgot();return false;">Forgot password?</a></div>
-        </div>
-        <div id="authError" class="error-text" style="display:none;margin-bottom:10px;"></div>
-        <button class="btn btn-primary btn-block" onclick="submitAuth()" id="authSubmitBtn">Log In</button>
-        <div class="auth-switch" id="authSwitchText">New here? <a href="#" onclick="setAuthMode('signup');return false;">Create an account</a></div>
       </div>
-      <p class="footer-note" style="color:rgba(251,246,234,0.55);">Offer Poster Studio · Made for Kerala businesses</p>
+      <p class="footer-note" style="color:rgba(251,246,234,0.55);">Offer Poster Studio · Made for Indian Businesses</p>
     </div>
   </section>
+      
 
   <section class="screen" id="screen-landing">
     <div class="landing-header">
@@ -303,7 +308,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
       <div class="hero-copy">
         <span class="hero-eyebrow">⚡ Ready in under 60 seconds</span>
         <h1>Create Stunning <em>Offer Posters</em> in Minutes</h1>
-        <p>Create professional promotional posters for your shop, supermarket or business — easily and quickly.</p>
+        <p>India's easy offer poster maker for supermarkets, shops, restaurants and businesses — in English and Malayalam.</p>
         <div class="hero-cta">
           <button class="btn btn-gold" onclick="showAuth();setAuthMode('signup')">Create Your Poster</button>
           <button class="btn btn-ghost" onclick="scrollToSection('landingTemplatesSection')">Explore Templates</button>
@@ -334,6 +339,11 @@ body.desktop-view #viewModeToggle{bottom:20px;}
       <div class="cat-tiles" id="landingCatGrid" style="padding:0 18px;"></div>
     </div>
 
+    <div class="section" id="landingFestivalSection">
+      <div class="section-head"><h2>Indian Festival Templates</h2></div>
+      <div class="cat-tiles" id="landingFestivalGrid" style="padding:0 18px;"></div>
+    </div>
+
     <div class="section pricing-section" id="pricingSection">
       <div class="section-head"><h2>Simple, Transparent Pricing</h2></div>
       <div class="pricing-grid" id="landingPricingGrid"></div>
@@ -349,6 +359,10 @@ body.desktop-view #viewModeToggle{bottom:20px;}
     <div class="section" style="padding-top:22px;">
       <div class="section-head"><h2>Popular Templates</h2><p style="color:var(--muted);font-size:13px;margin-top:6px;">Pick a template, drop in your own photos and prices.</p></div>
       <div class="cat-tiles" id="pubTemplatesGrid" style="padding:0 18px;"></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Indian Festival Templates</h2></div>
+      <div class="cat-tiles" id="pubFestivalGrid" style="padding:0 18px;"></div>
     </div>
     <div class="free-demo-card" style="margin-top:8px;">
       <div><h2>Don't see what you need?</h2><p>Start from a blank canvas and build your own layout in the editor.</p></div>
@@ -469,7 +483,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
     <section class="screen" id="screen-home">
       <div class="hero">
         <span class="hero-eyebrow">⚡ Ready in under 60 seconds</span>
-        <h1>Posters that make Kerala <em>shop today.</em></h1>
+        <h1>Create Professional Offer Posters <em>in Minutes.</em></h1>
         <p>Pick a template, drop in your photos and prices, download in HD.</p>
         <div class="hero-cta">
           <button class="btn btn-gold" onclick="goto('marketplace')">Browse Templates</button>
@@ -667,6 +681,9 @@ body.desktop-view #viewModeToggle{bottom:20px;}
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:16px 0 8px;">ALL TEXT LAYERS</label>
             <div class="font-row" id="textLayerChips"></div>
 
+            <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:16px 0 8px;">QUICK ENGLISH PHRASES</label>
+            <div id="enQuick" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;"></div>
+
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:16px 0 8px;">QUICK MALAYALAM PHRASES</label>
             <div id="mlQuick" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
           </div>
@@ -775,6 +792,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
     <div class="slot-thumb" id="slotEditPreview" style="width:70px;height:70px;flex-shrink:0;" onclick="selectSlot(pendingSlotIndex)"></div>
     <button class="btn btn-outline btn-sm" style="flex:1;" onclick="selectSlot(pendingSlotIndex)">📤 Upload from Device</button>
   </div>
+  <div id="bgRemoveControls" style="display:flex;gap:8px;margin-bottom:14px;"></div>
   <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">OR CHOOSE FROM PRODUCT LIBRARY</label>
   <div class="sticker-grid" id="slotLibraryGrid" style="margin-bottom:16px;"></div>
   <div style="display:flex;gap:10px;">
@@ -846,11 +864,29 @@ body.desktop-view #viewModeToggle{bottom:20px;}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<!-- Google Identity Services — only needed if you switch to the native Google "One Tap" /
+     ID-token sign-in flow. The button below uses Supabase's own OAuth redirect flow instead,
+     which needs NO client ID here at all — see the comment above GOOGLE_CLIENT_ID. -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 const SUPABASE_URL = 'https://peftmuasykbcrhtkhhjf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZnRtdWFzeWtiY3JodGtoaGpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU3MzkzMTIsImV4cCI6MjEwMTMxNTMxMn0.oiFn_41F-jBxK8tizA3qPoC1UPJPC72SvNxyxiUlhGY';
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ===== Google Sign-In =====
+// The "Continue with Google" button below uses Supabase's built-in OAuth redirect flow
+// (sb.auth.signInWithOAuth). With this flow, the Google Client ID/Secret are configured
+// ONCE in your Supabase project dashboard — NOT here in the HTML:
+//   Supabase Dashboard → Authentication → Providers → Google → paste your Client ID
+//   and Client Secret from Google Cloud Console, then Save.
+// You do NOT need to edit this file for that to work.
+//
+// GOOGLE_CLIENT_ID below is ONLY used if you later add the native Google "Sign in with
+// Google" button / One Tap widget (google.accounts.id.initialize) instead of the redirect
+// flow — paste your OAuth Client ID from https://console.cloud.google.com/apis/credentials
+// here if you do that. Leave the placeholder as-is otherwise; it is not required.
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 
 async function authSignUp(email, password, shopName) {
   const { data, error } = await sb.auth.signUp({ email, password, options: { data: { shop_name: shopName || 'My Shop' } } });
@@ -867,6 +903,24 @@ async function authSendPasswordReset(email) {
   const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
   if (error) throw error;
 }
+// Redirects to Google's sign-in page and back — Supabase exchanges the result for a
+// session automatically, so boot() picks it up on the next load exactly like an email
+// login. Requires the Google provider to be enabled in the Supabase dashboard (see the
+// GOOGLE_CLIENT_ID comment above).
+async function signInWithGoogle() {
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.href }
+  });
+  if (error) toast(error.message, true);
+}
+function toggleEmailAuthForm() {
+  const form = document.getElementById('emailAuthForm');
+  const link = document.getElementById('emailToggleLink');
+  const showing = form.style.display !== 'none';
+  form.style.display = showing ? 'none' : 'block';
+  link.textContent = showing ? 'Sign in with email instead' : 'Hide email sign-in';
+}
 async function getCurrentUser() { const { data } = await sb.auth.getUser(); return data?.user || null; }
 async function getCurrentProfile() {
   const user = await getCurrentUser(); if (!user) return null;
@@ -875,6 +929,17 @@ async function getCurrentProfile() {
     if (error.code !== 'PGRST116') console.error(error);
     return null;
   }
+  return data;
+}
+// Email signup passes shop_name as user metadata, which a Supabase trigger normally turns
+// into a profiles row. Google sign-in has no such step, so a first-time Google user would
+// otherwise be stuck authenticated-but-profile-less. This creates a minimal profile row
+// on the fly using whatever Google gave us, so Google sign-in works without any database
+// changes on your end.
+async function ensureProfileExists(user) {
+  const shopName = user.user_metadata?.full_name || user.user_metadata?.name || (user.email ? user.email.split('@')[0] : 'My Shop');
+  const { data, error } = await sb.from('profiles').insert({ id: user.id, email: user.email, shop_name: shopName, plan: 'free' }).select().single();
+  if (error) { console.error('Could not auto-create profile:', error); return null; }
   return data;
 }
 
@@ -942,7 +1007,8 @@ async function boot() {
   const user = await getCurrentUser();
   if (!user) { showLanding(); return; }
   try { await sb.rpc('expire_plans'); } catch (e) { /* non-fatal */ }
-  const profile = await getCurrentProfile();
+  let profile = await getCurrentProfile();
+  if (!profile) { profile = await ensureProfileExists(user); }
   if (!profile) { showAuth(); return; }
   if (profile.suspended) {
     toast('Your account has been suspended. Contact support.', true);
@@ -994,6 +1060,7 @@ function showLanding() {
   document.getElementById('bottomNav').style.display = 'none';
   renderFeaturesGrid('landingFeaturesGrid');
   renderLandingCategories('landingCatGrid');
+  renderFestivalCategories('landingFestivalGrid');
   renderPricingCards('landingPricingGrid', { mode: 'landing' });
   renderSiteFooter('landingFooter');
   renderNavCta();
@@ -1043,7 +1110,7 @@ function showPublicScreen(name) {
   STATE.currentScreen = 'pub';
   window.scrollTo(0, 0);
   history.replaceState(null, '', '#' + name);
-  if (name === 'templates') { renderLandingCategories('pubTemplatesGrid'); renderSiteFooter('pubTemplatesFooter'); }
+  if (name === 'templates') { renderLandingCategories('pubTemplatesGrid'); renderFestivalCategories('pubFestivalGrid'); renderSiteFooter('pubTemplatesFooter'); }
   if (name === 'features') { renderFeaturesGrid('pubFeaturesGrid'); renderSiteFooter('pubFeaturesFooter'); }
   if (name === 'pricing') { renderPricingCards('pubPricingGrid', { mode: STATE.user ? 'home' : 'landing' }); renderSiteFooter('pubPricingFooter'); }
   if (name === 'contact') { renderSiteFooter('pubContactFooter'); }
@@ -1081,11 +1148,33 @@ const MARKETING_CATEGORIES = [
   { icon: '1️⃣', label: '1 Photo' }, { icon: '2️⃣', label: '2 Photos' }, { icon: '4️⃣', label: '4 Photos' },
   { icon: '6️⃣', label: '6 Photos' }, { icon: '9️⃣', label: '9 Photos' }, { icon: '🔟', label: '12 Photos' },
   { icon: '🛒', label: 'Supermarket' }, { icon: '🎉', label: 'Festival' }, { icon: '🍔', label: 'Food' },
-  { icon: '📱', label: 'Electronics' }, { icon: '👗', label: 'Fashion' }
+  { icon: '📱', label: 'Electronics' }, { icon: '👗', label: 'Fashion' },
+  { icon: '🥦', label: 'Grocery' }, { icon: '🍽️', label: 'Restaurant' }, { icon: '🍞', label: 'Bakery' },
+  { icon: '☕', label: 'Cafe' }, { icon: '👕', label: 'Clothing' }, { icon: '💍', label: 'Jewellery' },
+  { icon: '📲', label: 'Mobile Shop' }, { icon: '🛋️', label: 'Furniture' }, { icon: '🏠', label: 'Interior' },
+  { icon: '👟', label: 'Footwear' }, { icon: '💄', label: 'Cosmetics' }, { icon: '💇', label: 'Beauty Salon' },
+  { icon: '🏨', label: 'Hotel' }, { icon: '💊', label: 'Pharmacy' }, { icon: '🔧', label: 'Hardware' },
+  { icon: '🧺', label: 'Home Appliances' }, { icon: '🚗', label: 'Automobile' }, { icon: '🏘️', label: 'Real Estate' },
+  { icon: '🏸', label: 'Sports Shop' }, { icon: '✏️', label: 'Stationery' }, { icon: '🎁', label: 'Gift Shop' }
 ];
 function renderLandingCategories(containerId) {
   const el = document.getElementById(containerId); if (!el) return;
   el.innerHTML = MARKETING_CATEGORIES.map(c => `
+    <div class="cat-tile" onclick="showAuth();setAuthMode('signup')"><div class="ic">${c.icon}</div><span>${escapeHtml(c.label)}</span></div>
+  `).join('');
+}
+const FESTIVAL_CATEGORIES = [
+  { icon: '🪔', label: 'Diwali' }, { icon: '🎨', label: 'Holi' }, { icon: '🌙', label: 'Eid' },
+  { icon: '🎄', label: 'Christmas' }, { icon: '🌾', label: 'Onam' }, { icon: '🌿', label: 'Vishu' },
+  { icon: '🌻', label: 'Pongal' }, { icon: '🐘', label: 'Ganesh Chaturthi' }, { icon: '🪅', label: 'Navratri' },
+  { icon: '🏹', label: 'Dussehra' }, { icon: '🎗️', label: 'Raksha Bandhan' }, { icon: '🇮🇳', label: 'Independence Day' },
+  { icon: '🇮🇳', label: 'Republic Day' }, { icon: '🎊', label: 'New Year' }, { icon: '☀️', label: 'Summer Sale' },
+  { icon: '🌧️', label: 'Monsoon Sale' }, { icon: '🏷️', label: 'Clearance Sale' }, { icon: '🎉', label: 'Grand Opening' },
+  { icon: '📅', label: 'Weekend Sale' }, { icon: '✨', label: 'Festive Sale' }
+];
+function renderFestivalCategories(containerId) {
+  const el = document.getElementById(containerId); if (!el) return;
+  el.innerHTML = FESTIVAL_CATEGORIES.map(c => `
     <div class="cat-tile" onclick="showAuth();setAuthMode('signup')"><div class="ic">${c.icon}</div><span>${escapeHtml(c.label)}</span></div>
   `).join('');
 }
@@ -1642,6 +1731,7 @@ const SINGLE_PRODUCT_PRESETS = [
   }
 ];
 const ML_PHRASES = ['🌙Ramadan Offer','🌸Onam Festival','🎄Christmas Carnival','🕌Eid Offers','🪔Diwali Sale','👗Fashion Sale','📱Mobile Fest','🛒Grocery Offer','💍Jewellery Offer','🧴Beauty Sale','🏠Home Essentials','🛍️ഇന്ന്.മാത്രം ഓഫർ', '🛍️മെഗാ സെയിൽ', '🛍️വമ്പൻ വിലക്കുറവ്', '📦സ്റ്റോക്ക് ക്ലിയറൻസ്', '🌸ഓണം.സ്പെഷ്യൽ ഓഫർ', '🧨വിഷു ഓഫർ', '🌜പെരുന്നാൾ ഓഫർ', '🚚പരിമിതകാല ഓഫർ'];
+const EN_PHRASES = ['🔥MEGA OFFER', '🛍️BIG SALE', '🎉GRAND SALE', '💥UP TO 50% OFF', '🏷️FLAT DISCOUNT', '⏰LIMITED TIME OFFER', '📅TODAY ONLY', '⭐BEST PRICE', '🎊FESTIVE OFFER', '💰SUPER SAVINGS', '📦CLEARANCE SALE', '✨SPECIAL OFFER', '🛒BUY NOW'];
 const FONT_OPTIONS = [
   { id: 'display', label: 'Fraunces', css: "'Fraunces', serif" },
   { id: 'body', label: 'Manrope', css: "'Manrope', sans-serif" },
@@ -1878,7 +1968,7 @@ function blankEditorState(template) {
     headline: template && template.festival ? (template.festival + ' 🛍️ഓഫർ') : '🛍️ഇന്ന്.മാത്രം ഓഫർ',
     dateRange: '', price: '₹499', discount: 'വൻ വിലക്കുറവ്',
     whatsapp: STATE.profile.whatsapp || '+91 0000000000',
-    address: STATE.profile.address || 'ബസ് സ്റ്റാൻഡിന് സമീപം, കേരളം',
+    address: STATE.profile.address || 'ബസ് സ്റ്റാൻഡിന് സമീപം / Near Bus Stand',
     logo: STATE.profile.logo_url || null,
     logoScale: 1, logoWidthScale: 1, logoHeightScale: 1, logoX: 0.05, logoY: 0.04,
     heroBanner: template ? (template.hero_banner_url || null) : null,
@@ -1910,7 +2000,7 @@ function enterEditor() {
   document.getElementById('fWhatsapp').value = STATE.editor.whatsapp;
   document.getElementById('fAddress').value = STATE.editor.address;
   document.getElementById('logoUpload').innerHTML = STATE.editor.logo ? `<img src="${STATE.editor.logo}">` : '➕';
-  renderSlotGrid(); renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderBorderlessToggle(); renderFontChips(); renderLayoutChips(); renderStickerLibrary(); renderBadgeLibrary(); renderStickerControls(); renderMlQuick(); renderTextControls(); renderTextLayerChips();
+  renderSlotGrid(); renderColorSwatches(); renderTextColorSwatches(); renderPillColorSwatches(); renderProductColorSwatches(); renderBorderlessToggle(); renderFontChips(); renderLayoutChips(); renderStickerLibrary(); renderBadgeLibrary(); renderStickerControls(); renderMlQuick(); renderEnQuick(); renderTextControls(); renderTextLayerChips();
   updatePlanBanner(); setEditorTab('photos'); resetZoom();
   historyStack = []; redoStack = []; updateUndoRedoButtons();
   renderPoster();
@@ -2049,6 +2139,16 @@ function insertMl(phrase) {
   document.getElementById('fHeadline').value = phrase;
   renderPoster();
 }
+function renderEnQuick() {
+  const el = document.getElementById('enQuick'); if (!el) return;
+  el.innerHTML = EN_PHRASES.map(p => `<div class="ml-chip" onclick="insertEn('${p}')">${p}</div>`).join('');
+}
+function insertEn(phrase) {
+  pushHistory();
+  STATE.editor.headline = phrase;
+  document.getElementById('fHeadline').value = phrase;
+  renderPoster();
+}
 
 let historyStack = [], redoStack = [];
 function snapshotEditor() { const c = JSON.parse(JSON.stringify(STATE.editor)); delete c._selectedSticker; delete c._selectedText; return c; }
@@ -2081,6 +2181,7 @@ function handleFileSelect(e) {
     if (pendingSlotIndex !== null) {
       pushHistory();
       STATE.editor.slots[pendingSlotIndex].img = ev.target.result;
+      STATE.editor.slots[pendingSlotIndex].imgOriginal = null;
       STATE.editor.slots[pendingSlotIndex].offX = 0.5; STATE.editor.slots[pendingSlotIndex].offY = 0.5;
       renderSlotGrid(); renderPoster();
       if (document.getElementById('sheetSlotEdit').classList.contains('show')) openSlotEditor(pendingSlotIndex);
@@ -2102,6 +2203,7 @@ function openSlotEditor(i) {
   document.getElementById('addProductNameBtn').textContent = hasName ? '🗑 Remove Product Name' : '➕ Add Product Name';
   slotOfferTextHistoryPushed = false;
   renderPriceStyleChips();
+  renderBgRemoveControls();
   openSheet('sheetSlotEdit');
 }
 // Product Name stays hidden until asked for — tapping the button reveals the field to type
@@ -2137,14 +2239,130 @@ function applyProductPhoto(productId) {
   const p = STATE.products.find(p => p.id === productId); if (!p || pendingSlotIndex === null) return;
   pushHistory();
   const s = STATE.editor.slots[pendingSlotIndex];
-  s.img = p.image_url; s.offX = 0.5; s.offY = 0.5;
+  s.img = p.image_url; s.imgOriginal = null; s.offX = 0.5; s.offY = 0.5;
   if (!s.mrp && p.mrp) s.mrp = String(p.mrp);
   if (!s.offerPrice && p.offer_price) s.offerPrice = String(p.offer_price);
   document.getElementById('slotMrp').value = s.mrp || '';
   document.getElementById('slotOfferPrice').value = s.offerPrice || '';
   document.getElementById('slotEditPreview').innerHTML = `<img src="${s.img}">`;
-  renderSlotGrid(); renderPoster();
+  renderSlotGrid(); renderPoster(); renderBgRemoveControls();
   toast('Product photo applied');
+}
+// Background removal: shows a "Remove Background" button once a photo is picked (from
+// device or the product library), and an "Undo" button after it's been applied.
+function renderBgRemoveControls() {
+  const box = document.getElementById('bgRemoveControls'); if (!box || pendingSlotIndex === null) return;
+  const s = STATE.editor.slots[pendingSlotIndex];
+  if (!s || !s.img) { box.innerHTML = ''; return; }
+  box.innerHTML = s.imgOriginal
+    ? `<button class="btn btn-outline btn-sm" style="flex:1;" onclick="undoBackgroundRemoval()">↩️ Undo Background Removal</button>`
+    : `<button class="btn btn-outline btn-sm" style="flex:1;" id="removeBgBtn" onclick="removeSlotBackground()">🪄 Remove Background</button>`;
+}
+async function removeSlotBackground() {
+  if (pendingSlotIndex === null) return;
+  const s = STATE.editor.slots[pendingSlotIndex];
+  if (!s.img) return;
+  const btn = document.getElementById('removeBgBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Removing background…'; }
+  try {
+    const resultUrl = await stripBackgroundFromImage(s.img);
+    pushHistory();
+    s.imgOriginal = s.img;
+    s.img = resultUrl;
+    document.getElementById('slotEditPreview').innerHTML = `<img src="${s.img}">`;
+    renderSlotGrid(); renderPoster(); renderBgRemoveControls();
+    toast('Background removed — works best on plain/white backgrounds');
+  } catch (err) {
+    toast('Could not remove the background from this photo', true);
+    renderBgRemoveControls();
+  }
+}
+function undoBackgroundRemoval() {
+  if (pendingSlotIndex === null) return;
+  const s = STATE.editor.slots[pendingSlotIndex];
+  if (!s.imgOriginal) return;
+  pushHistory();
+  s.img = s.imgOriginal;
+  s.imgOriginal = null;
+  document.getElementById('slotEditPreview').innerHTML = `<img src="${s.img}">`;
+  renderSlotGrid(); renderPoster(); renderBgRemoveControls();
+  toast('Original photo restored');
+}
+// Loads `src`, samples the background color from the image's outer border, then removes
+// only the pixels reachable from that border through a continuous path of matching color
+// (flood fill) — not every pixel in the photo that happens to share that color. This is
+// what protects interior details like white text or highlights on the product itself: they
+// aren't connected to the outer background region, so a plain "remove pixels near this
+// color" pass would wrongly erase them, but a flood fill from the edges won't touch them.
+function stripBackgroundFromImage(src) {
+  return new Promise((resolve, reject) => {
+    const im = new Image();
+    im.crossOrigin = 'anonymous';
+    im.onload = () => {
+      try {
+        const maxDim = 1200;
+        const scale = Math.min(1, maxDim / Math.max(im.width, im.height));
+        const w = Math.max(1, Math.round(im.width * scale)), h = Math.max(1, Math.round(im.height * scale));
+        const off = document.createElement('canvas'); off.width = w; off.height = h;
+        const octx = off.getContext('2d');
+        octx.drawImage(im, 0, 0, w, h);
+        const imgData = octx.getImageData(0, 0, w, h);
+        const d = imgData.data;
+        const n = w * h;
+
+        // Sample the background color from the full border perimeter (more reliable than
+        // just the 4 corners when the subject sits close to one edge).
+        let sr = 0, sg = 0, sb = 0, count = 0;
+        const addSample = (x, y) => { const i = (y * w + x) * 4; sr += d[i]; sg += d[i + 1]; sb += d[i + 2]; count++; };
+        for (let x = 0; x < w; x++) { addSample(x, 0); addSample(x, h - 1); }
+        for (let y = 0; y < h; y++) { addSample(0, y); addSample(w - 1, y); }
+        const avgR = sr / count, avgG = sg / count, avgB = sb / count;
+        const colorDist = (i) => { const dr = d[i] - avgR, dg = d[i + 1] - avgG, db = d[i + 2] - avgB; return Math.sqrt(dr * dr + dg * dg + db * db); };
+
+        const threshold = 46;
+        const visited = new Uint8Array(n);
+        const removeMask = new Uint8Array(n);
+        const stack = [];
+        const tryPush = (x, y) => {
+          if (x < 0 || y < 0 || x >= w || y >= h) return;
+          const p = y * w + x;
+          if (visited[p]) return;
+          visited[p] = 1;
+          if (colorDist(p * 4) < threshold) { removeMask[p] = 1; stack.push(p); }
+        };
+        for (let x = 0; x < w; x++) { tryPush(x, 0); tryPush(x, h - 1); }
+        for (let y = 0; y < h; y++) { tryPush(0, y); tryPush(w - 1, y); }
+        while (stack.length) {
+          const p = stack.pop();
+          const x = p % w, y = (p / w) | 0;
+          tryPush(x + 1, y); tryPush(x - 1, y); tryPush(x, y + 1); tryPush(x, y - 1);
+        }
+
+        // Soften just the cut edge (pixels touching a removed pixel) so it isn't jagged —
+        // this deliberately does NOT touch similar-colored pixels elsewhere in the photo.
+        const feather = 30;
+        for (let p = 0; p < n; p++) {
+          if (removeMask[p]) { d[p * 4 + 3] = 0; continue; }
+          const i = p * 4;
+          const dist = colorDist(i);
+          if (dist < threshold + feather) {
+            const x = p % w, y = (p / w) | 0;
+            let nearRemoved = false;
+            if (x + 1 < w && removeMask[p + 1]) nearRemoved = true;
+            else if (x > 0 && removeMask[p - 1]) nearRemoved = true;
+            else if (y + 1 < h && removeMask[p + w]) nearRemoved = true;
+            else if (y > 0 && removeMask[p - w]) nearRemoved = true;
+            if (nearRemoved) d[i + 3] = Math.round(d[i + 3] * ((dist - threshold) / feather));
+          }
+        }
+
+        octx.putImageData(imgData, 0, 0);
+        resolve(off.toDataURL('image/png'));
+      } catch (err) { reject(err); }
+    };
+    im.onerror = () => reject(new Error('image load failed'));
+    im.src = src;
+  });
 }
 function saveSlotPrices() {
   if (pendingSlotIndex === null) return;
@@ -2160,7 +2378,7 @@ function deleteSlotContent() {
   if (pendingSlotIndex === null) return;
   pushHistory();
   const s = STATE.editor.slots[pendingSlotIndex];
-  s.img = null; s.mrp = ''; s.offerPrice = ''; s.offerText = '';
+  s.img = null; s.imgOriginal = null; s.mrp = ''; s.offerPrice = ''; s.offerText = '';
   renderSlotGrid(); renderPoster(); closeSheets(); toast('Photo removed');
 }
 // Deletes the photo box itself (not just its content) — the layout loses this box entirely,
