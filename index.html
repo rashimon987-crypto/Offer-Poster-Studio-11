@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Offer Poster Studio">
 <meta name="theme-color" content="#0E6E5D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Bowlby+One+SC&family=Bungee&family=Bungee+Shade&family=Chango&family=Coiny&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Luckiest+Guy&family=Lilita+One&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700&family=Baloo+Chettan+2:wght@400;500;600;700;800&family=Manjari:wght@400;700&family=Chilanka&family=Gayathri:wght@400;700&family=Noto+Serif+Malayalam:wght@400;600;700&family=Suranna&family=Uroob&family=Paytone+One&family=Righteous&family=Russo+One&family=Titan+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Bowlby+One+SC&family=Bungee&family=Bungee+Shade&family=Chango&family=Coiny&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Luckiest+Guy&family=Lilita+One&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;600;700&family=Baloo+Chettan+2:wght@400;500;600;700;800&family=Manjari:wght@400;700&family=Chilanka&family=Gayathri:wght@400;700&family=Noto+Serif+Malayalam:wght@400;600;700&family=Suranna&family=Uroob&family=Paytone+One&family=Righteous&family=Russo+One&family=Titan+One&family=Baloo+2:wght@400;500;600;700;800&family=Yatra+One&family=Kalam:wght@400;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Baloo+Da+2:wght@400;500;600;700;800&family=Galada&family=Noto+Sans+Bengali:wght@400;600;700&family=Baloo+Paaji+2:wght@400;500;600;700;800&family=Mukta+Mahee:wght@400;700&family=Noto+Sans+Gurmukhi:wght@400;600;700&family=Baloo+Bhai+2:wght@400;500;600;700;800&family=Rasa:wght@400;700&family=Noto+Sans+Gujarati:wght@400;600;700&family=Baloo+Bhaina+2:wght@400;500;600;700;800&family=Utsaah&family=Noto+Sans+Oriya:wght@400;600;700&family=Baloo+Thambi+2:wght@400;500;600;700;800&family=Kavivanar&family=Noto+Sans+Tamil:wght@400;600;700&family=Baloo+Tammudu+2:wght@400;500;600;700;800&family=Mallanna&family=Noto+Sans+Telugu:wght@400;600;700&family=Baloo+Tamma+2:wght@400;500;600;700;800&family=Hubballi&family=Noto+Sans+Kannada:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Gulzar&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#132420; --ink-2:#1B342D; --gold:#CC9A3C; --gold-soft:#E7C77C; --teal:#0E6E5D; --teal-2:#0A5548;
@@ -161,6 +161,7 @@ img{max-width:100%;display:block;} button{font-family:inherit;cursor:pointer;} i
 .pricing-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;}
 .pricing-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-1);}
 .pricing-card.featured{border-color:var(--gold);box-shadow:0 10px 24px rgba(204,154,60,0.2);position:relative;}
+.pricing-card.selected{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal);}
 .pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:-11px;right:16px;background:var(--gold);color:#1c1204;font-size:9.5px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:.04em;}
 .pricing-card .pname{font-family:var(--font-display);font-size:19px;font-weight:700;}
 .pricing-card .pprice{font-size:28px;font-weight:800;margin:8px 0;color:var(--ink);}
@@ -396,7 +397,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
       <div class="section-head"><h2>Frequently Asked</h2></div>
       <div style="max-width:1280px;margin:0 auto;padding:0 18px;display:grid;gap:12px;">
         <div class="pricing-card"><h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:15px;">Can I cancel anytime?</h3><p style="color:var(--muted);font-size:13px;margin:0;">Yes — Premium and Business are simple monthly plans with no long-term lock-in.</p></div>
-        <div class="pricing-card"><h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:15px;">How do I pay?</h3><p style="color:var(--muted);font-size:13px;margin:0;">Payments are made via UPI. Your plan activates once the payment is verified.</p></div>
+        <div class="pricing-card"><h3 style="font-family:var(--font-display);margin:0 0 8px;font-size:15px;">How do I pay?</h3><p style="color:var(--muted);font-size:13px;margin:0;">Payments are made through Razorpay (card, UPI, netbanking or wallet). Your plan activates once the payment is verified.</p></div>
       </div>
     </div>
     <div class="site-footer" id="pubPricingFooter"></div>
@@ -467,8 +468,8 @@ body.desktop-view #viewModeToggle{bottom:20px;}
       <p>You retain ownership of the photos, logos and text you upload. By uploading content, you confirm you have the right to use it in your posters.</p>
       <h2>Plans and payment</h2>
       <ul>
-        <li>Premium and Business plans are paid monthly via UPI and activate once payment is verified.</li>
-        <li>Prices shown in the app apply; we do not automatically charge you — each renewal is a manual UPI payment you submit for verification.</li>
+        <li>Plans are available for 1 month (₹299) or 6 months (₹999), paid via Razorpay, and activate once payment is verified.</li>
+        <li>We do not automatically charge you — each renewal is a payment you make through Razorpay, verified before activation.</li>
       </ul>
       <h2>Service availability</h2>
       <p>We aim to keep Offer Poster Studio available and reliable but do not guarantee uninterrupted access. Features may be added, changed or removed over time.</p>
@@ -874,6 +875,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
      ID-token sign-in flow. The button below uses Supabase's own OAuth redirect flow instead,
      which needs NO client ID here at all — see the comment above GOOGLE_CLIENT_ID. -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 const SUPABASE_URL = 'https://peftmuasykbcrhtkhhjf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlZnRtdWFzeWtiY3JodGtoaGpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU3MzkzMTIsImV4cCI6MjEwMTMxNTMxMn0.oiFn_41F-jBxK8tizA3qPoC1UPJPC72SvNxyxiUlhGY';
@@ -893,6 +895,16 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // flow — paste your OAuth Client ID from https://console.cloud.google.com/apis/credentials
 // here if you do that. Leave the placeholder as-is otherwise; it is not required.
 const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+
+// ===== Razorpay =====
+// Paste your Razorpay Key ID (starts with rzp_test_ or rzp_live_) from
+// https://dashboard.razorpay.com/app/keys — this "Key ID" is public and safe to put in
+// client-side code, same as it would appear in Razorpay's own checkout examples.
+//
+// ⚠️ Your Razorpay Key SECRET must NEVER go in this file or any other client-side code —
+// it is not needed for the checkout flow used here. Activation is admin-verified (see
+// recordPendingPayment below), so no server-side signature check is required either.
+const RAZORPAY_KEY_ID = 'rzp_live_TYP3L2ADhyR5gz';
 
 async function authSignUp(email, password, shopName) {
   const { data, error } = await sb.auth.signUp({ email, password, options: { data: { shop_name: shopName || 'My Shop' } } });
@@ -1188,16 +1200,14 @@ function renderFestivalCategories(containerId) {
 function renderPricingCards(containerId, opts) {
   const el = document.getElementById(containerId); if (!el) return;
   const mode = (opts && opts.mode) || 'landing';
-  const premiumPrice = (STATE.settings && STATE.settings.premium_price) ?? 299;
-  const businessPrice = (STATE.settings && STATE.settings.business_plan_price) ?? 999;
   const freeLimit = (STATE.settings && STATE.settings.free_download_limit) ?? 1;
   const ctaFor = (plan) => mode === 'home'
     ? `onclick="goto('payment')"`
     : `onclick="showAuth();setAuthMode('signup')"`;
   const plans = [
     { name: 'Free', price: '₹0', suffix: '', features: [`${freeLimit} download/day`, 'Basic templates', 'Watermark on export'], cta: 'Get Started', featured: false },
-    { name: 'Premium', price: fmtMoney(premiumPrice), suffix: '/month', features: ['Unlimited downloads', 'All premium templates', 'No watermark', 'HD export'], cta: 'Choose Premium', featured: true },
-    { name: 'Business', price: fmtMoney(businessPrice), suffix: '/month', features: ['Everything in Premium', 'Priority support', 'Multiple shop profiles'], cta: 'Choose Business', featured: false }
+    { name: '1 Month', price: fmtMoney(299), suffix: '', features: ['Unlimited downloads', 'All premium templates', 'No watermark', 'HD export'], cta: 'Choose 1 Month', featured: false },
+    { name: '6 Months', price: fmtMoney(1499), suffix: '', features: ['Everything in 1 Month', 'Best value — save more', 'Priority support'], cta: 'Choose 6 Months', featured: true }
   ];
   el.innerHTML = plans.map(p => `
     <div class="pricing-card ${p.featured ? 'featured' : ''}">
@@ -1545,64 +1555,79 @@ async function saveProfile() {
   goto('dashboard');
 }
 
-let paymentScreenshotUrl = null;
+// ===== Razorpay payment =====
+// Payment itself happens through Razorpay (replacing the old UPI QR/manual-entry flow), but
+// activation stays admin-verified — exactly like the old UPI flow, just with a trustworthy
+// Razorpay payment ID captured automatically instead of a self-typed UPI transaction ID.
+// This is the safer choice: it avoids the risk of a client-side-only activation being
+// bypassed, without needing a server-side webhook to verify Razorpay's signature.
+const PLAN_DURATIONS = [
+  { id: 'month1', label: '1 Month', months: 1, price: 299, note: 'One month of Premium access' },
+  { id: 'month6', label: '6 Months', months: 6, price: 1499, note: 'Six months of Premium access — best value', badge: true }
+];
+let selectedPlanDurationId = PLAN_DURATIONS[0].id;
 function renderPayment() {
-  paymentScreenshotUrl = null;
-  const premiumPrice = STATE.settings.premium_price ?? 299;
-  const businessPrice = STATE.settings.business_plan_price ?? 999;
+  selectedPlanDurationId = PLAN_DURATIONS[0].id;
   document.getElementById('paymentBody').innerHTML = `
-    <div class="field"><label>Choose Plan</label>
-      <select id="paySelectPlan" onchange="renderPaymentAmount()">
-        <option value="premium">Premium — ${fmtMoney(premiumPrice)}/month</option>
-        <option value="business">Business — ${fmtMoney(businessPrice)}/month</option>
-      </select>
+    <div style="display:grid;gap:12px;margin-bottom:18px;">
+      ${PLAN_DURATIONS.map(p => `
+        <div class="pricing-card ${p.badge ? 'featured' : ''}" id="planCard-${p.id}" style="cursor:pointer;" onclick="selectPlanDuration('${p.id}')">
+          <div class="pname">${p.label}</div>
+          <div class="pprice">${fmtMoney(p.price)}</div>
+          <p style="font-size:12.5px;color:var(--muted);margin:6px 0 0;">${p.note}</p>
+        </div>
+      `).join('')}
     </div>
-    <div style="background:var(--cream-2);border-radius:12px;padding:14px;margin-bottom:14px;text-align:center;">
-      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Pay via UPI to</div>
-      <div style="font-family:var(--font-display);font-size:17px;font-weight:700;margin-top:4px;" id="payUpiId">${escapeHtml(STATE.settings.upi_id || 'yourshop@upi')}</div>
-      ${STATE.settings.qr_image_url ? `<img src="${STATE.settings.qr_image_url}" style="max-width:160px;margin:10px auto 0;border-radius:8px;">` : ''}
-    </div>
-    <button class="btn btn-gold btn-block" style="margin-bottom:16px;" onclick="payViaUpiApp()">📲 Pay <span id="payAmountLabel">${fmtMoney(premiumPrice)}</span> via UPI App</button>
-    <div class="field"><label>Transaction ID</label><input type="text" id="payTxnId" placeholder="UPI reference number"></div>
-    <label style="font-size:12px;font-weight:700;display:block;margin-bottom:6px;">Payment Screenshot</label>
-    <div class="logo-upload" id="payScreenshotPreview" style="width:100%;border-radius:12px;height:130px;" onclick="document.getElementById('payScreenshotInput').click()">📤 Tap to upload screenshot</div>
-    <input type="file" id="payScreenshotInput" accept="image/*" style="display:none;" onchange="handlePayScreenshot(event)">
-    <button class="btn btn-primary btn-block" style="margin-top:16px;" onclick="submitPayment()">Submit for Approval</button>
-    <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px;">Your plan activates once admin verifies the payment (usually within a few hours).</p>`;
+    <button class="btn btn-gold btn-block" onclick="payWithRazorpay()">💳 Pay with Razorpay</button>
+    <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;">Pay by card, UPI, netbanking or wallet. Your plan activates once admin verifies the payment (usually within a few hours).</p>`;
+  selectPlanDuration(selectedPlanDurationId);
 }
-function renderPaymentAmount() {
-  const plan = document.getElementById('paySelectPlan').value;
-  const amount = plan === 'premium' ? (STATE.settings.premium_price ?? 299) : (STATE.settings.business_plan_price ?? 999);
-  document.getElementById('payAmountLabel').textContent = fmtMoney(amount);
-}
-function payViaUpiApp() {
-  const plan = document.getElementById('paySelectPlan').value;
-  const amount = plan === 'premium' ? (STATE.settings.premium_price ?? 299) : (STATE.settings.business_plan_price ?? 999);
-  const upi = STATE.settings.upi_id || 'yourshop@upi';
-  const name = encodeURIComponent(STATE.settings.business_name || 'Offer Poster Studio');
-  const note = encodeURIComponent(plan + ' plan subscription');
-  const upiUrl = `upi://pay?pa=${encodeURIComponent(upi)}&pn=${name}&am=${amount}&cu=INR&tn=${note}`;
-  window.location.href = upiUrl;
-  toast('UPI ആപ്പ് ഓപ്പൺ ചെയ്യുന്നു...');
-}
-async function handlePayScreenshot(e) {
-  const file = e.target.files[0]; if (!file) return;
-  try {
-    paymentScreenshotUrl = await uploadFile('payment-screenshots', file, STATE.user.id);
-    document.getElementById('payScreenshotPreview').innerHTML = `<img src="${paymentScreenshotUrl}" style="width:100%;height:100%;object-fit:cover;">`;
-  } catch (err) { toast(err.message, true); }
-}
-async function submitPayment() {
-  const plan = document.getElementById('paySelectPlan').value;
-  const txnId = document.getElementById('payTxnId').value.trim();
-  const amount = plan === 'premium' ? (STATE.settings.premium_price ?? 299) : (STATE.settings.business_plan_price ?? 999);
-  if (!txnId) { toast('Enter your transaction ID', true); return; }
-  const { error } = await sb.from('payments').insert({
-    user_id: STATE.user.id, plan, amount, upi_transaction_id: txnId, screenshot_url: paymentScreenshotUrl, status: 'pending'
+function selectPlanDuration(id) {
+  selectedPlanDurationId = id;
+  PLAN_DURATIONS.forEach(p => {
+    const el = document.getElementById('planCard-' + p.id);
+    if (el) el.classList.toggle('selected', p.id === id);
   });
-  if (error) { toast(error.message, true); return; }
-  toast('Submitted! We\'ll activate your plan after verification.');
-  goto('dashboard');
+}
+function payWithRazorpay() {
+  const plan = PLAN_DURATIONS.find(p => p.id === selectedPlanDurationId);
+  if (!plan) return;
+  if (typeof Razorpay === 'undefined') { toast('Payment system could not load — check your connection and try again.', true); return; }
+  const rzp = new Razorpay({
+    key: RAZORPAY_KEY_ID,
+    amount: plan.price * 100,
+    currency: 'INR',
+    name: 'Offer Poster Studio',
+    description: `${plan.label} Plan`,
+    prefill: { email: STATE.user?.email || '' },
+    theme: { color: '#0E6E5D' },
+    // Explicitly listing methods (rather than omitting this) makes Razorpay show all of
+    // these as options up front instead of only what it guesses is relevant — this is
+    // usually what fixes UPI not appearing. It still only works if UPI is enabled for your
+    // account in the Razorpay Dashboard (Settings → Payment Methods) — see the note below.
+    method: { netbanking: true, card: true, upi: true, wallet: true },
+    handler: (response) => recordPendingPayment(plan, response.razorpay_payment_id),
+    modal: { ondismiss: () => toast('Payment cancelled') }
+  });
+  rzp.on('payment.failed', (response) => toast('Payment failed: ' + (response.error?.description || 'please try again'), true));
+  rzp.open();
+}
+// Records the payment as pending admin review — mirrors exactly what the old UPI flow did,
+// just with Razorpay's own payment ID as the reference instead of a self-typed UPI txn ID.
+// The admin panel activates the plan (sets profiles.plan and plan_expires_at) after checking
+// this payment ID against the Razorpay Dashboard, same as it used to check UPI payments.
+async function recordPendingPayment(plan, paymentId) {
+  try {
+    const { error } = await sb.from('payments').insert({
+      user_id: STATE.user.id, plan: 'premium', amount: plan.price, upi_transaction_id: paymentId, status: 'pending'
+    });
+    if (error) throw error;
+    toast(`Payment received! Your ${plan.label} plan will be activated after verification.`);
+    goto('dashboard');
+  } catch (err) {
+    console.error(err);
+    toast('Payment succeeded but we could not record it — contact support with payment ID ' + paymentId, true);
+  }
 }
 
 const HEADER_FRAC = 0.35, FOOTER_FRAC = 0.085;
@@ -1749,6 +1774,33 @@ const FONT_OPTIONS = [
   { id: 'ml-serif', label: 'മലയാളം ക്ലാസിക്', css: "'Noto Serif Malayalam','Noto Sans Malayalam',serif" },
   { id: 'ml-suranna', label: 'മലയാളം എലഗന്റ്', css: "'Suranna','Noto Serif Malayalam',serif" },
   { id: 'ml-uroob', label: 'മലയാളം കാലിഗ്രഫി', css: "'Uroob','Noto Sans Malayalam',cursive" },
+  { id: 'hi', label: 'Hindi', css: "'Noto Sans Devanagari','Manrope',sans-serif" },
+  { id: 'hi-baloo', label: 'हिंदी बोल्ड', css: "'Baloo 2','Noto Sans Devanagari',sans-serif" },
+  { id: 'hi-yatra', label: 'हिंदी स्टाइल', css: "'Yatra One','Noto Sans Devanagari',cursive" },
+  { id: 'hi-kalam', label: 'हिंदी लिखावट', css: "'Kalam','Noto Sans Devanagari',cursive" },
+  { id: 'bn', label: 'Bengali', css: "'Noto Sans Bengali','Manrope',sans-serif" },
+  { id: 'bn-baloo', label: 'বাংলা বোল্ড', css: "'Baloo Da 2','Noto Sans Bengali',sans-serif" },
+  { id: 'bn-galada', label: 'বাংলা স্টাইল', css: "'Galada','Noto Sans Bengali',cursive" },
+  { id: 'pa', label: 'Punjabi', css: "'Noto Sans Gurmukhi','Manrope',sans-serif" },
+  { id: 'pa-baloo', label: 'ਪੰਜਾਬੀ ਬੋਲਡ', css: "'Baloo Paaji 2','Noto Sans Gurmukhi',sans-serif" },
+  { id: 'pa-mukta', label: 'ਪੰਜਾਬੀ ਸਟਾਈਲ', css: "'Mukta Mahee','Noto Sans Gurmukhi',sans-serif" },
+  { id: 'gu', label: 'Gujarati', css: "'Noto Sans Gujarati','Manrope',sans-serif" },
+  { id: 'gu-baloo', label: 'ગુજરાતી બોલ્ડ', css: "'Baloo Bhai 2','Noto Sans Gujarati',sans-serif" },
+  { id: 'gu-rasa', label: 'ગુજરાતી એલિગન્ટ', css: "'Rasa','Noto Sans Gujarati',serif" },
+  { id: 'or', label: 'Odia', css: "'Noto Sans Oriya','Manrope',sans-serif" },
+  { id: 'or-baloo', label: 'ଓଡ଼ିଆ ବୋଲ୍ଡ', css: "'Baloo Bhaina 2','Noto Sans Oriya',sans-serif" },
+  { id: 'or-utsaah', label: 'ଓଡ଼ିଆ ଷ୍ଟାଇଲ୍', css: "'Utsaah','Noto Sans Oriya',sans-serif" },
+  { id: 'ta', label: 'Tamil', css: "'Noto Sans Tamil','Manrope',sans-serif" },
+  { id: 'ta-baloo', label: 'தமிழ் போல்ட்', css: "'Baloo Thambi 2','Noto Sans Tamil',sans-serif" },
+  { id: 'ta-kavi', label: 'தமிழ் கையெழுத்து', css: "'Kavivanar','Noto Sans Tamil',cursive" },
+  { id: 'te', label: 'Telugu', css: "'Noto Sans Telugu','Manrope',sans-serif" },
+  { id: 'te-baloo', label: 'తెలుగు బోల్డ్', css: "'Baloo Tammudu 2','Noto Sans Telugu',sans-serif" },
+  { id: 'te-mallanna', label: 'తెలుగు స్టైల్', css: "'Mallanna','Noto Sans Telugu',sans-serif" },
+  { id: 'kn', label: 'Kannada', css: "'Noto Sans Kannada','Manrope',sans-serif" },
+  { id: 'kn-baloo', label: 'ಕನ್ನಡ ಬೋಲ್ಡ್', css: "'Baloo Tamma 2','Noto Sans Kannada',sans-serif" },
+  { id: 'kn-hubballi', label: 'ಕನ್ನಡ ಶೈಲಿ', css: "'Hubballi','Noto Sans Kannada',cursive" },
+  { id: 'ur', label: 'Urdu', css: "'Noto Nastaliq Urdu','Manrope',sans-serif" },
+  { id: 'ur-gulzar', label: 'اردو اسٹائل', css: "'Gulzar','Noto Nastaliq Urdu',cursive" },
   { id: 'bungee-shade', label: 'Bungee 3D', css: 'Bungee Shade, cursive' },
   { id: 'bungee', label: 'Bungee', css: 'Bungee, cursive' },
   { id: 'bowlby', label: 'Bowlby', css: 'Bowlby One SC, sans-serif' },
@@ -1763,18 +1815,36 @@ const FONT_OPTIONS = [
   { id: 'coiny', label: 'Coiny', css: 'Coiny, cursive' },
   { id: 'paytone', label: 'Paytone', css: 'Paytone One, sans-serif' }
 ];
-const MALAYALAM_FONT_IDS = ['ml', 'ml-baloo', 'ml-manjari', 'ml-chilanka', 'ml-gayathri', 'ml-serif', 'ml-suranna', 'ml-uroob'];
-// Picks the right font for a piece of text: if the text is Malayalam and the user has
-// chosen one of the Malayalam-capable fonts in Style tab, use that font's own look
-// (e.g. the bold "അടിപൊളി" Baloo style); otherwise fall back to the safe default
-// Malayalam font so Malayalam text never renders in a Latin-only font as boxes.
-function resolveTextFontCss(ed, isMl, fontFamily, mlFont) {
-  if (isMl) {
-    if (MALAYALAM_FONT_IDS.includes(ed.font)) {
-      const f = FONT_OPTIONS.find(f => f.id === ed.font);
-      if (f) return f.css;
+// Every Indian script the app supports fonts for, in the order checked. Each group knows
+// which of its own fonts are "native" to it (so picking one of those in the Style tab makes
+// text in that script render in that exact look) and a safe default (Noto Sans for the script) to
+// fall back to if the person picked a Latin font while typing in that script — so text never
+// renders as boxes/tofu.
+const SCRIPT_GROUPS = [
+  { key: 'ml', regex: /[\u0D00-\u0D7F]/, fontIds: ['ml', 'ml-baloo', 'ml-manjari', 'ml-chilanka', 'ml-gayathri', 'ml-serif', 'ml-suranna', 'ml-uroob'], defaultId: 'ml' },
+  { key: 'hi', regex: /[\u0900-\u097F]/, fontIds: ['hi', 'hi-baloo', 'hi-yatra', 'hi-kalam'], defaultId: 'hi' },
+  { key: 'bn', regex: /[\u0980-\u09FF]/, fontIds: ['bn', 'bn-baloo', 'bn-galada'], defaultId: 'bn' },
+  { key: 'pa', regex: /[\u0A00-\u0A7F]/, fontIds: ['pa', 'pa-baloo', 'pa-mukta'], defaultId: 'pa' },
+  { key: 'gu', regex: /[\u0A80-\u0AFF]/, fontIds: ['gu', 'gu-baloo', 'gu-rasa'], defaultId: 'gu' },
+  { key: 'or', regex: /[\u0B00-\u0B7F]/, fontIds: ['or', 'or-baloo', 'or-utsaah'], defaultId: 'or' },
+  { key: 'ta', regex: /[\u0B80-\u0BFF]/, fontIds: ['ta', 'ta-baloo', 'ta-kavi'], defaultId: 'ta' },
+  { key: 'te', regex: /[\u0C00-\u0C7F]/, fontIds: ['te', 'te-baloo', 'te-mallanna'], defaultId: 'te' },
+  { key: 'kn', regex: /[\u0C80-\u0CFF]/, fontIds: ['kn', 'kn-baloo', 'kn-hubballi'], defaultId: 'kn' },
+  { key: 'ur', regex: /[\u0600-\u06FF]/, fontIds: ['ur', 'ur-gulzar'], defaultId: 'ur' }
+];
+const MALAYALAM_FONT_IDS = SCRIPT_GROUPS[0].fontIds;
+// Picks the right font for a piece of text: detects which Indian script (if any) it's
+// written in, and if the person has chosen one of that script's own fonts in the Style tab,
+// uses that font's exact look (e.g. the bold "അടിപൊളി" Baloo style); otherwise falls back to
+// that script's safe default font so text never renders as boxes/tofu — and Latin text keeps
+// using whatever font was picked, same as before.
+function resolveTextFontCss(ed, content, fontFamily) {
+  for (const group of SCRIPT_GROUPS) {
+    if (group.regex.test(content)) {
+      const chosen = group.fontIds.includes(ed.font) ? ed.font : group.defaultId;
+      const f = FONT_OPTIONS.find(f => f.id === chosen);
+      return f ? f.css : fontFamily;
     }
-    return mlFont;
   }
   return fontFamily;
 }
@@ -2841,7 +2911,7 @@ function textLayerBoundingBoxAt00(ctx, ed, tl, content, W, H, fontFamily, mlFont
   const curve = tl.curve || 0;
   if (tl.key === 'headline') {
     const isMl = /[\u0D00-\u0D7F]/.test(content);
-    const fam = resolveTextFontCss(ed, isMl, fontFamily, mlFont);
+    const fam = resolveTextFontCss(ed, content, fontFamily);
     let fontPx = W * textLayerBaseSizeFrac('headline') * scale;
     ctx.font = `900 ${Math.round(fontPx)}px ${fam}`;
     if (curve) {
@@ -2871,7 +2941,7 @@ function textLayerBoundingBoxAt00(ctx, ed, tl, content, W, H, fontFamily, mlFont
     return { fontPx, pillW, pillH, w: pillW, h: pillH };
   }
   const isMl = /[\u0D00-\u0D7F]/.test(content);
-  const fam = resolveTextFontCss(ed, isMl, fontFamily, mlFont);
+  const fam = resolveTextFontCss(ed, content, fontFamily);
   const fontPx = W * textLayerBaseSizeFrac(tl.key) * scale;
   const weight = tl.key === 'footerShop' ? 800 : (tl.key === 'headerShop' ? 700 : 500);
   ctx.font = `${weight} ${Math.round(fontPx)}px ${fam}`;
