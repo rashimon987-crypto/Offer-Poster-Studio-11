@@ -248,7 +248,10 @@ body.desktop-view .editor-shell{max-width:640px;margin:0 auto;}
 body.desktop-view .pub-header{display:none;}
 #viewModeToggle{position:fixed;right:14px;bottom:88px;z-index:90;padding:10px 16px;border-radius:99px;border:none;background:var(--ink);color:var(--cream);font-size:12px;font-weight:700;box-shadow:var(--shadow-2);cursor:pointer;}
 body.desktop-view #viewModeToggle{bottom:20px;}
-
+/* Elements / Shapes Styles */
+.shape-item { aspect-ratio: 1; background: var(--cream); border: 1.5px solid var(--line); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.1s; }
+.shape-item:active { transform: scale(0.92); }
+.shape-item svg { width: 65%; height: 65%; fill: var(--ink); }
 </style>
 </head>
 <body>
@@ -659,6 +662,7 @@ body.desktop-view #viewModeToggle{bottom:20px;}
           <div class="etab" data-tab="text" onclick="setEditorTab('text')">🔤 Text</div>
           <div class="etab" data-tab="logo" onclick="setEditorTab('logo')">🏷 Logo</div>
           <div class="etab" data-tab="stickers" onclick="setEditorTab('stickers')">✨ Stickers</div>
+          <div class="etab" data-tab="elements" onclick="setEditorTab('elements')">🔶 Elements</div>
           <div class="etab" data-tab="style" onclick="setEditorTab('style')">🎨 Style</div>
           <div class="etab" data-tab="layout" onclick="setEditorTab('layout')">▦ Layout</div>
           <div class="etab" data-tab="headertpl" onclick="setEditorTab('headertpl')">🌟 Top Banners</div>
@@ -723,7 +727,27 @@ body.desktop-view #viewModeToggle{bottom:20px;}
 
             <button class="btn btn-outline btn-sm btn-block" onclick="removeLogo()">🗑 ലോഗോ ഒഴിവാക്കുക</button>
           </div>
-          
+         <div class="panel-block" id="panel-elements">
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">📐 BASIC SHAPES (ടച്ച് ചെയ്ത് ആഡ് ചെയ്യാം)</label>
+  <div class="sticker-grid" id="shapesLibraryGrid" style="grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;"></div>
+  
+  <div class="divider"></div>
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">🎨 തിരഞ്ഞെടുത്ത ഷേപ്പിന്റെ കളർ മാറ്റാൻ</label>
+  <div class="swatch-row" id="shapeThemeSwatches"></div>
+
+  <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin:12px 0 6px;">↔️ വീതിയും നീളവും (Width & Height) കൂട്ടാൻ / കുറയ്ക്കാൻ</label>
+  <div style="display:flex;gap:6px;margin-bottom:8px;">
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeShape('w', 1.15)">↔️ വീതി കൂട്ടുക</button>
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeShape('w', 0.85)">↔️ വീതി കുറയ്ക്കുക</button>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:14px;">
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeShape('h', 1.15)">↕️ നീളം കൂട്ടുക</button>
+    <button class="btn btn-outline btn-sm" style="flex:1;" onclick="resizeShape('h', 0.85)">↕️ നീളം കുറയ്ക്കുക</button>
+  </div>
+
+  <!-- 👇 ഇവിടെയാണ് ഡിലീറ്റ് ബട്ടൺ പുതിയതായി ചേർത്തത് -->
+  <button class="btn btn-outline btn-sm btn-block" style="border-color:var(--coral);color:var(--coral);margin-top:6px;" onclick="deleteSelectedShape()">🗑️ ഈ ഷേപ്പ് ഡിലീറ്റ് ചെയ്യുക</button>
+</div>
           <div class="panel-block" id="panel-headertpl">
             <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:8px;">TAP TO APPLY TOP HEADER TEMPLATE</label>
             <div class="sticker-grid" id="headerTplLibraryGrid" style="grid-template-columns: repeat(2, 1fr); gap: 10px;"></div>
@@ -3062,6 +3086,41 @@ async function drawPoster() {
       ctx.fillStyle = theme;
     }
     ctx.fillRect(0, 0, W, H);
+  // 🟢 പ്രൊഡക്ട് ഫോട്ടോകൾക്ക് മുകളിലും ടെക്സ്റ്റുകൾക്ക് പിന്നിലുമായി ഷേപ്പുകൾ വരയ്ക്കാൻ ഇവിടെ ഒട്ടിക്കുക:
+  if (ed.stickers && ed.stickers.length) {
+    for (const st of ed.stickers) {
+      if (st.shapeElement) {
+        ctx.save();
+        const shapeDef = BASIC_SHAPES.find(s => s.id === st.shapeId);
+        const baseSize = Math.min(W, H) * 0.4 * (st.scale || 1);
+        // ഇവിടെ വീതിയും നീളവും കൺട്രോൾ ചെയ്യാൻ വാല്യൂസ് സെറ്റ് ചെയ്തിരിക്കുന്നു:
+        const sw = baseSize * (st.scaleW || 1.8); 
+        const sh = baseSize * (st.scaleH || 1.2);
+        const cx = st.x * W, cy = st.y * H;
+        
+        ctx.translate(cx, cy);
+        ctx.rotate((st.rotation || 0) * Math.PI / 180);
+
+        if (shapeDef) {
+          const p2d = new Path2D(shapeDef.path);
+          ctx.save();
+          ctx.scale(sw / 100, sh / 100);
+          ctx.translate(-50, -50);
+          
+          ctx.fillStyle = st.bg || '#0E6E5D';
+          ctx.fill(p2d);
+          
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 4;
+          ctx.stroke(p2d);
+          ctx.restore();
+        }
+        ctx.restore();
+      }
+    }
+  }
+
+
   } else if (ed.heroBanner) {
     const him = await loadImg(ed.heroBanner);
     if (him && him.complete) {
@@ -3226,6 +3285,7 @@ async function drawPoster() {
         if (im) ctx.drawImage(im, -r.size / 2, -r.size / 2, r.size, r.size);
       }
       ctx.restore();
+    
       if (ed._selectedSticker === st.id) {
         ctx.save(); ctx.translate(cx, cy); ctx.rotate((st.rotation || 0) * Math.PI / 180);
         ctx.strokeStyle = 'rgba(204,154,60,0.9)'; ctx.lineWidth = 3; ctx.setLineDash([6, 4]);
@@ -3567,6 +3627,98 @@ document.addEventListener('DOMContentLoaded', async () => {
     showPublicScreen(hash);
   }
 });
+const BASIC_SHAPES = [
+  { id: 'rect', name: 'Square', path: 'M 10 10 H 90 V 90 H 10 Z' },
+  { id: 'rounded_rect', name: 'Rounded Rect', path: 'M 20 10 H 80 Q 90 10 90 20 V 80 Q 90 90 80 90 H 20 Q 10 90 10 80 V 20 Q 10 10 20 10 Z' },
+  { id: 'circle', name: 'Circle', path: 'M 50 10 A 40 40 0 1 1 49.9 10 Z' },
+  { id: 'triangle', name: 'Triangle', path: 'M 50 10 L 90 90 H 10 Z' },
+  { id: 'inv_triangle', name: 'Inverted Triangle', path: 'M 10 10 H 90 L 50 90 Z' },
+  { id: 'diamond', name: 'Diamond', path: 'M 50 10 L 90 50 L 50 90 L 10 50 Z' },
+  { id: 'cross', name: 'Cross', path: 'M 35 10 H 65 V 35 H 90 V 65 H 65 V 90 H 35 V 65 H 10 V 35 H 35 Z' },
+  { id: 'parallelogram', name: 'Parallelogram', path: 'M 30 10 H 90 L 70 90 H 10 Z' },
+  { id: 'trapezoid', name: 'Trapezoid', path: 'M 30 10 H 70 L 90 90 H 10 Z' },
+  { id: 'shield', name: 'Shield', path: 'M 10 10 H 90 V 50 Q 90 90 50 90 Q 10 90 10 50 Z' },
+  { id: 'arch', name: 'Arch', path: 'M 10 90 V 50 Q 10 10 50 10 Q 90 10 90 50 V 90 Z' }
+];
+
+function renderShapesLibrary() {
+  const grid = document.getElementById('shapesLibraryGrid');
+  if (!grid) return;
+  grid.innerHTML = BASIC_SHAPES.map(s => `
+    <div class="shape-item" onclick="addShapeElement('${s.id}')" title="${s.name}">
+      <svg viewBox="0 0 100 100"><path d="${s.path}" /></svg>
+    </div>
+  `).join('');
+}
+
+function addShapeElement(shapeId) {
+  pushHistory();
+  if (!STATE.editor.stickers) STATE.editor.stickers = [];
+  const id = uid();
+  STATE.editor.stickers.push({
+    id, shapeElement: true, shapeId,
+    bg: '#0E6E5D', x: 0.5, y: 0.5, scaleW: 1, scaleH: 1, scale: 1.2, rotation: 0
+  });
+  STATE.editor._selectedSticker = id;
+  renderPoster();
+  renderStickerControls();
+  toast('Shape added successfully!');
+}
+
+function resizeShape(dim, factor) {
+  const st = getSelectedSticker();
+  if (!st || !st.shapeElement) {
+    toast('Please select a shape first!', true);
+    return;
+  }
+  pushHistory();
+  if (dim === 'w') {
+    st.scaleW = Math.min(4, Math.max(0.2, (st.scaleW || 1) * factor));
+  } else {
+    st.scaleH = Math.min(4, Math.max(0.2, (st.scaleH || 1) * factor));
+  }
+  renderPoster();
+}
+
+function renderShapeThemeSwatches() {
+  const row = document.getElementById('shapeThemeSwatches');
+  if (!row) return;
+  const colors = ['#E1273B', '#FFD23C', '#0E6E5D', '#8C3AA8', '#132420', '#35A7FF', '#FF7F50', '#FFFFFF', '#000000', '#F59E0B'];
+  row.innerHTML = colors.map(c => `
+    <div class="swatch" style="background:${c}; border: 1.5px solid #cbd5e1;" onclick="setShapeColor('${c}')"></div>
+  `).join('');
+}
+
+function setShapeColor(color) {
+  const st = getSelectedSticker();
+  if (!st || !st.shapeElement) return;
+  pushHistory();
+  st.bg = color;
+  renderPoster();
+}
+
+const origSetEditorTab = window.setEditorTab;
+window.setEditorTab = function(tab) {
+  if (typeof origSetEditorTab === 'function') origSetEditorTab(tab);
+  if (tab === 'elements') {
+    renderShapesLibrary();
+    renderShapeThemeSwatches();
+  }
+};
+  function deleteSelectedShape() {
+    const ed = STATE.editor;
+    if (!ed || !ed._selectedSticker) {
+      toast('ഡിലീറ്റ് ചെയ്യാൻ ഒരു ഷേപ്പ് സെലക്റ്റ് ചെയ്യൂ!', true);
+      return;
+    }
+    pushHistory();
+    ed.stickers = ed.stickers.filter(s => s.id !== ed._selectedSticker);
+    ed._selectedSticker = null;
+    renderPoster();
+    toast('ഷേപ്പ് ഡിലീറ്റ് ചെയ്തു!');
+  }
+
+
 </script>
 </body>
 </html>
