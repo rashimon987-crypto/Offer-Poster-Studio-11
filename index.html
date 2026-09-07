@@ -634,7 +634,6 @@ body.desktop-view #viewModeToggle{bottom:20px;}
       <div class="topbar" style="position:static;"><div style="font-family:var(--font-display);font-weight:700;font-size:18px;">Upgrade Plan</div><button class="icon-btn" onclick="goto('dashboard')">✕</button></div>
       <div class="section" style="padding-top:16px;" id="paymentBody"></div>
     </section>
-
     <section class="screen" id="screen-editor">
       <div class="editor-shell">
         <div class="editor-top">
@@ -3110,9 +3109,6 @@ async function drawPoster() {
           ctx.fillStyle = st.bg || '#0E6E5D';
           ctx.fill(p2d);
           
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 4;
-          ctx.stroke(p2d);
           ctx.restore();
         }
         ctx.restore();
@@ -3627,20 +3623,425 @@ document.addEventListener('DOMContentLoaded', async () => {
     showPublicScreen(hash);
   }
 });
-const BASIC_SHAPES = [
-  { id: 'rect', name: 'Square', path: 'M 10 10 H 90 V 90 H 10 Z' },
-  { id: 'rounded_rect', name: 'Rounded Rect', path: 'M 20 10 H 80 Q 90 10 90 20 V 80 Q 90 90 80 90 H 20 Q 10 90 10 80 V 20 Q 10 10 20 10 Z' },
-  { id: 'circle', name: 'Circle', path: 'M 50 10 A 40 40 0 1 1 49.9 10 Z' },
-  { id: 'triangle', name: 'Triangle', path: 'M 50 10 L 90 90 H 10 Z' },
-  { id: 'inv_triangle', name: 'Inverted Triangle', path: 'M 10 10 H 90 L 50 90 Z' },
-  { id: 'diamond', name: 'Diamond', path: 'M 50 10 L 90 50 L 50 90 L 10 50 Z' },
-  { id: 'cross', name: 'Cross', path: 'M 35 10 H 65 V 35 H 90 V 65 H 65 V 90 H 35 V 65 H 10 V 35 H 35 Z' },
-  { id: 'parallelogram', name: 'Parallelogram', path: 'M 30 10 H 90 L 70 90 H 10 Z' },
-  { id: 'trapezoid', name: 'Trapezoid', path: 'M 30 10 H 70 L 90 90 H 10 Z' },
-  { id: 'shield', name: 'Shield', path: 'M 10 10 H 90 V 50 Q 90 90 50 90 Q 10 90 10 50 Z' },
-  { id: 'arch', name: 'Arch', path: 'M 10 90 V 50 Q 10 10 50 10 Q 90 10 90 50 V 90 Z' }
-];
 
+const BASIC_SHAPES = [
+
+  // ═══════════════════════════════════════
+  // BASIC SHAPES
+  // ═══════════════════════════════════════
+
+  {
+    id: 'square',
+    name: 'Square',
+    path: 'M 10 10 H 90 V 90 H 10 Z'
+  },
+  {
+    id: 'rounded_rect',
+    name: 'Rounded Rectangle',
+    path: 'M 22 10 H 78 Q 90 10 90 22 V 78 Q 90 90 78 90 H 22 Q 10 90 10 78 V 22 Q 10 10 22 10 Z'
+  },
+  {
+    id: 'circle',
+    name: 'Circle',
+    path: 'M 50 10 A 40 40 0 1 1 49.9 10 Z'
+  },
+  {
+    id: 'oval',
+    name: 'Oval',
+    path: 'M 10 50 C 10 28 28 15 50 15 C 72 15 90 28 90 50 C 90 72 72 85 50 85 C 28 85 10 72 10 50 Z'
+  },
+  {
+    id: 'triangle',
+    name: 'Triangle',
+    path: 'M 50 8 L 92 90 H 8 Z'
+  },
+  {
+    id: 'inv_triangle',
+    name: 'Inverted Triangle',
+    path: 'M 8 10 H 92 L 50 92 Z'
+  },
+  {
+    id: 'diamond',
+    name: 'Diamond',
+    path: 'M 50 8 L 92 50 L 50 92 L 8 50 Z'
+  },
+  {
+    id: 'hexagon',
+    name: 'Hexagon',
+    path: 'M 27 10 H 73 L 92 50 L 73 90 H 27 L 8 50 Z'
+  },
+  {
+    id: 'octagon',
+    name: 'Octagon',
+    path: 'M 28 8 H 72 L 92 28 V 72 L 72 92 H 28 L 8 72 V 28 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // CROSS / PLUS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'cross',
+    name: 'Cross',
+    path: 'M 35 10 H 65 V 35 H 90 V 65 H 65 V 90 H 35 V 65 H 10 V 35 H 35 Z'
+  },
+  {
+    id: 'plus_soft',
+    name: 'Soft Plus',
+    path: 'M 35 10 H 65 Q 72 10 72 17 V 35 H 83 Q 90 35 90 42 V 58 Q 90 65 83 65 H 72 V 83 Q 72 90 65 90 H 35 Q 28 90 28 83 V 65 H 17 Q 10 65 10 58 V 42 Q 10 35 17 35 H 28 V 17 Q 28 10 35 10 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // GEOMETRIC
+  // ═══════════════════════════════════════
+
+  {
+    id: 'parallelogram',
+    name: 'Parallelogram',
+    path: 'M 30 10 H 90 L 70 90 H 10 Z'
+  },
+  {
+    id: 'trapezoid',
+    name: 'Trapezoid',
+    path: 'M 30 10 H 70 L 90 90 H 10 Z'
+  },
+  {
+    id: 'reverse_trapezoid',
+    name: 'Reverse Trapezoid',
+    path: 'M 10 10 H 90 L 70 90 H 30 Z'
+  },
+  {
+    id: 'skew_label',
+    name: 'Skew Label',
+    path: 'M 20 18 L 88 10 L 82 78 L 12 86 Z'
+  },
+  {
+    id: 'point_tag',
+    name: 'Point Tag',
+    path: 'M 10 10 H 70 L 92 50 L 70 90 H 10 Z'
+  },
+  {
+    id: 'notched_tag',
+    name: 'Notched Tag',
+    path: 'M 10 10 H 90 V 90 H 10 L 28 50 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // ARROWS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'arrow_right',
+    name: 'Arrow Right',
+    path: 'M 10 28 H 62 V 10 L 92 50 L 62 90 V 72 H 10 Z'
+  },
+  {
+    id: 'arrow_left',
+    name: 'Arrow Left',
+    path: 'M 38 10 L 8 50 L 38 90 V 72 H 90 V 28 H 38 Z'
+  },
+  {
+    id: 'chevron',
+    name: 'Chevron',
+    path: 'M 12 10 L 52 10 L 90 50 L 52 90 H 12 L 50 50 Z'
+  },
+  {
+    id: 'double_arrow',
+    name: 'Double Arrow',
+    path: 'M 10 25 H 58 L 82 50 L 58 75 H 10 L 34 50 Z'
+  },
+  {
+    id: 'forward_arrow',
+    name: 'Forward Arrow',
+    path: 'M 10 28 H 58 V 12 L 90 50 L 58 88 V 72 H 10 Z'
+  },
+  {
+    id: 'outline_arrow',
+    name: 'Outline Arrow',
+    path: 'M 12 28 H 57 L 88 50 L 57 72 H 12 L 40 50 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // BADGES
+  // ═══════════════════════════════════════
+
+  {
+    id: 'rounded_badge',
+    name: 'Soft Badge',
+    path: 'M 22 10 H 78 Q 90 10 90 22 V 78 Q 90 90 78 90 H 22 Q 10 90 10 78 V 22 Q 10 10 22 10 Z'
+  },
+  {
+    id: 'scallop_badge',
+    name: 'Scallop Badge',
+    path: 'M 50 8 C 57 8 61 14 67 12 C 73 10 77 14 77 20 C 77 26 84 27 88 32 C 92 37 88 43 90 49 C 92 55 88 60 84 64 C 80 68 82 75 77 80 C 72 85 66 82 60 88 C 54 94 48 89 43 88 C 37 87 33 84 28 87 C 22 90 18 85 17 80 C 16 74 10 72 11 66 C 12 60 7 56 9 50 C 11 44 16 41 13 35 C 10 29 16 25 20 22 C 24 18 23 12 30 11 C 36 10 40 7 45 10 C 47 11 48 8 50 8 Z'
+  },
+  {
+    id: 'seal',
+    name: 'Seal',
+    path: 'M 50 6 L 57 14 L 68 10 L 72 21 L 84 20 L 83 32 L 94 38 L 87 48 L 94 58 L 83 64 L 84 76 L 72 75 L 68 90 L 57 86 L 50 94 L 43 86 L 32 90 L 28 75 L 16 76 L 17 64 L 6 58 L 13 48 L 6 38 L 17 32 L 16 20 L 28 21 L 32 10 L 43 14 Z'
+  },
+  {
+    id: 'ticket',
+    name: 'Ticket',
+    path: 'M 10 18 Q 18 18 18 10 H 82 Q 82 18 90 18 V 82 Q 82 82 82 90 H 18 Q 18 82 10 82 Z'
+  },
+  {
+    id: 'scallop',
+    name: 'Scallop',
+    path: 'M 50 10 C 57 10 61 16 67 15 C 74 13 78 18 77 24 C 84 23 89 28 87 35 C 94 37 95 44 89 49 C 94 54 92 61 86 64 C 88 71 83 77 76 75 C 75 82 68 86 62 82 C 58 89 50 91 46 84 C 40 89 32 86 30 80 C 23 82 18 77 20 70 C 13 69 10 62 15 57 C 8 53 9 45 15 41 C 11 35 15 28 22 28 C 20 21 26 16 33 18 C 37 11 44 10 50 10 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // BURSTS / STARS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'star5',
+    name: 'Star',
+    path: 'M 50 7 L 60 36 L 91 36 L 66 54 L 76 88 L 50 68 L 24 88 L 34 54 L 9 36 L 40 36 Z'
+  },
+  {
+    id: 'burst8',
+    name: '8 Point Burst',
+    path: 'M 50 5 L 57 28 L 72 12 L 69 35 L 94 28 L 76 43 L 95 50 L 76 57 L 94 72 L 69 65 L 72 88 L 57 72 L 50 95 L 43 72 L 28 88 L 31 65 L 6 72 L 24 57 L 5 50 L 24 43 L 6 28 L 31 35 L 28 12 L 43 28 Z'
+  },
+  {
+    id: 'burst12',
+    name: 'Sun Burst',
+    path: 'M 50 5 L 56 27 L 67 8 L 66 30 L 84 16 L 72 34 L 94 33 L 75 44 L 95 50 L 75 56 L 94 67 L 72 66 L 84 84 L 66 70 L 67 92 L 56 73 L 50 95 L 44 73 L 33 92 L 34 70 L 16 84 L 28 66 L 6 67 L 25 56 L 5 50 L 25 44 L 6 33 L 28 34 L 16 16 L 34 30 L 33 8 L 44 27 Z'
+  },
+  {
+    id: 'sun_burst',
+    name: 'Sun Burst 2',
+    path: 'M 50 5 L 56 29 L 68 12 L 67 32 L 88 22 L 74 40 L 96 39 L 76 50 L 96 61 L 74 60 L 88 78 L 67 68 L 68 88 L 56 71 L 50 95 L 44 71 L 32 88 L 33 68 L 12 78 L 26 60 L 4 61 L 24 50 L 4 39 L 26 40 L 12 22 L 33 32 L 32 12 L 44 29 Z'
+  },
+  {
+    id: 'spark_burst',
+    name: 'Spark Burst',
+    path: 'M 50 8 L 56 39 L 87 32 L 61 50 L 87 68 L 56 61 L 50 92 L 44 61 L 13 68 L 39 50 L 13 32 L 44 39 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // ORGANIC BLOBS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'blob',
+    name: 'Organic Blob',
+    path: 'M 18 32 C 23 17 39 12 53 16 C 66 20 75 14 84 22 C 94 31 88 42 90 51 C 93 65 81 77 68 77 C 55 77 49 88 36 84 C 22 81 15 68 18 56 C 20 47 13 42 18 32 Z'
+  },
+  {
+    id: 'modern_blob',
+    name: 'Modern Blob',
+    path: 'M 18 35 C 20 20 35 12 49 17 C 62 21 68 14 80 21 C 93 29 87 43 91 53 C 96 67 82 79 68 76 C 55 73 48 89 34 83 C 20 78 15 65 19 55 C 22 47 14 43 18 35 Z'
+  },
+  {
+    id: 'soft_blob',
+    name: 'Soft Blob',
+    path: 'M 15 38 C 21 24 35 27 45 25 C 57 22 63 14 75 20 C 87 26 84 38 91 46 C 97 55 89 66 79 70 C 67 75 61 82 49 78 C 38 74 31 82 21 74 C 11 66 18 55 14 48 C 11 44 12 41 15 38 Z'
+  },
+  {
+    id: 'wave_blob',
+    name: 'Wave Blob',
+    path: 'M 10 35 C 22 18 34 27 45 25 C 57 23 63 14 75 20 C 86 25 91 35 87 45 C 83 55 92 65 82 75 C 72 85 60 76 50 78 C 38 81 30 90 20 81 C 10 72 17 61 13 52 C 9 45 6 41 10 35 Z'
+  },
+  {
+    id: 'peanut',
+    name: 'Peanut',
+    path: 'M 30 25 C 17 25 12 35 17 45 C 20 51 20 55 17 61 C 12 71 18 80 30 80 C 40 80 43 72 50 72 C 57 72 60 80 70 80 C 82 80 88 71 83 61 C 80 55 80 51 83 45 C 88 35 82 25 70 25 C 60 25 57 33 50 33 C 43 33 40 25 30 25 Z'
+  },
+  {
+    id: 'cloud',
+    name: 'Cloud',
+    path: 'M 25 72 C 14 72 8 65 8 56 C 8 47 15 40 24 40 C 25 28 35 20 47 20 C 57 20 65 26 68 35 C 71 30 77 28 83 30 C 91 33 94 40 92 48 C 98 52 98 60 94 66 C 90 73 83 76 74 76 H 25 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // FLOWERS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'flower6',
+    name: 'Flower',
+    path: 'M 50 30 C 38 30 35 20 38 13 C 41 5 51 5 56 12 C 61 4 71 5 75 12 C 79 19 73 27 67 31 C 76 28 86 32 87 40 C 88 49 80 55 72 54 C 80 61 79 71 72 76 C 64 81 56 74 53 67 C 50 77 41 82 34 76 C 27 70 30 61 36 56 C 26 59 18 53 19 44 C 20 35 29 31 38 34 C 31 27 32 18 39 14 Z'
+  },
+  {
+    id: 'flower8',
+    name: 'Round Flower',
+    path: 'M 50 24 C 40 14 43 5 50 5 C 57 5 60 14 59 24 C 69 14 78 16 81 22 C 84 29 76 35 67 38 C 79 37 87 43 85 50 C 83 57 73 59 64 55 C 72 65 70 74 64 77 C 57 80 51 72 50 63 C 46 74 37 80 31 76 C 25 72 29 63 36 55 C 25 59 16 55 15 48 C 14 40 24 36 34 39 C 25 32 25 23 31 19 C 37 15 44 20 50 24 Z'
+  },
+  {
+    id: 'flower_badge',
+    name: 'Flower Badge',
+    path: 'M 50 12 C 57 12 61 20 60 27 C 68 21 77 23 79 30 C 81 37 74 42 67 43 C 75 47 78 56 73 61 C 68 66 59 61 55 55 C 57 64 51 72 44 71 C 37 70 35 61 39 54 C 30 60 21 56 21 49 C 21 42 30 38 38 41 C 31 34 33 25 40 22 C 46 19 50 25 50 12 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // RIBBONS / BANNERS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'wave_ribbon',
+    name: 'Wave Ribbon',
+    path: 'M 10 30 C 25 20 38 25 50 30 C 62 35 75 38 90 28 V 62 C 75 72 62 67 50 62 C 38 57 25 54 10 64 Z'
+  },
+  {
+    id: 'curved_banner',
+    name: 'Curved Banner',
+    path: 'M 10 25 C 28 32 38 32 50 25 C 62 18 72 18 90 25 L 84 38 C 70 32 62 32 50 39 C 38 46 28 46 16 39 Z'
+  },
+  {
+    id: 'ribbon',
+    name: 'Ribbon',
+    path: 'M 12 32 C 28 25 39 29 50 34 C 61 39 72 42 88 33 V 67 C 72 76 61 71 50 66 C 39 61 28 58 12 68 Z'
+  },
+  {
+    id: 'curved_ribbon',
+    name: 'Curved Ribbon',
+    path: 'M 15 30 C 32 23 43 27 54 33 C 65 39 76 39 88 31 L 84 50 C 72 57 62 56 51 50 C 40 44 29 41 15 48 Z'
+  },
+  {
+    id: 'ribbon_tag',
+    name: 'Ribbon Tag',
+    path: 'M 10 18 Q 10 10 18 10 H 90 V 90 H 18 Q 10 90 10 82 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // RINGS / CIRCLES
+  // ═══════════════════════════════════════
+
+  {
+    id: 'ring',
+    name: 'Ring',
+    path: 'M 50 10 A 40 40 0 1 1 49.99 10 Z M 50 25 A 25 25 0 1 0 50.01 25 Z'
+  },
+  {
+    id: 'broken_ring',
+    name: 'Broken Ring',
+    path: 'M 50 10 A 40 40 0 0 1 88 38 L 72 43 A 25 25 0 0 0 50 25 Z M 88 62 A 40 40 0 0 1 30 86 L 37 70 A 25 25 0 0 0 72 57 Z M 12 38 A 40 40 0 0 1 28 18 L 38 30 A 25 25 0 0 0 28 43 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // BRUSH / PAINT
+  // ═══════════════════════════════════════
+
+  {
+    id: 'brush_stroke',
+    name: 'Brush Stroke',
+    path: 'M 8 38 C 22 30 36 34 49 31 C 63 28 76 31 92 26 L 88 61 C 73 66 61 61 47 65 C 33 69 21 64 8 70 C 12 58 11 49 8 38 Z'
+  },
+  {
+    id: 'paint_splash',
+    name: 'Paint Splash',
+    path: 'M 18 42 C 12 34 20 27 29 30 C 30 20 40 17 47 24 C 55 16 66 21 65 31 C 77 25 86 32 81 41 C 93 43 94 54 84 59 C 90 69 80 77 71 72 C 67 83 55 84 50 74 C 41 82 30 77 32 67 C 21 71 14 62 21 55 C 10 51 11 44 18 42 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // SPECIAL SHAPES
+  // ═══════════════════════════════════════
+
+  {
+    id: 'shield',
+    name: 'Shield',
+    path: 'M 10 10 H 90 V 52 C 90 73 73 88 50 92 C 27 88 10 73 10 52 Z'
+  },
+  {
+    id: 'arch',
+    name: 'Arch',
+    path: 'M 10 90 V 50 C 10 25 26 10 50 10 C 74 10 90 25 90 50 V 90 Z'
+  },
+  {
+    id: 'half_circle',
+    name: 'Half Circle',
+    path: 'M 10 90 V 50 A 40 40 0 0 1 90 50 V 90 Z'
+  },
+  {
+    id: 'house',
+    name: 'House',
+    path: 'M 10 45 L 50 10 L 90 45 V 90 H 10 Z'
+  },
+  {
+    id: 'heart',
+    name: 'Heart',
+    path: 'M 50 88 C 44 82 12 61 12 36 C 12 20 23 12 36 12 C 44 12 50 17 50 25 C 50 17 56 12 64 12 C 77 12 88 20 88 36 C 88 61 56 82 50 88 Z'
+  },
+  {
+    id: 'droplet',
+    name: 'Droplet',
+    path: 'M 50 8 C 50 8 20 42 20 62 C 20 79 33 90 50 90 C 67 90 80 79 80 62 C 80 42 50 8 50 8 Z'
+  },
+  {
+    id: 'crescent',
+    name: 'Crescent',
+    path: 'M 72 12 C 56 18 46 32 46 50 C 46 68 56 82 72 88 C 61 91 48 87 39 78 C 28 67 25 51 30 37 C 35 22 48 12 62 10 C 66 10 69 11 72 12 Z'
+  },
+  {
+    id: 'moon',
+    name: 'Moon',
+    path: 'M 72 12 C 56 18 45 32 45 50 C 45 68 56 82 72 88 C 58 92 43 87 34 77 C 22 64 22 46 29 33 C 37 19 53 10 72 12 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // LEAVES
+  // ═══════════════════════════════════════
+
+  {
+    id: 'leaf',
+    name: 'Leaf',
+    path: 'M 18 78 C 25 48 43 25 78 14 C 75 48 58 73 18 78 Z'
+  },
+  {
+    id: 'double_leaf',
+    name: 'Double Leaf',
+    path: 'M 50 82 C 29 70 20 48 27 25 C 48 29 57 43 50 60 C 57 43 70 28 87 22 C 88 48 75 69 50 82 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // PLAY / TRIANGLE EFFECTS
+  // ═══════════════════════════════════════
+
+  {
+    id: 'play_outline',
+    name: 'Play Frame',
+    path: 'M 25 15 L 82 50 L 25 85 Z M 34 31 V 69 L 64 50 Z'
+  },
+  {
+    id: 'double_triangle',
+    name: 'Double Triangle',
+    path: 'M 12 20 L 55 50 L 12 80 Z M 45 20 L 88 50 L 45 80 Z'
+  },
+
+  // ═══════════════════════════════════════
+  // DOT PATTERN
+  // ═══════════════════════════════════════
+
+  {
+    id: 'dot_cluster',
+    name: 'Dot Cluster',
+    path: 'M 25 25 A 4 4 0 1 0 25.1 25 M 40 18 A 3 3 0 1 0 40.1 18 M 58 24 A 4 4 0 1 0 58.1 24 M 75 32 A 3 3 0 1 0 75.1 32 M 32 43 A 3 3 0 1 0 32.1 43 M 50 45 A 5 5 0 1 0 50.1 45 M 68 48 A 3 3 0 1 0 68.1 48 M 25 62 A 4 4 0 1 0 25.1 62 M 43 67 A 3 3 0 1 0 43.1 67 M 61 64 A 5 5 0 1 0 61.1 64 M 78 70 A 3 3 0 1 0 78.1 70'
+  },
+
+  // ═══════════════════════════════════════
+  // ABSTRACT
+  // ═══════════════════════════════════════
+
+  {
+    id: 'abstract_wave',
+    name: 'Abstract Wave',
+    path: 'M 10 38 C 25 22 38 30 50 36 C 62 42 75 50 90 34 V 62 C 75 78 62 70 50 64 C 38 58 25 50 10 66 Z'
+  },
+  {
+    id: 'rounded_square_cut',
+    name: 'Cut Corner',
+    path: 'M 10 22 Q 10 10 22 10 H 78 Q 90 10 90 22 V 78 Q 90 90 78 90 H 22 Q 10 90 10 78 Z'
+  },
+  {
+    id: 'corner_frame',
+    name: 'Corner Shape',
+    path: 'M 10 30 V 10 H 30 V 20 H 20 V 30 Z M 70 10 H 90 V 30 H 80 V 20 H 70 Z M 10 70 H 20 V 80 H 30 V 90 H 10 Z M 80 70 H 90 V 90 H 70 V 80 H 80 Z'
+  },
+
+];
 function renderShapesLibrary() {
   const grid = document.getElementById('shapesLibraryGrid');
   if (!grid) return;
@@ -3683,8 +4084,22 @@ function resizeShape(dim, factor) {
 function renderShapeThemeSwatches() {
   const row = document.getElementById('shapeThemeSwatches');
   if (!row) return;
-  const colors = ['#E1273B', '#FFD23C', '#0E6E5D', '#8C3AA8', '#132420', '#35A7FF', '#FF7F50', '#FFFFFF', '#000000', '#F59E0B'];
-  row.innerHTML = colors.map(c => `
+  const colors = [
+  '#E1273B', '#FFD23C', '#0E6E5D', '#8C3AA8', '#132420',
+  '#35A7FF', '#FF7F50', '#FFFFFF', '#000000', '#F59F0B',
+  '#061B4A', '#082A73', '#0D5FDB', '#35A7FF', '#0EA5E9',
+  '#0F766E', '#0891B2',
+  '#F5B82E', '#FFD447', '#F47B20', '#EA580C', '#CA8A04',
+  '#FFE066',
+  '#DC2626', '#B91C1C', '#E1553B', '#BE185D', '#DB2777',
+  '#F43F5E', '#FB7185',
+  '#7C2D12', '#6D28D9', '#9333EA', '#4338CA', '#8B5CF6',
+  '#A78BFA',
+  '#166534', '#15803D', '#0E6E5D', '#22C55E', '#65A30D',
+  '#111827', '#1F2937', '#FFF8E8', '#FFD1DC', '#B4F8C8',
+  '#A0E7E5'
+];
+ row.innerHTML = colors.map(c => `
     <div class="swatch" style="background:${c}; border: 1.5px solid #cbd5e1;" onclick="setShapeColor('${c}')"></div>
   `).join('');
 }
