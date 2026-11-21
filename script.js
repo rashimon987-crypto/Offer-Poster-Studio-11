@@ -171,6 +171,15 @@ async function loadSharedData() {
   STATE.stickers = stickers.data || [];
   STATE.products = products.data || [];
   STATE.settings = settingsRow.data || {};
+  try { // plans are managed in Admin → Plans; if the table is missing/empty the built-in plans below are used
+    const pr = await sb.from('plans').select('*').eq('active', true).order('sort');
+    if (!pr.error && pr.data && pr.data.length) {
+      PLAN_DURATIONS.length = 0;
+      pr.data.forEach(r => PLAN_DURATIONS.push({ id: r.id, label: r.name, months: r.months || 1, price: Number(r.price), note: r.note || '', badge: !!r.badge, download_limit: r.download_limit, video_limit: r.video_limit }));
+    } else {
+      PLAN_DURATIONS.forEach(d => { const v = Number(STATE.settings['price_' + d.id]); if (v > 0) d.price = v; });
+    }
+  } catch (e) { /* plans stay as coded */ }
   STATE.favorites = (favs.data || []).map(f => f.template_id);
 
   if (!STATE.settings.demo_templates_seeded) {
@@ -325,11 +334,10 @@ function renderPricingCards(containerId, opts) {
   const ctaFor = (plan) => mode === 'home'
     ? `onclick="goto('payment')"`
     : `onclick="showAuth();setAuthMode('signup')"`;
+  const dlText = d => d.download_limit ? `${d.download_limit} downloads` : 'Unlimited downloads';
   const plans = [
     { name: 'Free', price: '₹0', suffix: '', features: [`${freeLimit} download/day`, 'Basic templates', 'Watermark on export'], cta: 'Get Started', featured: false },
-    { name: '1 Month', price: fmtMoney(299), suffix: '', features: ['Unlimited downloads', 'All premium templates', 'No watermark', 'HD export'], cta: 'Choose 1 Month', featured: false },
-    { name: '6 Months', price: fmtMoney(999), suffix: '', features: ['Everything in 1 Month', 'Best value — save more', 'Priority support'], cta: 'Choose 6 Months', featured: true }
-  ];
+  ].concat(PLAN_DURATIONS.map(d => ({ name: d.label, price: fmtMoney(d.price), suffix: '', features: [dlText(d), ...(d.video_limit ? [`${d.video_limit} videos`] : []), 'All premium templates', 'No watermark', 'HD export'], cta: 'Choose ' + d.label, featured: !!d.badge })));
   el.innerHTML = plans.map(p => `
     <div class="pricing-card ${p.featured ? 'featured' : ''}">
       <div class="pname">${p.name}</div>
@@ -618,6 +626,7 @@ async function renderDashboard() {
   const days = planDaysRemaining();
   document.getElementById('planDaysLeft').textContent = days !== null ? days + ' days left' : '';
   document.getElementById('planExpiryRow').textContent = STATE.profile.plan_expires_at ? 'Expires ' + fmtDate(STATE.profile.plan_expires_at) : 'No active subscription';
+  quotaRemaining('image').then(n => { if (n !== null) document.getElementById('planExpiryRow').textContent += ' · ' + n + ' downloads left'; }).catch(() => { });
   document.getElementById('planUpgradeBtn').style.display = STATE.profile.plan === 'business' ? 'none' : 'inline-flex';
 
   const [postersRes, downloadsRes] = await Promise.all([
@@ -708,6 +717,7 @@ function renderPayment() {
           <div class="pname">${p.label}</div>
           <div class="pprice">${fmtMoney(p.price)}</div>
           <p style="font-size:12.5px;color:var(--muted);margin:6px 0 0;">${p.note}</p>
+          <p style="font-size:13px;font-weight:800;margin:6px 0 0;">${p.download_limit ? p.download_limit + ' downloads' : 'Unlimited downloads'}${p.video_limit ? ' · ' + p.video_limit + ' videos' : ''}</p>
         </div>
       `).join('')}
     </div>
@@ -726,8 +736,10 @@ function payWithRazorpay() {
   const plan = PLAN_DURATIONS.find(p => p.id === selectedPlanDurationId);
   if (!plan) return;
   if (typeof Razorpay === 'undefined') { toast('Payment system could not load — check your connection and try again.', true); return; }
+  const rzpKey = (STATE.settings && STATE.settings.razorpay_key_id) || RAZORPAY_KEY_ID;
+  if (!rzpKey || /YOUR_KEY_ID/.test(rzpKey)) { toast('Payments are not set up yet — the site owner must add the Razorpay Key ID (Admin → Pricing & Limits).', true); return; }
   const rzp = new Razorpay({
-    key: RAZORPAY_KEY_ID,
+    key: rzpKey,
     amount: plan.price * 100,
     currency: 'INR',
     name: 'Offer Poster Studio',
@@ -742,7 +754,7 @@ function payWithRazorpay() {
     handler: (response) => activatePlanAfterPayment(plan, response.razorpay_payment_id),
     modal: { ondismiss: () => toast('Payment cancelled') }
   });
-  rzp.on('payment.failed', (response) => toast('Payment failed: ' + (response.error?.description || 'please try again'), true));
+  rzp.on('payment.failed', (response) => toast('Payment failed: ' + (response.error?.description || 'please try again') + (/^rzp_test_/.test(rzpKey) ? ' (Test mode: use test card 4111 1111 1111 1111 or UPI success@razorpay)' : ''), true));
   rzp.open();
 }
 // Activates the plan immediately: extends from the current expiry if it's still active
@@ -750,6 +762,16 @@ function payWithRazorpay() {
 // starts fresh from now. The existing expire_plans check (already called in boot()) is
 // what automatically deactivates the plan once plan_expires_at passes — no new backend
 // piece needed for that part.
+// ---- plan download quotas (Admin → Plans: "downloads included") ----
+async function quotaRemaining(kind) { // number left, or null when unlimited / free plan / not tracked
+  const p = STATE.profile; if (!p || p.plan === 'free') return null;
+  const lim = kind === 'video' ? p.plan_video_limit : p.plan_download_limit;
+  if (lim == null || !p.plan_started_at) return null;
+  let q = sb.from('downloads_log').select('id', { count: 'exact', head: true }).eq('user_id', STATE.user.id).gte('created_at', p.plan_started_at);
+  q = kind === 'video' ? q.eq('format', 'studio-video') : q.neq('format', 'studio-video');
+  const { count } = await q; return Math.max(0, lim - (count || 0));
+}
+async function planQuotaExceeded(kind) { const r = await quotaRemaining(kind); return r !== null && r <= 0; }
 async function activatePlanAfterPayment(plan, paymentId) {
   try {
     const now = new Date();
@@ -757,7 +779,18 @@ async function activatePlanAfterPayment(plan, paymentId) {
     const base = (currentExpiry && currentExpiry > now) ? currentExpiry : now;
     const newExpiry = new Date(base); newExpiry.setMonth(newExpiry.getMonth() + plan.months);
 
-    const { error: profErr } = await sb.from('profiles').update({ plan: 'premium', plan_expires_at: newExpiry.toISOString() }).eq('id', STATE.user.id);
+    // Download quotas: a limited plan adds its allowance on top of whatever is left of an active limited plan.
+    const active = STATE.profile.plan !== 'free' && currentExpiry && currentExpiry > now;
+    let dl = plan.download_limit ?? null, vl = plan.video_limit ?? null;
+    if (active) {
+      const rd = dl != null ? await quotaRemaining('image') : null, rv = vl != null ? await quotaRemaining('video') : null;
+      if (rd != null) dl += rd; if (rv != null) vl += rv;
+    }
+    const quotaFields = { plan_download_limit: dl, plan_video_limit: vl, plan_started_at: now.toISOString(), plan_id: plan.id };
+    let { error: profErr } = await sb.from('profiles').update(Object.assign({ plan: 'premium', plan_expires_at: newExpiry.toISOString() }, quotaFields)).eq('id', STATE.user.id);
+    if (profErr) { // quota columns not created yet — still activate the paid plan
+      const r2 = await sb.from('profiles').update({ plan: 'premium', plan_expires_at: newExpiry.toISOString() }).eq('id', STATE.user.id); profErr = r2.error;
+    } else Object.assign(STATE.profile, quotaFields);
     if (profErr) throw profErr;
 
     await sb.from('payments').insert({ user_id: STATE.user.id, plan: 'premium', amount: plan.price, upi_transaction_id: paymentId, status: 'completed' });
@@ -2912,7 +2945,7 @@ async function doExport() {
     const { count } = await sb.from('downloads_log').select('id', { count: 'exact', head: true }).eq('user_id', STATE.user.id).gte('created_at', todayStr() + 'T00:00:00');
     const limit = STATE.settings.free_download_limit ?? 1;
     if ((count || 0) >= limit) { toast('Daily free limit reached. Upgrade for unlimited downloads.', true); closeSheets(); goto('payment'); return; }
-  }
+  } else if (await planQuotaExceeded('image')) { toast('Your plan\'s download limit is used up. Choose a plan to continue.', true); closeSheets(); goto('payment'); return; }
   const mult = exportHD ? 2 : 1;
   const exportCanvas = document.createElement('canvas'); exportCanvas.width = exportSize.w * mult; exportCanvas.height = exportSize.h * mult;
   const ectx = exportCanvas.getContext('2d');
@@ -3075,6 +3108,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /* ############ DESIGN STUDIO (new) — everything below this line is additive ############ */
+
+/* script.js declares STATE / sb / FONT_OPTIONS with let/const, which are NOT window properties.
+   The Studio modules read them through window.*, so expose live getters for them. */
+try { if (!Object.getOwnPropertyDescriptor(window, 'STATE')) Object.defineProperty(window, 'STATE', { get() { return STATE; }, configurable: true }); } catch (e) { /* ignore */ }
+try { if (!Object.getOwnPropertyDescriptor(window, 'sb')) Object.defineProperty(window, 'sb', { get() { return sb; }, configurable: true }); } catch (e) { /* ignore */ }
+try { if (!Object.getOwnPropertyDescriptor(window, 'FONT_OPTIONS')) Object.defineProperty(window, 'FONT_OPTIONS', { get() { return FONT_OPTIONS; }, configurable: true }); } catch (e) { /* ignore */ }
 
 // ======================= studio.js =======================
 // ===================================================================================
@@ -5796,7 +5835,11 @@ var StudioStore = (() => {
   const localExtra = () => { try { return parseInt(localStorage.getItem(localKey()) || '0'); } catch (e) { return 0; } };
   const upgrade = msg => { toast(msg, true); try { Studio.exportDialogClose(); } catch (e) { /* ignore */ } try { if (window.VideoMaker) VideoMaker.close(); } catch (e) { /* ignore */ } A().flushSave(); if (window.goto) goto('payment'); return false; };
   async function beforeExport(o) {
-    if (plan() !== 'free') { o.watermark = null; return true; }
+    if (plan() !== 'free') { // paid plan: only the plan's download allowance (if the plan has one) applies
+      o.watermark = null;
+      try { if (typeof planQuotaExceeded === 'function' && await planQuotaExceeded(o.format === 'video' ? 'video' : 'image')) return upgrade('Your plan\'s ' + (o.format === 'video' ? 'video' : 'download') + ' limit is used up — choose a plan to continue'); } catch (e) { /* ignore */ }
+      return true;
+    }
     if (o.format === 'video') { // free plan: limited number of video downloads (default 1), counted separately from images
       try {
         const lim = (STATE.settings && (STATE.settings.free_video_limit ?? STATE.settings.free_download_limit)) ?? 1;
@@ -5821,11 +5864,9 @@ var StudioStore = (() => {
   async function afterExport(o) {
     const d = A().doc(), s = A().size();
     try { await put('history', { id: uid(), userId: userId(), name: o.name || d.name, format: o.format, w: o.w || Math.round(s.w * o.multiplier), h: o.h || Math.round(s.h * o.multiplier), ts: Date.now() }); } catch (e) { /* ignore */ }
-    if (plan() === 'free') {
-      let ok = false;
-      try { if (window.sb && userId()) { const r = await sb.from('downloads_log').insert({ user_id: userId(), format: 'studio-' + o.format, size_preset: 'studio', hd: false }); ok = !r.error; } } catch (e) { /* ignore */ }
-      if (!ok) { try { const k = o.format === 'video' ? 'studio_dlv_' + todayStr() : localKey(); localStorage.setItem(k, String((parseInt(localStorage.getItem(k) || '0')) + 1)); } catch (e) { /* ignore */ } }
-    }
+    let ok = false;
+    try { if (window.sb && userId()) { const r = await sb.from('downloads_log').insert({ user_id: userId(), format: 'studio-' + o.format, size_preset: 'studio', hd: false }); ok = !r.error; } } catch (e) { /* ignore */ }
+    if (!ok && plan() === 'free') { try { const k = o.format === 'video' ? 'studio_dlv_' + todayStr() : localKey(); localStorage.setItem(k, String((parseInt(localStorage.getItem(k) || '0')) + 1)); } catch (e) { /* ignore */ } }
   }
   const syncFavs = () => { };
 
