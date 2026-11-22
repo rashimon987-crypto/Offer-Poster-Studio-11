@@ -154,6 +154,7 @@ async function boot() {
     await authSignOut(); showAuth(); return;
   }
   STATE.user = user; STATE.profile = profile;
+  expireLocalPlan();
   await loadSharedData();
   enterApp();
 }
@@ -613,6 +614,25 @@ async function toggleFavorite(templateId) {
   if (STATE.currentScreen === 'dashboard') renderDashboard();
 }
 
+// A plan ends when plan_expires_at passes: drop to Free (server expire_plans does the same on the next load) and tell the user.
+function expireLocalPlan() {
+  const p = STATE.profile; if (!p || !p.plan_expires_at) return;
+  const ms = new Date(p.plan_expires_at) - new Date();
+  if (p.plan !== 'free' && ms <= 0) {
+    p.plan = 'free';
+    try { sb.from('profiles').update({ plan: 'free' }).eq('id', STATE.user.id).then(() => { }); } catch (e) { /* ignore */ }
+    toast('Your plan has expired — you are on the Free plan now. Renew to continue.', true);
+  } else if (p.plan !== 'free' && ms < 3 * 86400000) {
+    toast('⏰ Your plan expires in ' + Math.max(1, Math.ceil(ms / 86400000)) + ' day(s) — renew to keep unlimited access.', true);
+  }
+}
+function planNoticeHtml() { // banner text for the dashboard
+  const p = STATE.profile; if (!p || !p.plan_expires_at) return '';
+  const ms = new Date(p.plan_expires_at) - new Date(), d = Math.ceil(ms / 86400000);
+  if (p.plan === 'free' && ms <= 0) return '❌ Your plan expired on ' + fmtDate(p.plan_expires_at) + '. You are on the Free plan (1 download + 1 save). Renew to continue.';
+  if (p.plan !== 'free' && ms > 0 && d <= 7) return '⏰ Your plan expires in ' + d + ' day' + (d === 1 ? '' : 's') + ' (' + fmtDate(p.plan_expires_at) + '). Renew now so you do not lose access.';
+  return '';
+}
 function planDaysRemaining() {
   if (!STATE.profile.plan_expires_at) return null;
   const diff = new Date(STATE.profile.plan_expires_at) - new Date();
@@ -625,7 +645,10 @@ async function renderDashboard() {
   document.getElementById('planName').textContent = STATE.profile.plan === 'free' ? 'Free Plan' : (STATE.profile.plan === 'premium' ? 'Premium Plan ✨' : 'Business Plan 💼');
   const days = planDaysRemaining();
   document.getElementById('planDaysLeft').textContent = days !== null ? days + ' days left' : '';
-  document.getElementById('planExpiryRow').textContent = STATE.profile.plan_expires_at ? 'Expires ' + fmtDate(STATE.profile.plan_expires_at) : 'No active subscription';
+  document.getElementById('planExpiryRow').textContent = STATE.profile.plan_expires_at ? (STATE.profile.plan === 'free' ? 'Expired ' : 'Expires ') + fmtDate(STATE.profile.plan_expires_at) : 'No active subscription';
+  { let nb = document.getElementById('planNotice'); const msg = planNoticeHtml(); const row = document.getElementById('planExpiryRow').parentElement;
+    if (!nb && row) { nb = document.createElement('div'); nb.id = 'planNotice'; nb.style.cssText = 'margin-top:10px;padding:10px 12px;border-radius:10px;background:#FEF3C7;color:#92400E;font-weight:700;font-size:13px;line-height:1.4'; row.parentElement.insertBefore(nb, row.nextSibling); }
+    if (nb) { nb.textContent = msg; nb.style.display = msg ? 'block' : 'none'; } }
   quotaRemaining('image').then(n => { if (n !== null) document.getElementById('planExpiryRow').textContent += ' · ' + n + ' downloads left'; }).catch(() => { });
   document.getElementById('planUpgradeBtn').style.display = STATE.profile.plan === 'business' ? 'none' : 'inline-flex';
 
@@ -6089,7 +6112,7 @@ var VideoMaker = (() => {
   const fontOf = () => (S.lang !== 'en' && StudioTpl.LF[S.lang] ? StudioTpl.LF[S.lang] + ',' : '') + "'Anton','Baloo Chettan 2','Noto Sans Malayalam',sans-serif";
   let S = null, raf = 0, playing = false, t0 = 0, recorder = null;
 
-  const fresh = () => ({ ratio: '9:16', trans: 'fade', theme: 'offer', lang: 'en', slides: [], music: null, ov: {}, bgImg: null, vol: 0.8, brand: '', cur: 0, loop: false });
+  const fresh = () => ({ ratio: '9:16', trans: 'fade', theme: 'offer', lang: 'en', slides: [], music: null, tscale: 1, ov: {}, bgImg: null, vol: 0.8, brand: '', cur: 0, loop: false });
   const total = () => S.slides.reduce((a, s) => a + s.dur, 0);
   const dims = () => RATIOS[S.ratio];
   const plan = () => (window.STATE && STATE.profile && STATE.profile.plan) || 'free';
@@ -6128,6 +6151,8 @@ var VideoMaker = (() => {
           <label class="studio-label">Decoration</label><select onchange="VideoMaker.setOv('deco',this.value)">${DECOS.map(d => `<option value="${d[0]}" ${(S.ov.deco || '') === d[0] ? 'selected' : ''}>${d[1]}</option>`).join('')}</select>
           <label class="studio-label">Background photo (optional, for text slides)</label><input type="file" accept="image/*" onchange="VideoMaker.setBgImage(this)"><div class="studio-hint">${S.bgImg ? 'Photo set — <a href="#" onclick="VideoMaker.clearBgImage();return false">remove</a>' : 'None'}</div>
           <label class="studio-label">Language of sample text</label><select onchange="VideoMaker.setLang(this.value)">${Object.entries(LANG_LABEL).map(([k, l]) => `<option value="${k}" ${S.lang === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+          <label class="studio-label">Text size (all slides): <b id="vmTs">${Math.round(S.tscale * 100)}%</b></label><input type="range" min="0.5" max="2" step="0.05" value="${S.tscale}" oninput="VideoMaker.setTextScale(this.value)">
+          <label class="studio-label">Time for every slide (seconds)</label><div style="display:flex;gap:6px"><input type="number" id="vmAllDur" min="1" max="60" step="0.5" value="3" style="width:80px"><button class="btn btn-outline btn-sm" onclick="VideoMaker.setAllDur()">Apply to all</button></div>
           <label class="studio-label">Transition</label><select onchange="VideoMaker.setTrans(this.value)">${TRANS.map(t => `<option value="${t[0]}" ${S.trans === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select>
           <label class="studio-label">Brand / watermark text (optional)</label><input type="text" value="${esc(S.brand)}" oninput="VideoMaker.setBrand(this.value)" placeholder="Your shop name">
           <label class="studio-label">Music (optional)</label><input type="file" accept="audio/*" onchange="VideoMaker.setMusic(this)"><div id="vmMusic" class="studio-hint">${S.music ? esc(S.music.name) : 'No music'}</div>
@@ -6147,6 +6172,8 @@ var VideoMaker = (() => {
   function setRatio(r) { stop(); S.ratio = r; open(); }
   function setTrans(v) { S.trans = v; }
   function setBrand(v) { S.brand = v; }
+  function setTextScale(v) { S.tscale = parseFloat(v) || 1; const e = document.getElementById('vmTs'); if (e) e.textContent = Math.round(S.tscale * 100) + '%'; draw(S.slides.length ? startOf(S.cur) + 0.9 : 0); }
+  function setAllDur() { const v = Math.min(60, Math.max(1, parseFloat(document.getElementById('vmAllDur').value) || 3)); S.slides.forEach(s => { if (s.type !== 'video') s.dur = v; }); renderSlides(); draw(0); }
   function setTheme(v) { S.theme = v; S.ov = {}; refreshColors(); if (S.slides.every(x => x.type === 'text')) fromTheme(); else draw(0); }
   function refreshColors() { const e = eff(), set = (id, v) => { const el = document.getElementById(id); if (el) el.value = hex6(v); }; set('vmC0', e.bg[0]); set('vmC1', e.bg[1]); set('vmCT', e.text); set('vmCA', e.accent); }
   function setOv(k, v) {
@@ -6197,7 +6224,8 @@ var VideoMaker = (() => {
       <select style="padding:6px;border-radius:8px;border:1.5px solid var(--line);font-size:12px" onchange="VideoMaker.upd(${i},'anim',this.value)">${ANIMS.map(a => `<option value="${a[0]}" ${s.anim === a[0] ? 'selected' : ''}>${a[1]}</option>`).join('')}</select>
       <input type="color" value="${hex6(s.tc || (s.type === 'text' ? eff().text : '#ffffff'))}" title="Text colour of this slide" style="width:34px;height:30px;padding:0;border:1.5px solid var(--line);border-radius:8px" oninput="VideoMaker.upd(${i},'tc',this.value)">
       <select style="padding:6px;border-radius:8px;border:1.5px solid var(--line);font-size:12px" onchange="VideoMaker.upd(${i},'pos',this.value)">${['top', 'center', 'bottom'].map(p => `<option ${s.pos === p ? 'selected' : ''}>${p}</option>`).join('')}</select>
-      <input type="number" min="1" max="15" step="0.5" value="${s.dur}" style="width:58px;padding:6px;border-radius:8px;border:1.5px solid var(--line);font-size:12px" onchange="VideoMaker.upd(${i},'dur',parseFloat(this.value)||3)" title="Seconds">
+      <label title="Text size of this slide" style="font-size:11px;display:flex;align-items:center;gap:3px">A<input type="range" min="0.5" max="2.5" step="0.05" value="${s.sz || 1}" style="width:70px" oninput="VideoMaker.upd(${i},'sz',parseFloat(this.value))">A</label>
+      <label title="Seconds this slide is shown" style="font-size:11px;display:flex;align-items:center;gap:3px"><input type="number" min="1" max="60" step="0.5" value="${s.dur}" style="width:58px;padding:6px;border-radius:8px;border:1.5px solid var(--line);font-size:12px" onchange="VideoMaker.upd(${i},'dur',Math.min(60,Math.max(1,parseFloat(this.value)||3)))">s</label>
       <button class="icon-btn" onclick="VideoMaker.move(${i},-1)">↑</button><button class="icon-btn" onclick="VideoMaker.move(${i},1)">↓</button><button class="icon-btn" onclick="VideoMaker.del(${i})">🗑</button></div>`).join('') || '<p class="studio-empty-hint">Add photos, clips or text slides.</p>';
     const info = document.getElementById('vmInfo'); if (info) info.textContent = `${S.slides.length} slides · ${total().toFixed(1)} s` + (plan() === 'free' ? ` · Free plan: ${FREE_MAX_SEC}s max + watermark` : '');
   }
@@ -6245,7 +6273,7 @@ var VideoMaker = (() => {
       if (s.type !== 'text') { const gr = ctx.createLinearGradient(0, H * 0.5, 0, H); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,0.55)'); ctx.fillStyle = gr; ctx.fillRect(0, H * 0.5, W, H * 0.5); }
       const p = ease(lt / 0.7); let txt = s.text, alpha = 1, dy = 0, dx = 0, sc = 1;
       if (s.anim === 'fade') alpha = p; else if (s.anim === 'up') { alpha = p; dy = (1 - p) * u * 0.08; } else if (s.anim === 'zoom') { alpha = p; sc = 0.6 + 0.4 * p; } else if (s.anim === 'pop') { const q = Math.min(1, lt / 0.6), o = 1.70158; alpha = Math.min(1, lt / 0.25); sc = 1 + (o + 1) * Math.pow(q - 1, 3) + o * Math.pow(q - 1, 2); sc = Math.max(0.01, sc); } else if (s.anim === 'left') { alpha = p; dx = -(1 - p) * W * 0.5; } else if (s.anim === 'type') txt = s.text.slice(0, Math.ceil(s.text.length * Math.min(1, lt / Math.max(0.8, s.dur * 0.6))));
-      const size = Math.round(u * (s.type === 'text' ? 0.085 : 0.06)); ctx.font = `800 ${size}px ${fontOf()}`;
+      const size = Math.round(u * (s.type === 'text' ? 0.085 : 0.06) * (S.tscale || 1) * (s.sz || 1)); ctx.font = `800 ${size}px ${fontOf()}`;
       const lines = wrap(ctx, txt, W * 0.84), lh = size * 1.18, bh = lines.length * lh, cy = s.pos === 'top' ? H * 0.18 : s.pos === 'center' ? H * 0.5 : H * 0.82 - bh / 2;
       ctx.globalAlpha *= alpha; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.translate(W / 2 + dx, cy + dy); ctx.scale(sc, sc);
       const tcol = s.tc || (s.type === 'text' ? th.text : '#ffffff'), light = isLight(tcol);
@@ -6339,6 +6367,6 @@ var VideoMaker = (() => {
     toast(ext === 'mp4' ? 'Video exported (MP4)' : 'Video exported as WebM (this browser cannot record MP4)');
   }
 
-  return { setOv, setPreset, resetOv, setBgImage, clearBgImage, setVol, open, close, setRatio, setTrans, setBrand, setTheme, setLang, setMusic, addFiles, addTextSlide, fromTheme, upd, move, del, togglePlay, exportVideo, THEMES, pickMime };
+  return { setTextScale, setAllDur, setOv, setPreset, resetOv, setBgImage, clearBgImage, setVol, open, close, setRatio, setTrans, setBrand, setTheme, setLang, setMusic, addFiles, addTextSlide, fromTheme, upd, move, del, togglePlay, exportVideo, THEMES, pickMime };
 })();
 
