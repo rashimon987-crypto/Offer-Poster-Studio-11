@@ -3297,9 +3297,18 @@ var Studio = (() => {
   function flushSave() { clearTimeout(changeTimer); if (canvas && window.StudioStore) StudioStore.autosave(getDoc()); }
 
   // Loads one page JSON (string) into the live canvas.
+  // Hand-written / pasted template code may leave out "styles" on text objects; Fabric then crashes on toObject
+  // ("Cannot read properties of undefined (reading '0')"). Add the missing field before loading.
+  function fixJSON(json) {
+    try {
+      const o = typeof json === 'string' ? JSON.parse(json) : json;
+      const fix = list => (list || []).forEach(ob => { if (!ob) return; if (/text/i.test(ob.type) && (ob.styles === undefined || ob.styles === null)) ob.styles = []; if (ob.objects) fix(ob.objects); });
+      fix(o.objects); return typeof json === 'string' ? JSON.stringify(o) : o;
+    } catch (e) { return json; }
+  }
   function loadPageJSON(json, cb) {
     applyingHistory = true;
-    canvas.loadFromJSON(json, () => {
+    canvas.loadFromJSON(fixJSON(json), () => {
       applyingHistory = false;
       applyZoomRaw(zoomLevel); refreshText(); canvas.renderAll();
       resetHistory(); renderLayers(); renderProps(null); renderPagebar(); if (cb) cb();
@@ -3310,7 +3319,7 @@ var Studio = (() => {
   function loadDoc(doc, opts) {
     designW = doc.width; designH = doc.height; designMM = doc.mm || null; designName = doc.name || 'Untitled Design';
     docId = doc.id || null; docKind = doc.kind || 'design';
-    pages = doc.pages.slice(); pageIndex = Math.min(doc.pageIndex || 0, pages.length - 1);
+    pages = doc.pages.map(fixJSON); pageIndex = Math.min(doc.pageIndex || 0, pages.length - 1);
     document.getElementById('studioDesignName').value = designName;
     syncSizeInputs(); userZoomed = false;
     canvas.setDimensions({ width: designW, height: designH });
@@ -3696,7 +3705,7 @@ var Studio = (() => {
     const urls = [];
     const targets = o.allPages ? pages.map((_, i) => i) : [pageIndex];
     for (const i of targets) {
-      if (i !== pageIndex) await new Promise(res => { applyingHistory = true; pageIndex = i; canvas.loadFromJSON(pages[i], () => { applyingHistory = false; refreshText(); res(); }); });
+      if (i !== pageIndex) await new Promise(res => { applyingHistory = true; pageIndex = i; canvas.loadFromJSON(fixJSON(pages[i]), () => { applyingHistory = false; refreshText(); res(); }); });
       try { urls.push(renderCurrentPageURL(o)); }
       catch (err) { // a photo loaded from another server can "taint" the canvas — copy such photos in as data first, then retry once
         console.warn('export retry after', err);
@@ -3816,7 +3825,7 @@ var Studio = (() => {
   publicApi.api = {
     canvas: () => canvas, commit, refresh: renderLayers, INCLUDE,
     size: () => ({ w: designW, h: designH, mm: designMM }), setSize, center, addObj, addImageURL, addImageFile,
-    getDoc, loadDoc, loadBuilt, newDoc, specToJSON, ensureFonts, refreshText, renderProps, doc: () => ({ id: docId, name: designName, kind: docKind }),
+    fixJSON, getDoc, loadDoc, loadBuilt, newDoc, specToJSON, ensureFonts, refreshText, renderProps, doc: () => ({ id: docId, name: designName, kind: docKind }),
     setDocId: id => { docId = id; }, pageCount: () => pages.length, flushSave, isBooted: () => booted, zoom: () => zoomLevel
   };
   return publicApi;
@@ -5787,7 +5796,7 @@ var StudioStore = (() => {
     return new Promise(resolve => {
       try {
         const s = max / Math.max(W, H), sc = new fabric.StaticCanvas(null, { width: Math.round(W * s), height: Math.round(H * s) });
-        sc.loadFromJSON(json, () => { try { sc.setZoom(s); sc.renderAll(); const u = sc.toDataURL({ format: 'jpeg', quality: 0.7 }); sc.dispose && sc.dispose(); resolve(u); } catch (e) { resolve(''); } });
+        sc.loadFromJSON(A().fixJSON ? A().fixJSON(json) : json, () => { try { sc.setZoom(s); sc.renderAll(); const u = sc.toDataURL({ format: 'jpeg', quality: 0.7 }); sc.dispose && sc.dispose(); resolve(u); } catch (e) { resolve(''); } });
       } catch (e) { resolve(''); }
     });
   }
