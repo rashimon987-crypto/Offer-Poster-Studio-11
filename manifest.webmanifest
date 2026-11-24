@@ -1,0 +1,19 @@
+{
+  "name": "Offer Poster Studio",
+  "short_name": "Poster Studio",
+  "description": "Create offer posters, logos, business cards and videos for your shop in minutes.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FBF6EA",
+  "theme_color": "#0E6E5D",
+  "lang": "en-IN",
+  "categories": ["business", "productivity", "design"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
