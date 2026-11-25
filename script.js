@@ -6911,6 +6911,21 @@ var PWA = (() => {
   const dismissedRecently = () => { const t = +LS.get('pwaDismissed') || 0; return Date.now() - t < 7 * 864e5; };
   const canShow = () => !standalone();
 
+  // Logs installs / app launches (one row per device per day for "opened") so the admin panel can count them.
+  function deviceId() { let d = LS.get('opsDevice'); if (!d) { d = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2); LS.set('opsDevice', d); } return d; }
+  function track(event) {
+    try {
+      if (typeof sb === 'undefined') return;
+      const uid = (window.STATE && STATE.user && STATE.user.id) || null;
+      sb.from('app_installs').insert({ device_id: deviceId(), user_id: uid, event, ua: navigator.userAgent.slice(0, 200) }).then(() => { }, () => { });
+    } catch (e) { /* table not created yet: ignore */ }
+  }
+  function trackOpen() {
+    if (!standalone()) return;
+    const day = new Date().toISOString().slice(0, 10);
+    if (LS.get('opsOpenDay') === day) return;
+    LS.set('opsOpenDay', day); if (!LS.get('opsInstLogged')) { LS.set('opsInstLogged', '1'); track('installed'); } track('opened');
+  }
   function register() {
     if (!('serviceWorker' in navigator)) return;
     if (!/^https:|^http:\/\/localhost/.test(location.protocol + '//' + location.hostname) && location.protocol !== 'https:') return;
@@ -6944,7 +6959,7 @@ var PWA = (() => {
     let m = document.getElementById('iosInstallHelp');
     if (!m) {
       m = document.createElement('div'); m.id = 'iosInstallHelp';
-      m.innerHTML = '<div class="ios-card"><h3 id="iosH"></h3><ol id="iosL"></ol><p id="iosP"></p><button class="btn btn-primary btn-block" type="button">OK</button></div>';
+      m.innerHTML = '<div class="ios-card"><h3 id="iosH"></h3><ol id="iosL"></ol><p id="iosP"></p><pre id="iosD"></pre><button class="btn btn-primary btn-block" type="button">OK</button></div>';
       m.onclick = e => { if (e.target === m || e.target.tagName === 'BUTTON') m.classList.remove('show'); };
       document.body.appendChild(m);
     }
@@ -6954,11 +6969,29 @@ var PWA = (() => {
       : '<li>Chrome-ന്റെ മുകളിൽ വലത്തെ <b>⋮</b> മെനു തുറക്കുക</li><li><b>Install app</b> അല്ലെങ്കിൽ <b>Add to Home screen</b> അമർത്തുക</li><li><b>Install</b> അമർത്തുക</li>';
     m.querySelector('#iosP').textContent = ios ? 'Chrome-ൽ ആണെങ്കിൽ Safari-യിൽ തുറന്ന് ഇതേ ചെയ്യുക.' : 'Menu-ൽ ഓപ്ഷൻ കാണുന്നില്ലെങ്കിൽ Chrome-ൽ തന്നെ www.offerposterstudio.in തുറന്നിട്ടുണ്ടോ എന്ന് നോക്കുക (WhatsApp/Instagram ഉള്ളിലെ browser-ൽ വരില്ല).';
     m.classList.add('show');
+    diagnose(m.querySelector('#iosD'), ios);
+  }
+  // Shows exactly which install requirement is missing on the live site (helps when Chrome offers no install).
+  async function diagnose(el, ios) {
+    if (ios) { el.textContent = ''; return; }
+    const L = [], ok = (b, t) => L.push((b ? '✓ ' : '✗ ') + t);
+    el.textContent = 'Checking…';
+    ok(!!document.querySelector('link[rel="manifest"]'), 'index.html has manifest link');
+    try { const r = await fetch('/manifest.webmanifest', { cache: 'no-store' }); const j = await r.json(); ok(!!(j && j.icons && j.icons.length), 'manifest.webmanifest found'); }
+    catch (e) { ok(false, 'manifest.webmanifest missing (site page returned instead)'); }
+    try { const r = await fetch('/sw.js', { cache: 'no-store' }); const t = await r.text(); ok(/ops-shell/.test(t), 'sw.js found'); }
+    catch (e) { ok(false, 'sw.js missing'); }
+    try { const r = await fetch('/icon-512.png', { cache: 'no-store' }); ok(r.ok && /image\/png/.test(r.headers.get('content-type') || ''), 'icon-512.png found'); }
+    catch (e) { ok(false, 'icon-512.png missing'); }
+    try { const g = await navigator.serviceWorker.getRegistration(); ok(!!g, 'service worker registered'); } catch (e) { ok(false, 'service worker not registered'); }
+    ok(location.protocol === 'https:', 'https');
+    el.textContent = L.join('\n');
   }
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; window.__bip = e; refresh(); const w = waiters; waiters = []; w.forEach(f => f()); });
-  window.addEventListener('appinstalled', () => { deferred = null; LS.set('pwaDismissed', Date.now()); refresh(); if (window.toast) toast('App installed ✓'); });
+  window.addEventListener('appinstalled', () => { deferred = null; LS.set('opsInstLogged', '1'); track('installed'); LS.set('pwaDismissed', Date.now()); refresh(); if (window.toast) toast('App installed ✓'); });
   window.installApp = install;
   register();
+  setTimeout(trackOpen, 5000);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refresh); else setTimeout(refresh, 0);
   setTimeout(refresh, 1500);
   return { install, refresh, isStandalone: standalone };
