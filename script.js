@@ -6904,12 +6904,12 @@ var VideoMaker = (() => {
 /* App install (PWA): registers the service worker, shows an "Install app" bar when the browser allows it
    (Android Chrome / Edge / desktop Chrome) and explains "Add to Home Screen" on iPhone. */
 var PWA = (() => {
-  let deferred = null, bar = null;
+  let deferred = window.__bip || null, bar = null, waiters = [];
   const standalone = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
   const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } } };
   const dismissedRecently = () => { const t = +LS.get('pwaDismissed') || 0; return Date.now() - t < 7 * 864e5; };
-  const canShow = () => !standalone() && (deferred || isIOS());
+  const canShow = () => !standalone();
 
   function register() {
     if (!('serviceWorker' in navigator)) return;
@@ -6930,24 +6930,32 @@ var PWA = (() => {
     if (show && !dismissedRecently()) { buildBar(); bar.classList.add('show'); } else if (bar) bar.classList.remove('show');
   }
   async function install() {
+    if (!deferred && !isIOS()) {   // Chrome may still be deciding: wait a moment for its install signal
+      if (window.toast) toast('Installing… ഒരു നിമിഷം');
+      await new Promise(res => { waiters.push(res); setTimeout(res, 3000); });
+    }
     if (deferred) {
       try { deferred.prompt(); const c = await deferred.userChoice; if (c && c.outcome === 'accepted') { deferred = null; } } catch (e) { /* ignore */ }
       refresh(); return;
     }
-    if (isIOS()) { iosHelp(); return; }
-    if (window.toast) toast('Browser menu (⋮) → "Install app" / "Add to Home screen"');
+    help(isIOS());
   }
-  function iosHelp() {
+  function help(ios) {
     let m = document.getElementById('iosInstallHelp');
     if (!m) {
       m = document.createElement('div'); m.id = 'iosInstallHelp';
-      m.innerHTML = '<div class="ios-card"><h3>iPhone-ൽ Install ചെയ്യാൻ</h3><ol><li>Safari-യുടെ താഴെയുള്ള <b>Share</b> ബട്ടൺ (⬆︎) അമർത്തുക</li><li><b>Add to Home Screen</b> തിരഞ്ഞെടുക്കുക</li><li><b>Add</b> അമർത്തുക</li></ol><p>Chrome-ൽ ആണെങ്കിൽ Safari-യിൽ തുറന്ന് ഇതേ ചെയ്യുക.</p><button class="btn btn-primary btn-block" type="button">OK</button></div>';
+      m.innerHTML = '<div class="ios-card"><h3 id="iosH"></h3><ol id="iosL"></ol><p id="iosP"></p><button class="btn btn-primary btn-block" type="button">OK</button></div>';
       m.onclick = e => { if (e.target === m || e.target.tagName === 'BUTTON') m.classList.remove('show'); };
       document.body.appendChild(m);
     }
+    m.querySelector('#iosH').textContent = ios ? 'iPhone-ൽ Install ചെയ്യാൻ' : 'Android-ൽ Install ചെയ്യാൻ';
+    m.querySelector('#iosL').innerHTML = ios
+      ? '<li>Safari-യുടെ താഴെയുള്ള <b>Share</b> ബട്ടൺ (⬆︎) അമർത്തുക</li><li><b>Add to Home Screen</b> തിരഞ്ഞെടുക്കുക</li><li><b>Add</b> അമർത്തുക</li>'
+      : '<li>Chrome-ന്റെ മുകളിൽ വലത്തെ <b>⋮</b> മെനു തുറക്കുക</li><li><b>Install app</b> അല്ലെങ്കിൽ <b>Add to Home screen</b> അമർത്തുക</li><li><b>Install</b> അമർത്തുക</li>';
+    m.querySelector('#iosP').textContent = ios ? 'Chrome-ൽ ആണെങ്കിൽ Safari-യിൽ തുറന്ന് ഇതേ ചെയ്യുക.' : 'Menu-ൽ ഓപ്ഷൻ കാണുന്നില്ലെങ്കിൽ Chrome-ൽ തന്നെ www.offerposterstudio.in തുറന്നിട്ടുണ്ടോ എന്ന് നോക്കുക (WhatsApp/Instagram ഉള്ളിലെ browser-ൽ വരില്ല).';
     m.classList.add('show');
   }
-  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; refresh(); });
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; window.__bip = e; refresh(); const w = waiters; waiters = []; w.forEach(f => f()); });
   window.addEventListener('appinstalled', () => { deferred = null; LS.set('pwaDismissed', Date.now()); refresh(); if (window.toast) toast('App installed ✓'); });
   window.installApp = install;
   register();
